@@ -1,57 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jordana Esther Muwanguzi | Consulting</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Jordana Esther Muwanguzi">
+    <title>Jordana Esther Muwanguzi | Bioinformatics Consultant for Health Equity</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Jordana Esther Muwanguzi, MS</h1>
-    <p>MBA Student | Bioinformatics & Precision Medicine Consultant</p>
-    <p>Methuen, MA | 📞 (978) 476-5810 | <a href="mailto:muwajorda1@gmail.com">muwajorda1@gmail.com</a></p>
-  </header>
+    <header>
+        <div class="header-content">
+            <h1>Jordana Esther Muwanguzi, MS</h1>
+            <p>Bioinformatics Consultant for Health Equity & Precision Medicine</p>
+            <p>📞 (978) 476-5810 | <a href="mailto:muwajorda1@gmail.com">muwajorda1@gmail.com</a></p>
+            <p>Methuen, MA</p>
+            <button class="cta-button" onclick="window.location.href='mailto:muwajorda1@gmail.com'">Let’s Work Together!</button>
+        </div>
+    </header>
 
-  <section>
-    <h2>Consulting Focus</h2>
-    <p>AI-driven tools in precision medicine, bioinformatics pipelines, and cancer genomics.</p>
-  </section>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am passionate about advancing precision medicine, with a special focus on health equity. My work aims to bridge the gap in healthcare by ensuring that underserved populations, especially Black patients, have access to personalized therapy options. My current project involves analyzing TCGA data to investigate racial disparities in therapy responses for breast, prostate, and ovarian cancers. The goal is to create a product that empowers doctors with better tools for informed decisions and offers Black patients more tailored treatment options.</p>
+        <button class="cta-button" onclick="window.location.href='https://www.linkedin.com/in/muwajorda/'">Connect with Me</button>
+    </section>
 
-  <section>
-    <h2>Experience</h2>
-    <ul>
-      <li><strong>Independent Consultant & Researcher</strong> (2023 – Present): TCGA-based racial disparity analysis in breast cancer.</li>
-      <li><strong>Precede Biosciences</strong> (2022 – 2023): Multi-omics pipeline development in AWS.</li>
-      <li><strong>Foghorn Therapeutics</strong> (2019 – 2022): Drug discovery support via NGS pipelines and CI/CD.</li>
-      <li><strong>UAB</strong> (2017 – 2019): RNA-seq analysis for Parkinson’s research.</li>
-    </ul>
-  </section>
+    <section id="project">
+        <h2>My Current Project</h2>
+        <div class="project-details">
+            <h3>Exploring Racial Disparities in Cancer Treatment</h3>
+            <p>My focus is on analyzing TCGA data from Black patients to identify biomarkers in breast, prostate, and ovarian cancers that can lead to better therapy. This data-driven investigation aims to uncover key insights that will help healthcare professionals develop personalized treatment plans, ensuring equity in medical outcomes.</p>
+            <p>The end result of this research could potentially evolve into a product that provides doctors with a platform offering more informed decisions for treating Black patients.</p>
+            <div class="project-image">
+                <img src="project-image.jpg" alt="Cancer Data Analysis" />
+            </div>
+        </div>
+        <button class="cta-button" onclick="window.location.href='mailto:muwajorda1@gmail.com'">Inquire About the Project</button>
+    </section>
 
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <li>Languages: Python, Shell</li>
-      <li>NGS Tools: BWA, GATK, samtools, FastQC</li>
-      <li>Cloud: AWS</li>
-      <li>Pipelines: Docker, Nextflow, Snakemake</li>
-    </ul>
-  </section>
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        <div class="job">
+            <h3>Independent Consultant & Researcher</h3>
+            <p><strong>Feb 2023 – Present | Remote</strong></p>
+            <ul>
+                <li>Designing AI-driven precision medicine tools to explore racial disparities in cancer therapy response across Black, White, and Hispanic populations using TCGA data.</li>
+            </ul>
+        </div>
+        <div class="job">
+            <h3>Computational Biologist | Precede Biosciences</h3>
+            <p><strong>May 2022 – Feb 2023 | Remote</strong></p>
+            <ul>
+                <li>Built multi-omics pipelines and collaborated with cross-functional teams to troubleshoot and validate healthcare data compliance.</li>
+            </ul>
+        </div>
+        <div class="job">
+            <h3>Senior Associate Computational Biologist | Foghorn Therapeutics</h3>
+            <p><strong>Feb 2019 – May 2022 | Cambridge, MA</strong></p>
+            <ul>
+                <li>Developed bioinformatics pipelines to support drug discovery programs, focusing on NGS quality control and feature extraction workflows.</li>
+            </ul>
+        </div>
+        <div class="job">
+            <h3>Bioinformatics Analyst | University of Alabama at Birmingham</h3>
+            <p><strong>Oct 2017 – Feb 2019 | Birmingham, AL</strong></p>
+            <ul>
+                <li>Performed RNA-seq and variant analysis, managing large genomic datasets for data consistency and integrity.</li>
+            </ul>
+        </div>
+    </section>
 
-  <section>
-    <h2>Education</h2>
-    <ul>
-      <li>MBA (2025 expected), Johns Hopkins University</li>
-      <li>MS Bioinformatics, Northeastern University (2017)</li>
-      <li>BS IT, Makerere University (2014)</li>
-    </ul>
-  </section>
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <ul>
+            <li><strong>Programming & QA Tools:</strong> Python, Shell, Git, TestNG (learning), pytest, REST API testing</li>
+            <li><strong>NGS & Bioinformatics:</strong> BWA, GATK, samtools, FastQC, VCF/BAM/FASTQ handling</li>
+            <li><strong>Automation & Pipelines:</strong> Docker, Nextflow, Snakemake, CI/CD practices</li>
+            <li><strong>Cloud & Data:</strong> AWS (S3, EC2), SQL (basic JOIN/SELECT), data-driven testing</li>
+        </ul>
+    </section>
 
-  <footer>
-    <p>© 2025 Jordana Esther Muwanguzi</p>
-  </footer>
+    <section id="education">
+        <h2>Education</h2>
+        <p><strong>MBA in Health Business</strong> (Fall 2025 Expected), Johns Hopkins University</p>
+        <p><strong>M.S. in Bioinformatics</strong>, Northeastern University, 2017</p>
+        <p><strong>B.S. in Information Technology</strong>, Makerere University, 2014</p>
+    </section>
 
-  <script src="script.js"></script>
+    <section id="certifications">
+        <h2>Certifications (Planned 2025)</h2>
+        <ul>
+            <li>AWS Certified Machine Learning – Specialty</li>
+            <li>Google Cloud ML Engineer – Professional</li>
+        </ul>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/muwajorda/" target="_blank">LinkedIn</a>
+            <a href="mailto:muwajorda1@gmail.com">Email</a>
+        </div>
+        <p>© 2025 Jordana Esther Muwanguzi. All rights reserved.</p>
+    </footer>
 </body>
 </html>
 
