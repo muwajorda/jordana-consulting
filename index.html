@@ -1,107 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Jordana Esther Muwanguzi">
-    <title>Jordana Esther Muwanguzi | Bioinformatics Consultant for Health Equity</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jordana Consulting</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f5;
+      color: #333;
+    }
+    header.hero {
+      background: #ff69b4;
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.2rem;
+      background: #ff1493;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    section {
+      padding: 2rem 1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    section h2 {
+      color: #c71585;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      background: #ffd1dc;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #c71585;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1>Jordana Esther Muwanguzi, MS</h1>
-            <p>Bioinformatics Consultant for Health Equity & Precision Medicine</p>
-            <p>📞 (978) 476-5810 | <a href="mailto:muwajorda1@gmail.com">muwajorda1@gmail.com</a></p>
-            <p>Methuen, MA</p>
-            <button class="cta-button" onclick="window.location.href='mailto:muwajorda1@gmail.com'">Let’s Work Together!</button>
-        </div>
-    </header>
+  <header class="hero">
+    <h1>Hi, I'm Jordana 👋</h1>
+    <p>Bioinformatics & Precision Medicine Consultant</p>
+    <a href="#contact" class="cta">Let’s work together</a>
+  </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I am passionate about advancing precision medicine, with a special focus on health equity. My work aims to bridge the gap in healthcare by ensuring that underserved populations, especially Black patients, have access to personalized therapy options. My current project involves analyzing TCGA data to investigate racial disparities in therapy responses for breast, prostate, and ovarian cancers. The goal is to create a product that empowers doctors with better tools for informed decisions and offers Black patients more tailored treatment options.</p>
-        <button class="cta-button" onclick="window.location.href='https://www.linkedin.com/in/muwajorda/'">Connect with Me</button>
-    </section>
+  <section class="about">
+    <h2>💡 About Me</h2>
+    <p>
+      Bioinformatics and computational biology expert with 6+ years of experience in NGS data analysis, biomarker discovery, and multi-omics research.
+      Proven track record in patient stratification, machine learning applications in bioinformatics, and precision medicine. Adept at collaborating with cross-functional teams,
+      consulting on scientific data workflows, and leveraging Python, R, and statistical methods to solve real-world biological challenges.
+      Passionate about driving digital transformation in biopharma R&D.
+    </p>
+  </section>
 
-    <section id="project">
-        <h2>My Current Project</h2>
-        <div class="project-details">
-            <h3>Exploring Racial Disparities in Cancer Treatment</h3>
-            <p>My focus is on analyzing TCGA data from Black patients to identify biomarkers in breast, prostate, and ovarian cancers that can lead to better therapy. This data-driven investigation aims to uncover key insights that will help healthcare professionals develop personalized treatment plans, ensuring equity in medical outcomes.</p>
-            <p>The end result of this research could potentially evolve into a product that provides doctors with a platform offering more informed decisions for treating Black patients.</p>
-            <div class="project-image">
-                <img src="project-image.jpg" alt="Cancer Data Analysis" />
-            </div>
-        </div>
-        <button class="cta-button" onclick="window.location.href='mailto:muwajorda1@gmail.com'">Inquire About the Project</button>
-    </section>
+  <section class="project">
+    <h2>🎯 My Current Focus</h2>
+    <p>
+      I’m analyzing TCGA data with a health equity lens — focusing on Black patients with breast, prostate, and ovarian cancers to uncover better biomarker-driven therapies.
+      The end goal? A platform that empowers hospitals, clinics, and patients with personalized cancer care options based on real data.
+    </p>
+  </section>
 
-    <section id="experience">
-        <h2>Professional Experience</h2>
-        <div class="job">
-            <h3>Independent Consultant & Researcher</h3>
-            <p><strong>Feb 2023 – Present | Remote</strong></p>
-            <ul>
-                <li>Designing AI-driven precision medicine tools to explore racial disparities in cancer therapy response across Black, White, and Hispanic populations using TCGA data.</li>
-            </ul>
-        </div>
-        <div class="job">
-            <h3>Computational Biologist | Precede Biosciences</h3>
-            <p><strong>May 2022 – Feb 2023 | Remote</strong></p>
-            <ul>
-                <li>Built multi-omics pipelines and collaborated with cross-functional teams to troubleshoot and validate healthcare data compliance.</li>
-            </ul>
-        </div>
-        <div class="job">
-            <h3>Senior Associate Computational Biologist | Foghorn Therapeutics</h3>
-            <p><strong>Feb 2019 – May 2022 | Cambridge, MA</strong></p>
-            <ul>
-                <li>Developed bioinformatics pipelines to support drug discovery programs, focusing on NGS quality control and feature extraction workflows.</li>
-            </ul>
-        </div>
-        <div class="job">
-            <h3>Bioinformatics Analyst | University of Alabama at Birmingham</h3>
-            <p><strong>Oct 2017 – Feb 2019 | Birmingham, AL</strong></p>
-            <ul>
-                <li>Performed RNA-seq and variant analysis, managing large genomic datasets for data consistency and integrity.</li>
-            </ul>
-        </div>
-    </section>
+  <section class="services">
+    <h2>🌟 What I Offer</h2>
+    <ul>
+      <li>🧬 NGS data analysis (RNA-seq, WGS, cfDNA)</li>
+      <li>🤖 Machine learning for biomarker prediction</li>
+      <li>📊 Dashboards & clinical data reports</li>
+      <li>📁 TCGA, CCLE, GEO, DepMap dataset mining</li>
+      <li>🛠️ Bioinformatics pipeline development (Python, R)</li>
+      <li>🌍 Cross-continental training & consulting</li>
+    </ul>
+  </section>
 
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <ul>
-            <li><strong>Programming & QA Tools:</strong> Python, Shell, Git, TestNG (learning), pytest, REST API testing</li>
-            <li><strong>NGS & Bioinformatics:</strong> BWA, GATK, samtools, FastQC, VCF/BAM/FASTQ handling</li>
-            <li><strong>Automation & Pipelines:</strong> Docker, Nextflow, Snakemake, CI/CD practices</li>
-            <li><strong>Cloud & Data:</strong> AWS (S3, EC2), SQL (basic JOIN/SELECT), data-driven testing</li>
-        </ul>
-    </section>
+  <section class="proposal-form">
+    <h2>📌 Submit a Project Idea</h2>
+    <p>Use this form to tell me what you need:</p>
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdX-REPLACE-ME/viewform" target="_blank">Submit via Google Form</a>
+  </section>
 
-    <section id="education">
-        <h2>Education</h2>
-        <p><strong>MBA in Health Business</strong> (Fall 2025 Expected), Johns Hopkins University</p>
-        <p><strong>M.S. in Bioinformatics</strong>, Northeastern University, 2017</p>
-        <p><strong>B.S. in Information Technology</strong>, Makerere University, 2014</p>
-    </section>
+  <section id="contact" class="contact">
+    <h2>📬 Contact Me</h2>
+    <p>Email: <a href="mailto:muwajorda1@gmail.com">muwajorda1@gmail.com</a></p>
+    <p>Call/Text: (978) 476-5810</p>
+    <p>GitHub: <a href="https://github.com/muwajorda" target="_blank">muwajorda</a></p>
+  </section>
 
-    <section id="certifications">
-        <h2>Certifications (Planned 2025)</h2>
-        <ul>
-            <li>AWS Certified Machine Learning – Specialty</li>
-            <li>Google Cloud ML Engineer – Professional</li>
-        </ul>
-    </section>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/muwajorda/" target="_blank">LinkedIn</a>
-            <a href="mailto:muwajorda1@gmail.com">Email</a>
-        </div>
-        <p>© 2025 Jordana Esther Muwanguzi. All rights reserved.</p>
-    </footer>
+  <footer>
+    <p>© 2025 Jordana Esther Muwanguzi • Consulting for Equitable Precision Medicine</p>
+  </footer>
 </body>
 </html>
 
