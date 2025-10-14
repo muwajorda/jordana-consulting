@@ -1,302 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Jordana Consulting — Bioinformatics & AI Strategy</title>
-  <meta name="description" content="Jordana Consulting: In-depth details on background, professional experience, full solution catalog, and strategic impact in bioinformatics and precision medicine." />
-
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jordana Consulting - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0f1724; /* deep navy */
-      --card:#0b1220;
-      --muted:#98a0b3;
-      --accent:#2dd4bf; /* teal */
-      --accent-2:#60a5fa; /* blue */
-      --glass: rgba(255,255,255,0.04);
-      --radius:14px;
-      color-scheme: dark;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(96,165,250,0.06), transparent),
-                   radial-gradient(800px 400px at 90% 90%, rgba(45,212,191,0.03), transparent),
-                   var(--bg);
-      color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:32px;
-    }
-    
-    .container{max-width:900px;margin:0 auto}
-    header{
-        background: linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
-        padding: 30px;
-        border-radius: var(--radius);
-        margin-bottom: 40px;
-        text-align: center;
-    }
-    header h1 {
-        font-size: 32px;
-        color: var(--accent);
-        margin: 0 0 8px;
-    }
-    header p {
-        color: var(--muted);
-        margin: 0;
-        font-size: 16px;
-    }
-    
-    /* Full-width content sections */
-    .full-width-section{
-        padding: 40px 0;
-        margin-bottom: 30px;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .full-width-section:last-child {
-        border-bottom: none;
-    }
-    .full-width-section h2{
-        font-size: 28px;
-        color: white;
-        margin-bottom: 20px;
-        border-bottom: 3px solid var(--accent);
-        display: inline-block;
-        padding-bottom: 5px;
-    }
-    .full-width-section p {
-        color: var(--muted);
-    }
-    .full-width-section ul{
-        list-style: none;
-        padding: 0;
-    }
-    .full-width-section li{
-        padding: 18px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.03);
-        font-size: 15px;
-        position: relative;
-    }
-    .full-width-section li:last-child{ border-bottom: none; }
-    
-    .full-width-section li strong {
-        color: white;
-        display: block;
-        margin-bottom: 4px;
-        font-size: 17px;
-        line-height: 1.2;
-    }
-    .list-item-detail {
-        color: var(--muted);
-        font-size: 14px;
-        margin-left: 10px;
-        display: block;
-        padding-top: 4px;
-    }
-    .turnaround-time {
-        font-style: italic;
-        color: #777;
-        margin-top: 5px;
-        font-size: 0.9em;
-        color: var(--muted);
-    }
-    .job-title {
-        color: var(--accent-2);
-        font-weight: 600;
-        display: block;
-        margin-bottom: 4px;
-    }
-    .job-date {
-        position: absolute;
-        right: 0;
-        top: 18px;
-        font-size: 13px;
-        color: var(--muted);
-    }
-
-    /* Case Study Grid */
-    .case-study-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-top: 20px;
-    }
-    .case-study-item {
-        background: var(--card);
-        padding: 20px;
-        border-radius: var(--radius);
-        border-left: 4px solid var(--accent);
-    }
-    .case-study-item strong {
-        color: var(--accent-2);
-        display: block;
-        margin-bottom: 8px;
-        font-size: 16px;
-    }
-    .case-study-item p {
-        font-size: 14px;
-        margin: 6px 0;
-    }
-
-    /* Contact Block */
-    .contact-block {
-        text-align: center;
-        padding: 30px;
-        background: linear-gradient(135deg,rgba(45,212,191,0.05),rgba(96,165,250,0.05));
-        border-radius: var(--radius);
-        margin: 40px 0;
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .contact-block h3 {
-        color: white;
-        font-size: 24px;
-        margin-bottom: 12px;
-    }
-    .btn{display:inline-block;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700; margin-top: 15px;}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#04263b}
-
-    /* responsive */
-    @media (max-width:640px){
-        .case-study-grid { grid-template-columns: 1fr; }
-        body { padding: 15px; }
-        header { padding: 20px; }
-        .full-width-section li { padding-right: 80px; }
-        .job-date { right: 0; top: 15px; }
-    }
-    /* Footer */
-    footer{margin-top:36px;color:var(--muted);display:flex;justify-content:space-between;align-items:center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;}
+    body {font-family: 'Inter', sans-serif;background-color: #f4f4f4;color: #333;}
+    .nav-link {transition: color 0.3s, border-color 0.3s;}
+    .nav-link[href="index.html"] {border-bottom-width: 2px;border-color: #047857;color: #047857;font-weight: 600;}
+    .cta-session {background-color: #1d4ed8;color: white;padding: 0.75rem 2rem;border-radius: 9999px;font-weight: 700;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);transition: all 0.3s ease;}
+    .cta-session:hover {background-color: #1e40af;transform: scale(1.05);}
   </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-        <h1>Jordana Consulting</h1>
-        <p>In-depth guide to expertise, experience, solutions, and strategic impact.</p>
-    </header>
-
-    <section id="about" class="full-width-section">
-      <h2>About Jordana</h2>
-      <p>
-        I'm a bioinformatics consultant with **6+ years of experience** in NGS data analysis, multi-omics research, and machine learning for cancer and rare diseases. I leverage deep scientific expertise to deliver production-ready solutions that accelerate your R&D pipeline. My mission is to build scalable solutions for personalized healthcare, with a special focus on achieving **global health equity**.
-      </p>
-    </section>
-
-    <section id="experience" class="full-width-section">
-      <h2>Professional Experience</h2>
-      <ul>
-        <li>
-            <span class="job-title">Independent Consultant & Biosecurity Researcher</span>
-            <strong>Jordana Consulting (Feb 2023 – Present)</strong>
-            <span class="job-date">Feb 2023 – Present</span>
-            <span class="list-item-detail">Providing expertise in advanced bioinformatics and biosecurity solutions. Research includes secure DNA synthesis screening and dual-use CRISPR/Cas classification.</span>
-        </li>
-        <li>
-            <span class="job-title">Senior Associate Computational Biologist</span>
-            <strong>Foghorn Therapeutics (Feb 2019 – May 2022)</strong>
-            <span class="job-date">Feb 2019 – May 2022</span>
-            <span class="list-item-detail">Piloted an ML model predicting drug sensitivity and developed bioinformatics pipelines that enabled advancement of 2 oncology drug candidates into clinical development.</span>
-        </li>
-        <li>
-            <span class="job-title">Computational Biologist</span>
-            <strong>Precede Biosciences (May 2022 – Feb 2023)</strong>
-            <span class="job-date">May 2022 – Feb 2023</span>
-            <span class="list-item-detail">Built modular NGS workflows (Nextflow/Python) and created novel QC metrics, boosting reproducibility by 25% and signal fidelity by 15%.</span>
-        </li>
-        <li>
-            <span class="job-title">Bioinformatics Analyst</span>
-            <strong>University of Alabama at Birmingham (Oct 2017 – Feb 2019)</strong>
-            <span class="job-date">Oct 2017 – Feb 2019</span>
-            <span class="list-item-detail">Automated QC and expression workflows with R/STAR, reducing analysis time by 40%.</span>
-        </li>
-      </ul>
-    </section>
-
-    <section id="services" class="full-width-section">
-      <h2>Full Spectrum Solutions & Value</h2>
-      <p>We streamline the path from complex biological data to breakthrough insights, offering fixed-scope packages for maximum value and rapid delivery.</p>
-      <ul>
-        <li>
-          <strong>Biomarker Discovery & Validation</strong> 
-          <span class="list-item-detail">Relevance: Robust pipelines for complex NGS (RNA-seq, cfDNA, Epigenomics) to accelerate identification and validation of novel drug targets, cutting months off your lead identification phase.</span>
-          <div class="turnaround-time">Typical Turnaround: 2–4 Weeks (depending on package depth)</div>
-        </li>
-        <li>
-          <strong>Predictive AI Modeling</strong>
-          <span class="list-item-detail">Relevance: Custom machine learning models (scikit-learn/TensorFlow) to predict drug response and stratify patient populations, directly reducing clinical trial risk and cost.</span>
-          <div class="turnaround-time">Typical Turnaround: 3–4 Weeks (Premium Packages)</div>
-        </li>
-        <li>
-          <strong>Scalable Infrastructure & Pipelines (Nextflow, Snakemake)</strong>
-          <span class="list-item-detail">Relevance: Building production-ready, reproducible bioinformatics pipelines for immediate team deployment. Your team gains a reliable, future-proof R&D asset.</span>
-          <div class="turnaround-time">Typical Turnaround: 2–3 Weeks (Standard to Premium setup)</div>
-        </li>
-        <li>
-          <strong>Actionable Insights & Reporting</strong>
-          <span class="list-item-detail">Relevance: Development of interactive clinical dashboards and strategic reports for faster, more informed R&D decisions. Don't wait weeks; get data access in days.</span>
-          <div class="turnaround-time">Typical Turnaround: 1–2 Weeks (Starter Package: QC & DE Analysis)</div>
-        </li>
-        <li>
-          <strong>Data Landscape Analysis</strong>
-          <span class="list-item-detail">Relevance: Strategic mining of large public datasets (TCGA, CCLE, DepMap, PRISM) to validate hypotheses and identify new therapeutic opportunities. Derisk new investments with high-confidence public data validation.</span>
-          <div class="turnaround-time">Typical Turnaround: 2–3 Weeks</div>
-        </li>
-        <li>
-          <strong>Global Health Equity Consulting</strong>
-          <span class="list-item-detail">Relevance: Strategic guidance on building precision medicine solutions that address data gaps and health disparities in underserved communities. Fulfilling the mission for broader impact.</span>
-        </li>
-      </ul>
-    </section>
-
-    <section id="case-studies" class="full-width-section">
-      <h2>Case Studies: Measurable Impact</h2>
-      <p>Examples of how strategic computational expertise translates into measurable R&D results.</p>
-      <div class="case-study-grid">
-        <div class="case-study-item">
-          <strong>Case Study 1: Early Cancer Detection AI</strong>
-          <p class="small">The Challenge: A clinical diagnostics company needed a non-invasive, high-sensitivity method for early cancer prediction.</p>
-          <p class="small">The Solution: Developed a robust AI model using multi-omic cfDNA data on Google Cloud, leveraging TCGA and custom QC metrics.</p>
-          <p class="small">The Impact: Achieved **~85%** predictive sensitivity, leading to the successful launch of a phase 1 validation study.</p>
-        </div>
-        <div class="case-study-item">
-          <strong>Case Study 2: Accelerated Target Prioritization</strong>
-          <p class="small">The Challenge: A biotech was stalled in identifying novel targets for a rare hematological disease, lacking internal pipeline bandwidth.</p>
-          <p class="small">The Solution: Integrated and analyzed proprietary cfChIP-seq data with public data (DepMap) using a Snakemake pipeline for high-confidence target prioritization.</p>
-          <p class="small">The Impact: Identified **5 high-priority biomarkers** and accelerated the drug lead optimization pipeline by **6 months**, saving significant capital.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="contact-block">
-        <h3>Ready to accelerate your R&D?</h3>
-        <p>Book a free 30-minute consultation to discuss your specific data challenge.</p>
-        <!-- Link to Google Calendar in a new tab -->
-        <a class="btn btn-primary" href="https://calendar.google.com/calendar/u/0/r?action=TEMPLATE&text=Strategy+Call+with+Jordana+Consulting&details=Discussion+of+NGS+data+analysis%2C+AI+modeling%2C+or+pipeline+development.&dates=20251025T100000Z/20251025T103000Z" target="_blank">Book Strategy Call Now</a>
-    </div>
-
-    <section id="privacy" class="full-width-section" style="padding-bottom: 5px; margin-bottom: 0;">
-        <h2>Privacy Policy Summary</h2>
-        <p>We respect your privacy. This site does not use cookies or collect personal information unless voluntarily submitted via the contact form. All submitted inquiries are confidential.</p>
-    </section>
-    
-    <section id="terms" class="full-width-section" style="padding-top: 10px; padding-bottom: 10px; border-bottom: none;">
-        <h2>Terms of Service Summary</h2>
-        <p>Consulting services are provided under a mutually agreed-upon statement of work (SOW) or contract. Fixed-price projects require 50% upfront payment. Deliverables and timelines are strictly defined in the SOW.</p>
-    </section>
-
-    <footer>
-      <div>© <span id="year-guide">2025</span> Jordana Consulting — All rights reserved.</div>
-      <div style="font-size: 13px; color: var(--muted)">Empowering Precision Medicine</div>
-    </footer>
+<body class="min-h-screen">
+<header class="bg-white shadow-lg sticky top-0 z-10">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-emerald-700 flex items-center"><i class="fas fa-brain mr-2 text-blue-700"></i> Jordana Consulting</h1>
+    <nav class="space-x-4">
+      <a href="index.html" class="nav-link text-gray-600 hover:text-emerald-700 px-3 py-2 rounded-md text-sm font-semibold">Home</a>
+      <a href="experience.html" class="nav-link text-gray-600 hover:text-emerald-700 px-3 py-2 rounded-md text-sm font-semibold">Experience</a>
+      <a href="services.html" class="nav-link bg-blue-700 text-white hover:bg-blue-800 px-4 py-2 rounded-lg text-sm transition">Services & Pricing</a>
+    </nav>
   </div>
-
-  <script>
-    document.getElementById('year-guide').textContent = new Date().getFullYear();
-  </script>
+</header>
+<main class="max-w-7xl mx-auto py-10 px-4">
+  <section class="bg-emerald-700 text-white p-12 text-center shadow-xl rounded-xl mb-10">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-5xl font-extrabold mb-3">Accelerating Precision Medicine R&D</h2>
+      <p class="text-2xl font-light mb-8">Scalable AI and Bioinformatics Solutions for Drug Discovery, Clinical Trials, and Diagnostics.</p>
+      <a href="services.html" class="cta-session inline-block">Explore Our Packages</a>
+    </div>
+  </section>
+</main>
+<footer class="bg-gray-200 text-center p-4 text-gray-600 text-sm mt-10">
+  <p>&copy; 2025 Jordana Consulting. Bioinformatics & Biosecurity Solutions.</p>
+</footer>
 </body>
 </html>
