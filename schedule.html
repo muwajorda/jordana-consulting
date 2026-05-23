@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Schedule a Consultation | Jordana Consulting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #07111f, #0f172a);
+      color: white;
+    }
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="sticky top-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-emerald-400">
+      <i class="fas fa-dna mr-2"></i> Jordana Consulting
+    </h1>
+
+    <nav class="space-x-6 text-sm font-semibold">
+      <a href="index.html" class="hover:text-emerald-400">Home</a>
+      <a href="experience.html" class="hover:text-emerald-400">Experience</a>
+      <a href="services.html" class="hover:text-emerald-400">Services</a>
+    </nav>
+  </div>
+</header>
+
+<section class="max-w-4xl mx-auto px-6 py-24">
+  <div class="text-center mb-16">
+    <h2 class="text-5xl font-black leading-tight mb-4">
+      Schedule a Consultation
+    </h2>
+    <p class="text-xl text-slate-300">
+      Let's discuss how I can help with your bioinformatics infrastructure needs
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-12">
+    
+    <!-- Contact Form -->
+    <div class="glass rounded-3xl p-8">
+      <h3 class="text-2xl font-bold mb-6 text-emerald-400">Get in Touch</h3>
+      
+      <form id="contactForm" action="https://formspree.io/f/xovarwje" method="POST" class="space-y-4">
+        
+        <div>
+          <label for="name" class="block text-sm font-semibold mb-2">Your Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
+            placeholder="John Doe"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-semibold mb-2">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required 
+            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-semibold mb-2">Phone (Optional)</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            name="phone" 
+            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
+            placeholder="+1 (555) 000-0000"
+          />
+        </div>
+
+        <div>
+          <label for="organization" class="block text-sm font-semibold mb-2">Organization</label>
+          <input 
+            type="text" 
+            id="organization" 
+            name="organization" 
+            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
+            placeholder="Your company or institution"
+          />
+        </div>
+
+        <div>
+          <label for="focus" class="block text-sm font-semibold mb-2">Primary Focus Area</label>
+          <select 
+            id="focus" 
+            name="focus" 
+            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
+          >
+            <option value="">Select an area...</option>
+            <option value="Cloud Infrastructure">Cloud Infrastructure</option>
+            <option value="Omics Pipelines">Omics Pipelines</option>
+            <option value="AI & ML">AI & ML Integration</option>
+            <option value="Data Science">Data Science Solutions</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-semibold mb-2">Message</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            required 
+            rows="5"
+            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
+            placeholder="Tell me about your project and what you're looking to accomplish..."
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit"
+          class="w-full bg-emerald-500 hover:bg-emerald-600 px-8 py-4 rounded-xl font-bold transition"
+        >
+          Send Consultation Request
+        </button>
+      </form>
+
+      <p class="text-xs text-slate-400 mt-4 text-center">
+        I'll review your request and reach out within 24-48 hours to schedule a consultation.
+      </p>
+    </div>
+
+    <!-- Information Section -->
+    <div class="space-y-8">
+      
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-xl font-bold mb-4 text-cyan-400">
+          <i class="fas fa-clock mr-2"></i> Consultation Details
+        </h3>
+        <ul class="space-y-3 text-slate-300">
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">•</span>
+            <span><strong>Duration:</strong> 30-60 minutes</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">•</span>
+            <span><strong>Format:</strong> Video call or in-person</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">•</span>
+            <span><strong>Cost:</strong> Complimentary initial consultation</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">•</span>
+            <span><strong>Response Time:</strong> 24-48 hours</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-xl font-bold mb-4 text-purple-400">
+          <i class="fas fa-check mr-2"></i> What We'll Cover
+        </h3>
+        <ul class="space-y-3 text-slate-300">
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">✓</span>
+            <span>Your current infrastructure challenges</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">✓</span>
+            <span>Project goals and timeline</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">✓</span>
+            <span>Potential solutions and approaches</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-emerald-400 mr-3 mt-1">✓</span>
+            <span>Next steps and engagement options</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-400">
+          <i class="fas fa-envelope mr-2"></i> Direct Contact
+        </h3>
+        <p class="text-slate-300 mb-4">
+          For urgent inquiries, you can also reach me at:
+        </p>
+        <p class="text-emerald-400 font-semibold break-all">
+          jordana@jordana-consulting.dev
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer class="border-t border-slate-800 py-8 text-center text-slate-400 mt-20">
+  <p>© 2026 Jordana Consulting | AI + Computational Biology Infrastructure</p>
+</footer>
+
+</body>
+</html>
