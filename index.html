@@ -1,94 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Jordana Muwanguzi — Bioinformatics Consulting</title>
-  <meta name="description" content="Pipeline to Patient — fractional bioinformatics, workflow development, and AI enablement for biotech startups and research labs." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jordana Consulting | AI Bioinformatics Infrastructure</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <style>
-    :root{--accent:#1263a6;--muted:#666;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
-    body{margin:0;color:#111;font-family:var(--font, Inter, sans-serif);line-height:1.5}
-    header{background:#f6fbff;padding:3rem 1rem;text-align:center;border-bottom:1px solid #e6eef8}
-    .container{max-width:980px;margin:0 auto;padding:1rem}
-    h1{margin:0 0 .25rem;font-size:1.75rem;color:var(--accent)}
-    p.lead{margin:.5rem 0 1.25rem;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-    .card{background:#fff;border:1px solid #eceff6;padding:1rem;border-radius:8px}
-    footer{padding:2rem 1rem;text-align:center;color:#777;font-size:.9rem}
-    .hero-cta{display:inline-block;background:var(--accent);color:#fff;padding:.5rem .9rem;border-radius:6px;text-decoration:none}
-    @media(min-width:700px){h1{font-size:2.4rem}}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #07111f, #0f172a);
+      color: white;
+    }
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="container">
-      <h1>Pipeline to Patient</h1>
-      <p class="lead">Helping biotech startups and research labs build scalable bioinformatics infrastructure before they're ready for a full-time bioinformatics team.</p>
-      <a class="hero-cta" href="#contact">Work together</a>
+
+<header class="sticky top-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-emerald-400">
+      <i class="fas fa-dna mr-2"></i> Jordana Consulting
+    </h1>
+
+    <nav class="space-x-6 text-sm font-semibold">
+      <a href="index.html" class="hover:text-emerald-400">Home</a>
+      <a href="experience.html" class="hover:text-emerald-400">Experience</a>
+      <a href="services.html" class="hover:text-emerald-400">Services</a>
+    </nav>
+  </div>
+</header>
+
+<section class="max-w-7xl mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+    <div>
+      <div class="inline-block bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-full text-sm mb-6">
+        AI • Bioinformatics • Precision Medicine
+      </div>
+
+      <h2 class="text-6xl font-black leading-tight mb-6">
+        Building Scalable AI & Bioinformatics Infrastructure
+      </h2>
+
+      <p class="text-xl text-slate-300 mb-4 leading-relaxed">
+        Cloud-native genomics pipelines, AI-driven analytics, and reproducible bioinformatics systems for biotech startups, hospitals, and public health organizations.
+      </p>
+
+      <p class="text-2xl font-bold text-emerald-300 mb-10 italic">
+        "I get you started and do what others won't do..."
+      </p>
+
+      <div class="flex gap-4">
+        <a href="schedule.html" class="bg-emerald-500 hover:bg-emerald-600 px-8 py-4 rounded-xl font-bold transition">
+          Schedule a Consultation
+        </a>
+
+        <a href="experience.html" class="border border-slate-600 hover:border-emerald-400 px-8 py-4 rounded-xl font-bold transition">
+          View Experience
+        </a>
+      </div>
     </div>
-  </header>
 
-  <main class="container" role="main">
-    <section aria-labelledby="story" style="margin-top:1rem">
-      <h2 id="story">My story — Pipeline to Patient</h2>
-      <p style="color:var(--muted)">I am the bioinformatics infrastructure partner for venture-backed biotech startups, and I help mid-size biotech companies with projects or by providing extra hands when their teams need support. I focus on building reliable, reproducible pipelines and platforms that move research toward measurable patient impact.</p>
-    </section>
+    <div class="glass rounded-3xl p-8">
+      <h3 class="text-2xl font-bold mb-6 text-emerald-400">Current Focus</h3>
 
-    <section aria-labelledby="services" style="margin-top:1rem">
-      <h2 id="services">Services</h2>
-      <p style="color:var(--muted)">Practical, hands-on support to accelerate your research and engineering work.</p>
-      <div class="grid" style="margin-top:.5rem">
-        <div class="card">
-          <strong>Infrastructure</strong>
-          <ul>
-            <li>Bioinformatics platform assessments</li>
-            <li>Cloud & compute strategy</li>
-            <li>Workflow architecture</li>
-            <li>Reproducible analysis pipelines</li>
-          </ul>
+      <ul class="space-y-4 text-lg text-slate-300">
+        <li class="flex items-start">
+          <i class="fas fa-check text-emerald-400 mr-4 mt-1"></i>
+          <span>AI-driven bioinformatics infrastructure</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-emerald-400 mr-4 mt-1"></i>
+          <span>Cloud-native omics pipelines</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-emerald-400 mr-4 mt-1"></i>
+          <span>Patient to pipeline</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-emerald-400 mr-4 mt-1"></i>
+          <span>All omics data types and workflows</span>
+        </li>
+      </ul>
+
+      <div class="mt-8 pt-8 border-t border-slate-700">
+        <h4 class="text-sm font-bold text-emerald-400 mb-3">CORE EXPERTISE</h4>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-slate-900 p-4 rounded-lg text-center">
+            <i class="fas fa-dna text-emerald-400 text-xl mb-2 block"></i>
+            <p class="text-xs font-semibold">Omics Pipelines</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg text-center">
+            <i class="fas fa-cloud text-cyan-400 text-xl mb-2 block"></i>
+            <p class="text-xs font-semibold">Cloud Infrastructure</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg text-center">
+            <i class="fas fa-brain text-purple-400 text-xl mb-2 block"></i>
+            <p class="text-xs font-semibold">AI & ML</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg text-center">
+            <i class="fas fa-flask text-blue-400 text-xl mb-2 block"></i>
+            <p class="text-xs font-semibold">Data Science</p>
+          </div>
         </div>
-        <div class="card">
-          <strong>Workflow Development</strong>
-          <ul>
-            <li>RNA-seq & single-cell pipelines</li>
-            <li>Variant analysis (WES/WGS)</li>
-            <li>Multiomics integration</li>
-            <li>Quality control & validation</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>Ad Hoc Scientific Analysis & AI</strong>
-          <ul>
-            <li>Exploratory analyses & biomarker discovery</li>
-            <li>AI-assisted literature synthesis</li>
-            <li>Knowledge retrieval & automated reporting</li>
-            <li>Scientist copilots</li>
-          </ul>
-        </div>
+        <p class="text-xs text-slate-400 mt-4">
+          Get in touch to get started with your omics infrastructure.
+        </p>
       </div>
-    </section>
+    </div>
 
-    <section aria-labelledby="projects" style="margin-top:1.25rem">
-      <h2 id="projects">Service accelerators</h2>
-      <p style="color:var(--muted)">These demos accelerate delivery and show domain expertise.</p>
-      <div class="grid" style="margin-top:.5rem">
-        <div class="card"><strong>Sample Integrity Platform</strong><div style="color:var(--muted)">Data QC expertise — Data quality audits & workflow validation</div></div>
-        <div class="card"><strong>Signal Detection Engine</strong><div style="color:var(--muted)">Algorithm dev — Biomarker & target prioritization</div></div>
-        <div class="card"><strong>Single-Cell Atlas</strong><div style="color:var(--muted)">Single-cell expertise — scRNA-seq analysis</div></div>
-        <div class="card"><strong>Multiomics Engine</strong><div style="color:var(--muted)">Data integration — Multiomics workflows</div></div>
-        <div class="card"><strong>Clinical Genomics Assistant</strong><div style="color:var(--muted)">Translational genomics — WES/WGS interpretation</div></div>
-        <div class="card"><strong>Startup Bioinformatics Concierge</strong><div style="color:var(--muted)">Fractional bioinformatics support — end-to-end consulting</div></div>
-      </div>
-    </section>
+  </div>
+</section>
 
-    <section id="contact" style="margin-top:1.25rem">
-      <h2>Contact</h2>
-      <p style="color:var(--muted)">To get started, email <em>[your-email@example.com]</em> or open an issue on this repo.</p>
-    </section>
-  </main>
+<section class="max-w-7xl mx-auto px-6 pb-20">
+  <h3 class="text-4xl font-black mb-12 text-center">Featured Projects</h3>
 
-  <footer>
-    <div class="container">© Jordana Esther Muwanguzi — Bioinformatics consulting · Built with HTML</div>
-  </footer>
+  <div class="grid md:grid-cols-2 gap-8">
+
+    <div class="glass rounded-3xl p-8">
+      <h4 class="text-2xl font-bold mb-4 text-cyan-400">Cloud Omics Platform</h4>
+      <p class="text-slate-300">
+        Production-grade Nextflow + Docker + AWS architecture for scalable multi-omics workflows.
+      </p>
+    </div>
+
+    <div class="glass rounded-3xl p-8">
+      <h4 class="text-2xl font-bold mb-4 text-purple-400">Genomics Analytics</h4>
+      <p class="text-slate-300">
+        End-to-end bioinformatics solutions with machine learning integration for precision medicine applications.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="border-t border-slate-800 py-8 text-center text-slate-400">
+  <p>© 2026 Jordana Consulting | AI + Computational Biology Infrastructure</p>
+</footer>
+
 </body>
 </html>
