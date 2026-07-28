@@ -1,75 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Readiness Assessment | Jordana Consulting</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <!-- Load Streamlit WebAssembly Engine (stlite) -->
-  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.50.0/build/stlite.js"></script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, #07111f, #0f172a);
-      color: white;
-    }
-    .glass {
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-  </style>
-</head>
-
-<body>
-
-<header class="sticky top-0 z-50 glass">
-  <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-emerald-400">
-      <a href="index.html"><i class="fas fa-dna mr-2"></i> Jordana Consulting</a>
-    </h1>
-
-    <nav class="space-x-6 text-sm font-semibold">
-      <a href="index.html" class="hover:text-emerald-400">Home</a>
-      <a href="experience.html" class="hover:text-emerald-400">Experience</a>
-      <a href="services.html" class="hover:text-emerald-400">Services</a>
-      <a href="about.html" class="hover:text-emerald-400">About</a>
-      <a href="assessment.html" class="hover:text-emerald-400 text-emerald-400">Assessment Tool</a>
-    </nav>
-  </div>
-</header>
-
-<section class="max-w-5xl mx-auto px-6 py-12">
-  <div class="glass rounded-3xl p-8">
-    <div class="text-center mb-6">
-      <h2 class="text-4xl font-black text-emerald-400 mb-2">
-        <i class="fas fa-microchip mr-2"></i> Interactive Readiness Assessment Engine
-      </h2>
-      <p class="text-slate-300">
-        Evaluate your pipeline readiness, identify infrastructure bottlenecks, and generate an actionable roadmap.
-      </p>
-    </div>
-
-    <!-- Free Assessment Engine Container -->
-    <div id="assessment-app" style="min-height: 650px;" class="rounded-xl overflow-hidden"></div>
-  </div>
-</section>
-
-<footer class="border-t border-slate-800 py-8 text-center text-slate-400">
-  <p>© 2026 Jordana Consulting | AI + Computational Biology Infrastructure</p>
-</footer>
-
 <script>
   stlite.mount({
     requirements: [],
+    // Disable the file watcher inside WebAssembly browser memory
+    streamlitConfig: {
+      "server.fileWatcherType": "none"
+    },
     mainScriptData: `
 import streamlit as st
 import sqlite3
 import json
 from datetime import datetime
 
+# Initialize SQLite database in WebAssembly environment
 def init_db():
     conn = sqlite3.connect("assessments.db")
     cursor = conn.cursor()
@@ -228,6 +170,3 @@ with tab2:
 `
   }, document.getElementById("assessment-app"));
 </script>
-
-</body>
-</html>
