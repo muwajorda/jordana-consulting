@@ -1,9 +1,41 @@
-import streamlit as st
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biotech Readiness Assessment Engine</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- stlite CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.css" />
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+
+  <!-- Top Navigation Bar -->
+  <nav class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold text-emerald-400 hover:text-emerald-300">
+        ← Back to Homepage
+      </a>
+      <span class="text-sm text-slate-400 font-mono">In-Browser Wasm Engine</span>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div id="root" class="min-h-[800px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4"></div>
+  </main>
+
+  <!-- stlite JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.js"></script>
+  <script>
+    const pythonAppCode = `import streamlit as st
 import sqlite3
 import json
 from datetime import datetime
 
-# Initialize SQLite database in WebAssembly browser memory
 def init_db():
     conn = sqlite3.connect("assessments.db")
     cursor = conn.cursor()
@@ -122,25 +154,10 @@ with tab1:
             for r in recommendations:
                 st.info(f"- {r}")
 
-        b_formatted = "\n".join([f"- {b}" for b in bottlenecks]) if bottlenecks else "- None identified."
-        r_formatted = "\n".join([f"- {r}" for r in recommendations]) if recommendations else "- System configuration meets current target requirements."
+        b_formatted = "\\n".join([f"- {b}" for b in bottlenecks]) if bottlenecks else "- None identified."
+        r_formatted = "\\n".join([f"- {r}" for r in recommendations]) if recommendations else "- System configuration meets current target requirements."
 
-        report_text = f"""# Bioinformatics Readiness Assessment Report
-**Company:** {company_name}
-**Email:** {contact_email}
-**Stage:** {stage}
-
-## Summary Readiness Scores
-- **Omics Readiness Score:** {min(5, omics_score)} / 5
-- **Infrastructure Readiness Score:** {min(5, infra_score)} / 5
-- **Team Maturity Score:** {team_score} / 5
-
-## Identified Bottlenecks
-{b_formatted}
-
-## Recommendations & Next Steps
-{r_formatted}
-"""
+        report_text = f"# Bioinformatics Readiness Assessment Report\\n**Company:** {company_name}\\n**Email:** {contact_email}\\n**Stage:** {stage}\\n\\n## Summary Readiness Scores\\n- **Omics Readiness Score:** {min(5, omics_score)} / 5\\n- **Infrastructure Readiness Score:** {min(5, infra_score)} / 5\\n- **Team Maturity Score:** {team_score} / 5\\n\\n## Identified Bottlenecks\\n{b_formatted}\\n\\n## Recommendations & Next Steps\\n{r_formatted}\\n"
 
         st.download_button(
             label="📄 Download Assessment Report (.md)",
@@ -161,3 +178,23 @@ with tab2:
         st.table([{"Company": r[0], "Stage": r[1], "Omics Score": f"{r[2]}/5", "Infra Score": f"{r[3]}/5", "Team Score": f"{r[4]}/5", "Timestamp": r[5][:16]} for r in rows])
     else:
         st.info("No assessments submitted in this session yet.")
+`;
+
+    stlite.mount({
+      requirements: [],
+      entrypoint: "streamlit_app.py",
+      files: {
+        "streamlit_app.py": pythonAppCode
+      },
+      streamlitConfig: {
+        "server.fileWatcherType": "none",
+        "theme.base": "dark",
+        "theme.backgroundColor": "#0f172a",
+        "theme.secondaryBackgroundColor": "#1e293b",
+        "theme.textColor": "#f8fafc",
+        "theme.primaryColor": "#10b981"
+      }
+    }, document.getElementById("root"));
+  </script>
+</body>
+</html>
