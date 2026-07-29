@@ -1,0 +1,163 @@
+import streamlit as st
+import sqlite3
+import json
+from datetime import datetime
+
+# Initialize SQLite database in WebAssembly browser memory
+def init_db():
+    conn = sqlite3.connect("assessments.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS assessments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            company_name TEXT,
+            contact_email TEXT,
+            stage TEXT,
+            team_size INTEGER,
+            data_types TEXT,
+            monthly_gb INTEGER,
+            uses_workflows INTEGER,
+            uses_containers INTEGER,
+            omics_score INTEGER,
+            infra_score INTEGER,
+            team_score INTEGER,
+            created_at TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+init_db()
+
+st.set_page_config(page_title="Biotech Readiness Engine", layout="centered")
+
+st.title("🧬 Compute & Omics Readiness Engine")
+st.caption("Evaluate your bioinformatics architecture, data pipelines, and team readiness.")
+
+tab1, tab2 = st.tabs(["🚀 New Assessment", "📊 Submission Logs"])
+
+with tab1:
+    with st.form("assessment_form"):
+        st.markdown("#### 1. Company Profile & Focus")
+        col1, col2 = st.columns(2)
+        with col1:
+            company_name = st.text_input("Company / Project Name", value="AstraOmics Bio")
+            contact_email = st.text_input("Contact Email", value="founder@astraomics.com")
+        with col2:
+            team_size = st.number_input("Bioinformatics Headcount", min_value=0, max_value=50, value=2)
+            stage = st.selectbox("Company Stage", ["Seed", "Series A", "Series B+", "Academic / Non-Profit"])
+
+        st.markdown("#### 2. Omics Modalities & Data Workloads")
+        data_types = st.multiselect(
+            "Primary Workloads & Data Types",
+            ["Preventive Genomics WGS", "cfDNA / Fragmentomics", "ChIP-seq / Epigenetics", "Bulk RNA-seq", "scRNA-seq", "Oncology Panels"],
+            default=["Preventive Genomics WGS", "cfDNA / Fragmentomics"]
+        )
+        monthly_gb = st.number_input("Estimated Monthly Data Volume (GB)", value=500, step=100)
+
+        st.markdown("#### 3. Infrastructure & Automation")
+        col3, col4 = st.columns(2)
+        with col3:
+            uses_workflows = st.checkbox("Uses Nextflow / Snakemake", value=True)
+        with col4:
+            uses_containers = st.checkbox("Uses Docker / Apptainer", value=True)
+
+        submitted = st.form_submit_button("Run Assessment Engine 🔥")
+
+    if submitted:
+        bottlenecks = []
+        recommendations = []
+
+        omics_score = 3
+        if "cfDNA / Fragmentomics" in data_types or "ChIP-seq / Epigenetics" in data_types:
+            omics_score += 1
+            if team_size < 3:
+                bottlenecks.append("High-noise omics modalities (cfDNA/ChIP-seq) require biological QC filtering.")
+                recommendations.append("Implement automated biological QC layers to filter low-signal samples prior to core pipelines.")
+
+        if "Preventive Genomics WGS" in data_types:
+            omics_score = min(5, omics_score + 1)
+            if monthly_gb > 1000:
+                bottlenecks.append("Large WGS cohort storage costs escalate rapidly without automated cold-tiering.")
+                recommendations.append("Configure automated cloud storage tiering (e.g., S3 Glacier) for raw FASTQ archives.")
+
+        infra_score = 1
+        if uses_workflows:
+            infra_score += 2
+        else:
+            bottlenecks.append("Lack of workflow orchestration reduces run reproducibility and error tracking.")
+            recommendations.append("Standardize pipelines using Nextflow DSL2 templates for reproducible execution.")
+
+        if uses_containers:
+            infra_score += 2
+        else:
+            bottlenecks.append("Uncontainerized environment increases risk of execution failure across target platforms.")
+            recommendations.append("Package pipeline dependencies into Docker/Apptainer containers.")
+
+        team_score = min(5, max(1, team_size * 2))
+
+        conn = sqlite3.connect("assessments.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO assessments (company_name, contact_email, stage, team_size, data_types, monthly_gb, uses_workflows, uses_containers, omics_score, infra_score, team_score, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (company_name, contact_email, stage, team_size, json.dumps(data_types), monthly_gb, int(uses_workflows), int(uses_containers), min(5, omics_score), min(5, infra_score), team_score, datetime.now().isoformat()))
+        conn.commit()
+        conn.close()
+
+        st.success("Assessment Computed & Persisted to Browser DB!")
+
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Omics Readiness", f"{min(5, omics_score)} / 5")
+        c2.metric("Infra Readiness", f"{min(5, infra_score)} / 5")
+        c3.metric("Team Maturity", f"{team_score} / 5")
+
+        if bottlenecks:
+            st.markdown("#### 🚨 Identified Bottlenecks")
+            for b in bottlenecks:
+                st.warning(f"- {b}")
+
+        if recommendations:
+            st.markdown("#### 🚀 Recommended Action Plan")
+            for r in recommendations:
+                st.info(f"- {r}")
+
+        b_formatted = "\n".join([f"- {b}" for b in bottlenecks]) if bottlenecks else "- None identified."
+        r_formatted = "\n".join([f"- {r}" for r in recommendations]) if recommendations else "- System configuration meets current target requirements."
+
+        report_text = f"""# Bioinformatics Readiness Assessment Report
+**Company:** {company_name}
+**Email:** {contact_email}
+**Stage:** {stage}
+
+## Summary Readiness Scores
+- **Omics Readiness Score:** {min(5, omics_score)} / 5
+- **Infrastructure Readiness Score:** {min(5, infra_score)} / 5
+- **Team Maturity Score:** {team_score} / 5
+
+## Identified Bottlenecks
+{b_formatted}
+
+## Recommendations & Next Steps
+{r_formatted}
+"""
+
+        st.download_button(
+            label="📄 Download Assessment Report (.md)",
+            data=report_text,
+            file_name=f"{company_name.lower().replace(' ', '_')}_readiness_report.md",
+            mime="text/markdown"
+        )
+
+with tab2:
+    st.markdown("#### 📁 SQLite Assessment Database")
+    conn = sqlite3.connect("assessments.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT company_name, stage, omics_score, infra_score, team_score, created_at FROM assessments ORDER BY id DESC")
+    rows = cursor.fetchall()
+    conn.close()
+
+    if rows:
+        st.table([{"Company": r[0], "Stage": r[1], "Omics Score": f"{r[2]}/5", "Infra Score": f"{r[3]}/5", "Team Score": f"{r[4]}/5", "Timestamp": r[5][:16]} for r in rows])
+    else:
+        st.info("No assessments submitted in this session yet.")
