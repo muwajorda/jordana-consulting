@@ -9,11 +9,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- stlite CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@0.76.0/build/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.css" />
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
-  <!-- Navigation Bar -->
+  <!-- Top Navigation Bar -->
   <nav class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="text-xl font-bold text-emerald-400 hover:text-emerald-300">
@@ -23,17 +23,21 @@
     </div>
   </nav>
 
-  <!-- Mount Container -->
+  <!-- Main Container -->
   <main class="max-w-5xl mx-auto px-4 py-8">
-    <div id="root" class="min-h-[800px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4"></div>
+    <div id="root" class="min-h-[800px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4">
+      <div id="loading" class="flex flex-col items-center justify-center py-20 text-slate-400">
+        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-400 mb-4"></div>
+        <p class="text-sm font-mono">Booting Python & Pyodide Wasm Runtime...</p>
+      </div>
+    </div>
   </main>
 
-  <!-- stlite Module Script -->
-  <script type="module">
-    import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@0.76.0/build/stlite.js";
-
-    mount(
-      `import streamlit as st
+  <!-- stlite JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.js"></script>
+  <script>
+    const pythonCode = `
+import streamlit as st
 import sqlite3
 import json
 from datetime import datetime
@@ -41,23 +45,7 @@ from datetime import datetime
 def init_db():
     conn = sqlite3.connect("assessments.db")
     cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS assessments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            company_name TEXT,
-            contact_email TEXT,
-            stage TEXT,
-            team_size INTEGER,
-            data_types TEXT,
-            monthly_gb INTEGER,
-            uses_workflows INTEGER,
-            uses_containers INTEGER,
-            omics_score INTEGER,
-            infra_score INTEGER,
-            team_score INTEGER,
-            created_at TEXT
-        )
-    """)
+    cursor.execute("CREATE TABLE IF NOT EXISTS assessments (id INTEGER PRIMARY KEY AUTOINCREMENT, company_name TEXT, contact_email TEXT, stage TEXT, team_size INTEGER, data_types TEXT, monthly_gb INTEGER, uses_workflows INTEGER, uses_containers INTEGER, omics_score INTEGER, infra_score INTEGER, team_score INTEGER, created_at TEXT)")
     conn.commit()
     conn.close()
 
@@ -106,8 +94,8 @@ with tab1:
         if "cfDNA / Fragmentomics" in data_types or "ChIP-seq / Epigenetics" in data_types:
             omics_score += 1
             if team_size < 3:
-                bottlenecks.append("High-noise omics modalities (cfDNA/ChIP-seq) require specialized QC filtering.")
-                recommendations.append("Implement automated biological QC layers to filter low-signal samples prior to core pipelines.")
+                bottlenecks.append("High-noise omics modalities require automated biological QC filtering.")
+                recommendations.append("Implement automated biological QC layers to filter low-signal samples.")
 
         if "Preventive Genomics WGS" in data_types:
             omics_score = min(5, omics_score + 1)
@@ -125,17 +113,14 @@ with tab1:
         if uses_containers:
             infra_score += 2
         else:
-            bottlenecks.append("Uncontainerized environment increases risk of execution failure across target platforms.")
+            bottlenecks.append("Uncontainerized environment increases risk of execution failure.")
             recommendations.append("Package pipeline dependencies into Docker/Apptainer containers.")
 
         team_score = min(5, max(1, team_size * 2))
 
         conn = sqlite3.connect("assessments.db")
         cursor = conn.cursor()
-        cursor.execute("""
-            INSERT INTO assessments (company_name, contact_email, stage, team_size, data_types, monthly_gb, uses_workflows, uses_containers, omics_score, infra_score, team_score, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (company_name, contact_email, stage, team_size, json.dumps(data_types), monthly_gb, int(uses_workflows), int(uses_containers), min(5, omics_score), min(5, infra_score), team_score, datetime.now().isoformat()))
+        cursor.execute("INSERT INTO assessments (company_name, contact_email, stage, team_size, data_types, monthly_gb, uses_workflows, uses_containers, omics_score, infra_score, team_score, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (company_name, contact_email, stage, team_size, json.dumps(data_types), monthly_gb, int(uses_workflows), int(uses_containers), min(5, omics_score), min(5, infra_score), team_score, datetime.now().isoformat()))
         conn.commit()
         conn.close()
 
@@ -157,9 +142,9 @@ with tab1:
                 st.info(f"- {r}")
 
         b_formatted = "\\n".join([f"- {b}" for b in bottlenecks]) if bottlenecks else "- None identified."
-        r_formatted = "\\n".join([f"- {r}" for r in recommendations]) if recommendations else "- System configuration meets current target requirements."
+        r_formatted = "\\n".join([f"- {r}" for r in recommendations]) if recommendations else "- System configuration meets target requirements."
 
-        report_text = f"# Bioinformatics Readiness Assessment Report\\n**Company:** {company_name}\\n**Email:** {contact_email}\\n**Stage:** {stage}\\n\\n## Summary Readiness Scores\\n- **Omics Readiness Score:** {min(5, omics_score)} / 5\\n- **Infrastructure Readiness Score:** {min(5, infra_score)} / 5\\n- **Team Maturity Score:** {team_score} / 5\\n\\n## Identified Bottlenecks\\n{b_formatted}\\n\\n## Recommendations & Next Steps\\n{r_formatted}\\n"
+        report_text = f"# Bioinformatics Readiness Assessment Report\\n**Company:** {company_name}\\n**Email:** {contact_email}\\n**Stage:** {stage}\\n\\n## Readiness Scores\\n- Omics: {min(5, omics_score)} / 5\\n- Infra: {min(5, infra_score)} / 5\\n- Team: {team_score} / 5\\n\\n## Bottlenecks\\n{b_formatted}\\n\\n## Recommendations\\n{r_formatted}\\n"
 
         st.download_button(
             label="📄 Download Assessment Report (.md)",
@@ -180,9 +165,23 @@ with tab2:
         st.table([{"Company": r[0], "Stage": r[1], "Omics Score": f"{r[2]}/5", "Infra Score": f"{r[3]}/5", "Team Score": f"{r[4]}/5", "Timestamp": r[5][:16]} for r in rows])
     else:
         st.info("No assessments submitted in this session yet.")
-`,
-      document.getElementById("root")
-    );
+`;
+
+    stlite.mount({
+      requirements: [],
+      entrypoint: "app.py",
+      files: {
+        "app.py": pythonCode
+      },
+      streamlitConfig: {
+        "server.fileWatcherType": "none",
+        "theme.base": "dark",
+        "theme.backgroundColor": "#0f172a",
+        "theme.secondaryBackgroundColor": "#1e293b",
+        "theme.textColor": "#f8fafc",
+        "theme.primaryColor": "#10b981"
+      }
+    }, document.getElementById("root"));
   </script>
 </body>
 </html>
