@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- stlite CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@0.76.0/build/style.css" />
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
@@ -23,15 +23,17 @@
     </div>
   </nav>
 
-  <!-- Container for Streamlit Mount -->
+  <!-- Mount Container -->
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div id="root" class="min-h-[800px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4"></div>
   </main>
 
-  <!-- stlite JS -->
-  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.js"></script>
-  <script>
-    const pythonAppCode = `import streamlit as st
+  <!-- stlite Module Script -->
+  <script type="module">
+    import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@0.76.0/build/stlite.js";
+
+    mount(
+      `import streamlit as st
 import sqlite3
 import json
 from datetime import datetime
@@ -178,23 +180,9 @@ with tab2:
         st.table([{"Company": r[0], "Stage": r[1], "Omics Score": f"{r[2]}/5", "Infra Score": f"{r[3]}/5", "Team Score": f"{r[4]}/5", "Timestamp": r[5][:16]} for r in rows])
     else:
         st.info("No assessments submitted in this session yet.")
-`;
-
-    stlite.mount({
-      requirements: [],
-      entrypoint: "streamlit_app.py",
-      files: {
-        "streamlit_app.py": pythonAppCode
-      },
-      streamlitConfig: {
-        "server.fileWatcherType": "none",
-        "theme.base": "dark",
-        "theme.backgroundColor": "#0f172a",
-        "theme.secondaryBackgroundColor": "#1e293b",
-        "theme.textColor": "#f8fafc",
-        "theme.primaryColor": "#10b981"
-      }
-    }, document.getElementById("root"));
+`,
+      document.getElementById("root")
+    );
   </script>
 </body>
 </html>
