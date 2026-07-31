@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biotech Readiness Assessment Engine</title>
+  <title>Biotech Readiness Assessment Engine | Week 2</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,16 +19,16 @@
       <a href="index.html" class="text-xl font-bold text-emerald-400 hover:text-emerald-300">
         ← Back to Homepage
       </a>
-      <span class="text-sm text-slate-400 font-mono">In-Browser Wasm Engine</span>
+      <span class="text-sm text-slate-400 font-mono">Week 2: Cloud & Compute Engine</span>
     </div>
   </nav>
 
   <!-- Main Mount Root Container -->
-  <main class="max-w-5xl mx-auto px-4 py-8">
-    <div id="root" class="min-h-[800px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4">
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <div id="root" class="min-h-[850px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4">
       <div id="status" class="flex flex-col items-center justify-center py-20 text-slate-400">
         <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-400 mb-4"></div>
-        <p class="text-sm font-mono">Loading Pyodide & Streamlit Runtime...</p>
+        <p class="text-sm font-mono">Initializing Compute & Storage Blueprint Engine...</p>
       </div>
     </div>
   </main>
@@ -42,44 +42,50 @@ import streamlit as st
 import json
 from datetime import datetime
 
-# Initialize Session State DB replacement
 if "assessments" not in st.session_state:
     st.session_state.assessments = []
 
-st.set_page_config(page_title="Biotech Readiness Engine", layout="centered")
+st.set_page_config(page_title="Biotech Readiness Engine", layout="wide")
 
-st.title("🧬 Compute & Omics Readiness Engine")
-st.caption("Evaluate your bioinformatics architecture, data pipelines, and team readiness.")
+st.title("🧬 Compute, Storage & Infrastructure Engine")
+st.caption("Week 2: Cloud Cost Estimation, Infrastructure Blueprints & Omics Assessment")
 
-tab1, tab2 = st.tabs(["🚀 New Assessment", "📊 Submission Logs"])
+tab1, tab2, tab3 = st.tabs(["🚀 Readiness Assessment", "💰 Storage & Compute Estimator", "📊 Submission History"])
 
+# ---------------------------------------------------------
+# TAB 1: READINESS ASSESSMENT & INFRASTRUCTURE BLUEPRINT
+# ---------------------------------------------------------
 with tab1:
     with st.form("assessment_form"):
-        st.markdown("#### 1. Company Profile & Focus")
+        st.markdown("#### 1. Company Profile & Scope")
         col1, col2 = st.columns(2)
         with col1:
             company_name = st.text_input("Company / Project Name", value="AstraOmics Bio")
             contact_email = st.text_input("Contact Email", value="founder@astraomics.com")
+            cloud_provider = st.selectbox("Target Cloud Provider", ["AWS (Amazon Web Services)", "GCP (Google Cloud Platform)", "Hybrid / On-Prem"])
         with col2:
-            team_size = st.number_input("Bioinformatics Headcount", min_value=0, max_value=50, value=2)
+            team_size = st.number_input("Bioinformatics Headcount", min_value=0, max_value=50, value=3)
             stage = st.selectbox("Company Stage", ["Seed", "Series A", "Series B+", "Academic / Non-Profit"])
+            primary_engine = st.selectbox("Workflow Orchestrator", ["Nextflow (nf-core)", "Snakemake", "Cromwell / WDL", "Manual / Custom Scripts"])
 
-        st.markdown("#### 2. Omics Modalities & Data Workloads")
+        st.markdown("#### 2. Omics Modalities & Data Throughput")
         data_types = st.multiselect(
             "Primary Workloads & Data Types",
             ["Preventive Genomics WGS", "cfDNA / Fragmentomics", "ChIP-seq / Epigenetics", "Bulk RNA-seq", "scRNA-seq", "Oncology Panels"],
             default=["Preventive Genomics WGS", "cfDNA / Fragmentomics"]
         )
-        monthly_gb = st.number_input("Estimated Monthly Data Volume (GB)", value=500, step=100)
+        monthly_gb = st.number_input("Estimated Monthly Raw Data Volume (GB)", value=1200, step=100)
 
-        st.markdown("#### 3. Infrastructure & Automation")
+        st.markdown("#### 3. Infrastructure & Automation Baseline")
         col3, col4 = st.columns(2)
         with col3:
-            uses_workflows = st.checkbox("Uses Nextflow / Snakemake", value=True)
+            uses_containers = st.checkbox("Uses Containers (Docker / Apptainer)", value=True)
+            has_cold_archive = st.checkbox("Automated Cold Storage Tiering Configured", value=False)
         with col4:
-            uses_containers = st.checkbox("Uses Docker / Apptainer", value=True)
+            uses_spot_instances = st.checkbox("Utilizes Spot / Preemptible Instances", value=True)
+            has_ci_cd = st.checkbox("CI/CD Pipeline Integration", value=False)
 
-        submitted = st.form_submit_button("Run Assessment Engine 🔥")
+        submitted = st.form_submit_button("Generate Assessment & Architecture Blueprint 🔥")
 
     if submitted:
         bottlenecks = []
@@ -89,75 +95,157 @@ with tab1:
         if "cfDNA / Fragmentomics" in data_types or "ChIP-seq / Epigenetics" in data_types:
             omics_score += 1
             if team_size < 3:
-                bottlenecks.append("High-noise omics modalities require biological QC filtering.")
-                recommendations.append("Implement automated biological QC layers to filter low-signal samples.")
+                bottlenecks.append("High-noise omics modalities require dedicated bioinformaticians for biological QC filtering.")
+                recommendations.append("Implement automated biological QC layers (e.g., FastQC, MultiQC) before downstream analysis.")
 
         if "Preventive Genomics WGS" in data_types:
             omics_score = min(5, omics_score + 1)
-            if monthly_gb > 1000:
-                bottlenecks.append("Large WGS cohort storage costs escalate rapidly without automated cold-tiering.")
-                recommendations.append("Configure automated cloud storage tiering (e.g., S3 Glacier) for raw FASTQ archives.")
+            if monthly_gb > 1000 and not has_cold_archive:
+                bottlenecks.append("High-volume WGS raw data will cause exponential storage cost growth without lifecycle policies.")
+                recommendations.append("Configure cloud lifecycle rules to move raw FASTQ files to Glacier Deep Archive after 30 days.")
 
-        infra_score = 1
-        if uses_workflows:
-            infra_score += 2
+        infra_score = 2
+        if primary_engine in ["Nextflow (nf-core)", "Snakemake"]:
+            infra_score += 1
         else:
-            bottlenecks.append("Lack of workflow orchestration reduces run reproducibility and error tracking.")
-            recommendations.append("Standardize pipelines using Nextflow DSL2 templates for reproducible execution.")
+            bottlenecks.append("Lack of standard workflow orchestration limits scalability and reproducibility.")
+            recommendations.append("Migrate pipeline scripts to Nextflow DSL2 or Snakemake.")
 
         if uses_containers:
-            infra_score += 2
+            infra_score += 1
         else:
-            bottlenecks.append("Uncontainerized environment increases risk of execution failure.")
-            recommendations.append("Package pipeline dependencies into Docker/Apptainer containers.")
+            bottlenecks.append("Uncontainerized tools risk dependency drift across runtimes.")
+            recommendations.append("Package pipeline steps into Docker or Apptainer images.")
+
+        if uses_spot_instances:
+            infra_score = min(5, infra_score + 1)
 
         team_score = min(5, max(1, team_size * 2))
 
-        # Store entry in session state
+        # Save to Session
         st.session_state.assessments.append({
             "Company": company_name,
             "Stage": stage,
+            "Cloud": cloud_provider.split(" ")[0],
             "Omics Score": f"{min(5, omics_score)}/5",
             "Infra Score": f"{min(5, infra_score)}/5",
             "Team Score": f"{team_score}/5",
+            "Monthly GB": monthly_gb,
             "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
         })
 
-        st.success("Assessment Computed & Saved to Session!")
+        st.success("Assessment Complete & Infrastructure Blueprint Generated!")
 
-        c1, c2, c3 = st.columns(3)
-        c1.metric("Omics Readiness", f"{min(5, omics_score)} / 5")
-        c2.metric("Infra Readiness", f"{min(5, infra_score)} / 5")
-        c3.metric("Team Maturity", f"{team_score} / 5")
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Omics Readiness", f"{min(5, omics_score)} / 5")
+        m2.metric("Infra Readiness", f"{min(5, infra_score)} / 5")
+        m3.metric("Team Maturity", f"{team_score} / 5")
 
-        if bottlenecks:
-            st.markdown("#### 🚨 Identified Bottlenecks")
-            for b in bottlenecks:
-                st.warning(f"- {b}")
+        col_b, col_r = st.columns(2)
+        with col_b:
+            if bottlenecks:
+                st.markdown("##### 🚨 Identified Bottlenecks")
+                for b in bottlenecks:
+                    st.warning(f"- {b}")
+            else:
+                st.success("No critical infrastructure bottlenecks detected!")
 
-        if recommendations:
-            st.markdown("#### 🚀 Recommended Action Plan")
-            for r in recommendations:
-                st.info(f"- {r}")
+        with col_r:
+            if recommendations:
+                st.markdown("##### 🚀 Recommended Architecture Actions")
+                for r in recommendations:
+                    st.info(f"- {r}")
 
-        b_formatted = "\\n".join([f"- {b}" for b in bottlenecks]) if bottlenecks else "- None identified."
-        r_formatted = "\\n".join([f"- {r}" for r in recommendations]) if recommendations else "- System configuration meets target requirements."
+        # Infrastructure Blueprint Output
+        st.markdown("---")
+        st.markdown("### 🏗️ Recommended Infrastructure Blueprint")
+        
+        bp_col1, bp_col2 = st.columns(2)
+        with bp_col1:
+            st.markdown(f"**Target Cloud Environment:** {cloud_provider}")
+            if "AWS" in cloud_provider:
+                st.markdown("""
+                * **Batch Computing:** AWS Batch with Spot EC2 instance pools (`c6i`, `m6i`, `r6i` families).
+                * **Object Storage:** AWS S3 Standard (Hot) + S3 Glacier Deep Archive lifecycle policies.
+                * **Orchestration:** AWS Batch integration via Nextflow / AWS Tower (Seqera).
+                """)
+            elif "GCP" in cloud_provider:
+                st.markdown("""
+                * **Batch Computing:** Google Cloud Life Sciences API / Batch with Preemptible VMs.
+                * **Object Storage:** Google Cloud Storage Standard + Nearline/Coldline tiering.
+                * **Orchestration:** GCP Batch runner or Nextflow with Google Cloud plugin.
+                """)
+            else:
+                st.markdown("""
+                * **Compute:** Hybrid Slurm Cluster / On-Premise HPC with local S3 storage (MinIO).
+                * **Containerization:** Apptainer / Singularity for HPC execution compatibility.
+                """)
 
-        report_text = f"# Bioinformatics Readiness Assessment Report\\n**Company:** {company_name}\\n**Email:** {contact_email}\\n**Stage:** {stage}\\n\\n## Readiness Scores\\n- Omics: {min(5, omics_score)} / 5\\n- Infra: {min(5, infra_score)} / 5\\n- Team: {team_score} / 5\\n\\n## Bottlenecks\\n{b_formatted}\\n\\n## Recommendations\\n{r_formatted}\\n"
+        with bp_col2:
+            st.markdown("**Starter Orchestration Config Snippet**")
+            if primary_engine == "Nextflow (nf-core)":
+                st.code(f"""
+// nextflow.config - {company_name}
+process {{
+    executor = '{ 'awsbatch' if 'AWS' in cloud_provider else 'google-batch' if 'GCP' in cloud_provider else 'slurm' }'
+    container = 'biocontainers/samtools:v1.17'
+    errorStrategy = 'retry'
+    maxRetries = 2
+}}
+                """, language="groovy")
+            else:
+                st.code(f"""
+# Snakemake Profile - {company_name}
+executor: cluster-generic
+cluster-generic-submit-cmd: sbatch --mem={{resources.mem_mb}} --cpus-per-task={{threads}}
+default-resources:
+  mem_mb: 8000
+  threads: 4
+                """, language="yaml")
 
-        st.download_button(
-            label="📄 Download Assessment Report (.md)",
-            data=report_text,
-            file_name=f"{company_name.lower().replace(' ', '_')}_readiness_report.md",
-            mime="text/markdown"
-        )
-
+# ---------------------------------------------------------
+# TAB 2: STORAGE & COMPUTE COST CALCULATOR
+# ---------------------------------------------------------
 with tab2:
-    st.markdown("#### 📁 Submission Logs")
+    st.markdown("### 💰 Cloud Storage & Compute Cost Estimator")
+    st.caption("Model your estimated cloud infrastructure spend based on sample throughput and retention policies.")
+
+    calc_c1, calc_c2 = st.columns(2)
+    with calc_c1:
+        calc_gb = st.slider("Monthly Raw Data Ingestion (GB)", min_value=100, max_value=20000, value=2000, step=100)
+        retention_months = st.slider("Hot Storage Retention (Months before Archiving)", min_value=1, max_value=12, value=3)
+        compute_hours_per_sample = st.number_input("Est. Compute Hours per Sample (100GB)", value=4.0, step=0.5)
+
+    with calc_c2:
+        hot_cost_per_gb = 0.023  # AWS S3 Standard / GCP Standard
+        cold_cost_per_gb = 0.00099 # AWS Glacier Deep Archive
+        spot_cpu_hour_cost = 0.04 # Average spot vCPU cost
+        
+        num_samples = calc_gb / 100
+        total_hot_gb = calc_gb * retention_months
+        total_cold_gb = max(0, (calc_gb * 12) - total_hot_gb)
+
+        monthly_hot_storage = total_hot_gb * hot_cost_per_gb
+        monthly_cold_storage = total_cold_gb * cold_cost_per_gb
+        monthly_compute_cost = num_samples * compute_hours_per_sample * 8 * spot_cpu_hour_cost # assuming 8 vCPU job
+
+        st.markdown("#### Estimated Monthly Infrastructure Spend")
+        st.metric("Hot Storage Spend", f"${monthly_hot_storage:,.2f} / mo")
+        st.metric("Cold Storage Spend (Archived)", f"${monthly_cold_storage:,.2f} / mo")
+        st.metric("Estimated Pipeline Compute (Spot)", f"${monthly_compute_cost:,.2f} / mo")
+
+        total_est = monthly_hot_storage + monthly_cold_storage + monthly_compute_cost
+        st.subheader(f"Total Projected Monthly Cloud Spend: **${total_est:,.2f}**")
+
+# ---------------------------------------------------------
+# TAB 3: SUBMISSION LOGS
+# ---------------------------------------------------------
+with tab3:
+    st.markdown("### 📊 Historical Session Logs")
     if st.session_state.assessments:
         st.table(st.session_state.assessments)
     else:
-        st.info("No assessments submitted in this session yet.")
+        st.info("No assessments completed in this browser session yet.")
 `;
 
     try {
