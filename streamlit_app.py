@@ -8,20 +8,17 @@ import random
 if "assessments" not in st.session_state:
     st.session_state.assessments = []
 
-if "recommended_pipeline" not in st.session_state:
-    st.session_state.recommended_pipeline = "scRNA-seq (Cell Ranger / Seurat)"
-
 if "active_workloads" not in st.session_state:
-    st.session_state.active_workloads = ["scRNA-seq", "Oncology Panels"]
+    st.session_state.active_workloads = ["scRNA-seq (Single Cell)", "Oncology Panels (Somatic Mutect2)"]
 
 st.set_page_config(page_title="Biotech Readiness Engine", layout="wide")
 
 st.title("🧬 Bioinformatics Readiness & Dynamic Pipeline Engine")
-st.caption("Auto-adapts Nextflow DSL2 templates based on your Readiness Assessment selections")
+st.caption("Auto-adapts Nextflow DSL2 templates, structured metadata samplesheets & DAG execution graphs")
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "🚀 Readiness Assessment", 
-    "⚡ Pipeline Generator", 
+    "⚡ Pipeline Generator & DAG Graph", 
     "📊 Statistical Analysis & PCA",
     "💰 Cost Estimator", 
     "📋 Session History"
@@ -73,10 +70,7 @@ with tab1:
         bottlenecks = []
         recommendations = []
 
-        # Update global session state for Tab 2
         st.session_state.active_workloads = data_types
-        if data_types:
-            st.session_state.recommended_pipeline = data_types[0]
 
         omics_score = 3
         if "scRNA-seq (Single Cell)" in data_types or "cfDNA / Fragmentomics" in data_types:
@@ -88,9 +82,6 @@ with tab1:
         if "Oncology Panels (Somatic Mutect2)" in data_types:
             omics_score = min(5, omics_score + 1)
             recommendations.append("Incorporate Tumor-Matched Normal pipelines for accurate somatic calling.")
-
-        if "TCGA / GDC Public Data Ingestion" in data_types:
-            recommendations.append("Automate Genomic Data Commons (GDC) API download processes via Nextflow.")
 
         infra_score = 3 if uses_containers else 1
         if uses_spot_instances:
@@ -109,40 +100,26 @@ with tab1:
             "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
         })
 
-        st.success("✅ Assessment Computed! Navigating to 'Pipeline Generator' will now display your selected pipelines.")
+        st.success("✅ Assessment Computed! Check 'Pipeline Generator & DAG Graph' tab for updated samplesheets and visual workflow graph.")
 
         m1, m2, m3 = st.columns(3)
         m1.metric("Omics Readiness", f"{min(5, omics_score)} / 5")
         m2.metric("Infra Readiness", f"{min(5, infra_score)} / 5")
         m3.metric("Team Maturity", f"{team_score} / 5")
 
-        col_b, col_r = st.columns(2)
-        with col_b:
-            if bottlenecks:
-                st.markdown("##### 🚨 Identified Bottlenecks")
-                for b in bottlenecks:
-                    st.warning(f"- {b}")
-        with col_r:
-            if recommendations:
-                st.markdown("##### 🚀 Recommended Actions")
-                for r in recommendations:
-                    st.info(f"- {r}")
-
 # ---------------------------------------------------------
-# TAB 2: PIPELINE GENERATOR (DYNAMICALLY POPULATED)
+# TAB 2: PIPELINE GENERATOR & ENHANCED SAMPLESHEET
 # ---------------------------------------------------------
 with tab2:
-    st.markdown("### ⚡ Nextflow DSL2 Workflow & Container Generator")
-    st.caption("Templates dynamically match your selections from the Readiness Assessment.")
+    st.markdown("### ⚡ Nextflow DSL2 Workflow & Metadata-Enriched Samplesheet")
+    st.caption("Templates and structured samplesheets dynamically update based on pipeline selection.")
 
     p_col1, p_col2 = st.columns(2)
     with p_col1:
-        # Dynamically build pipeline list based on assessment selections
         available_templates = st.session_state.active_workloads if st.session_state.active_workloads else [
             "scRNA-seq (Single Cell)", 
             "Oncology Panels (Somatic Mutect2)", 
-            "TCGA / GDC Public Data Ingestion", 
-            "Bulk RNA-seq"
+            "TCGA / GDC Public Data Ingestion"
         ]
         
         target_modality = st.selectbox(
@@ -155,151 +132,223 @@ with tab2:
 
     st.markdown("---")
 
-    # Dynamic Code Generation
+    # Generate Modality-Specific Nextflow Code, SVG DAG, and Structured Samplesheet
     if "scRNA-seq" in target_modality:
+        svg_dag = """
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 160" style="background:#0f172a; border-radius:8px; padding:10px; width:100%;">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
+            </marker>
+          </defs>
+          <rect x="20" y="50" width="130" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+          <text x="85" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">FASTQ Input</text>
+          
+          <line x1="150" y1="75" x2="220" y2="75" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)" />
+          
+          <rect x="225" y="50" width="160" height="50" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+          <text x="305" y="72" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">CELLRANGER_COUNT</text>
+          <text x="305" y="88" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">Alignment & Demux</text>
+          
+          <line x1="385" y1="75" x2="455" y2="75" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)" />
+          
+          <rect x="460" y="20" width="150" height="45" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+          <text x="535" y="47" fill="#f8fafc" font-size="11" font-family="monospace" text-anchor="middle">SEURAT_QC</text>
+
+          <rect x="460" y="85" width="150" height="45" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+          <text x="535" y="112" fill="#f8fafc" font-size="11" font-family="monospace" text-anchor="middle">SCANPY_UMAP</text>
+          
+          <line x1="610" y1="42" x2="670" y2="75" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="610" y1="108" x2="670" y2="75" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)" />
+
+          <rect x="675" y="50" width="100" height="50" rx="8" fill="#065f46" stroke="#34d399" stroke-width="2"/>
+          <text x="725" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">h5ad / rds</text>
+        </svg>
+        """
         main_nf = """nextflow.enable.dsl=2
 
-params.fastqs = "$projectDir/fastqs"
+params.samplesheet = "$projectDir/samplesheet.csv"
 params.transcriptome = "$projectDir/ref/refdata-gex-GRCh38-2020-A"
 params.outdir = "$projectDir/results"
 
 process CELLRANGER_COUNT {
     tag "$sample_id"
     container 'cumulus/cellranger:7.1.0'
-    memory '64 GB'
-    cpus 16
 
     input:
-    tuple val(sample_id), path(fastq_dir)
+    tuple val(sample_id), val(fastq_1), val(fastq_2)
 
     output:
-    path "${sample_id}_cellranger", emit: count_matrix
+    path "${sample_id}_out", emit: count_matrix
 
     script:
     \"\"\"
-    cellranger count --id=${sample_id}_cellranger \\
-                     --transcriptome=${params.transcriptome} \\
-                     --fastqs=${fastq_dir} \\
-                     --sample=${sample_id}
+    cellranger count --id=${sample_id}_out --transcriptome=${params.transcriptome} --fastqs=${fastq_1}
     \"\"\"
 }
 
 workflow {
-    samples_ch = Channel.fromPath(params.fastqs, type: 'dir')
+    samples_ch = Channel
+        .fromPath(params.samplesheet)
+        .splitCsv(header:true)
+        .map { row -> tuple(row.sample_id, row.fastq_1, row.fastq_2) }
+
     CELLRANGER_COUNT(samples_ch)
 }"""
         dockerfile_code = """FROM ubuntu:22.04
-LABEL maintainer="Jordana Consulting - scRNA Engine"
-
+LABEL maintainer="Jordana Consulting - Single Cell Engine"
 RUN apt-get update && apt-get install -y wget curl python3 python3-pip
 RUN pip3 install scanpy seurat-disk scrublet
-
 WORKDIR /opt/singlecell
 CMD ["/bin/bash"]"""
 
-        samplesheet_code = """sample,fastq_dir
-PBMC_10k_Control,s3://my-bucket/sc_fastqs/pbmc_10k/
-TCell_Tumor_Infiltrate,s3://my-bucket/sc_fastqs/tcell_tumor/"""
+        samplesheet_code = """sample_id,omics_modality,experiment_type,data_type,file_type,fastq_1,fastq_2
+PBMC_10k_Ctrl,Single-Cell Transcriptomics,10x Chromium 3' v3,Raw Gene Expression,FASTQ (GZIP),s3://my-bucket/sc_fastqs/pbmc_10k_R1.fastq.gz,s3://my-bucket/sc_fastqs/pbmc_10k_R2.fastq.gz
+TCell_Tumor_01,Single-Cell Transcriptomics,10x Chromium 5' VDJ,Immune Profiling,FASTQ (GZIP),s3://my-bucket/sc_fastqs/tcell_R1.fastq.gz,s3://my-bucket/sc_fastqs/tcell_R2.fastq.gz"""
 
     elif "Oncology Panels" in target_modality:
+        svg_dag = """
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 160" style="background:#0f172a; border-radius:8px; padding:10px; width:100%;">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
+            </marker>
+          </defs>
+          <rect x="20" y="20" width="130" height="45" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+          <text x="85" y="47" fill="#f8fafc" font-size="11" font-family="monospace" text-anchor="middle">Tumor FASTQ</text>
+          
+          <rect x="20" y="85" width="130" height="45" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+          <text x="85" y="112" fill="#f8fafc" font-size="11" font-family="monospace" text-anchor="middle">Normal FASTQ</text>
+          
+          <line x1="150" y1="42" x2="210" y2="75" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="150" y1="108" x2="210" y2="75" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)" />
+
+          <rect x="215" y="50" width="150" height="50" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+          <text x="290" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">BWA_MEM_ALIGN</text>
+          
+          <line x1="365" y1="75" x2="435" y2="75" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)" />
+
+          <rect x="440" y="50" width="160" height="50" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+          <text x="520" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">GATK_MUTECT2</text>
+          
+          <line x1="600" y1="75" x2="670" y2="75" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)" />
+
+          <rect x="675" y="50" width="100" height="50" rx="8" fill="#7f1d1d" stroke="#f87171" stroke-width="2"/>
+          <text x="725" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">Somatic VCF</text>
+        </svg>
+        """
         main_nf = """nextflow.enable.dsl=2
 
-params.tumor_bam = "$projectDir/bams/tumor.bam"
-params.normal_bam = "$projectDir/bams/normal.bam"
+params.samplesheet = "$projectDir/samplesheet.csv"
 params.genome = "$projectDir/ref/hg38.fasta"
-params.outdir = "$projectDir/results"
 
 process MUTECT2_SOMATIC {
-    tag "Oncology_Panel_Variant_Calling"
+    tag "$sample_id"
     container 'broadinstitute/gatk:4.4.0.0'
 
     input:
-    path tumor
-    path normal
+    tuple val(sample_id), val(tumor_bam), val(normal_bam)
 
     output:
-    path "somatic_variants.vcf.gz", emit: vcf
+    path "${sample_id}.vcf.gz", emit: vcf
 
     script:
     \"\"\"
-    gatk Mutect2 \\
-        -R ${params.genome} \\
-        -I ${tumor} -tumor Tumor_Sample \\
-        -I ${normal} -normal Normal_Sample \\
-        -O somatic_variants.vcf.gz
+    gatk Mutect2 -R ${params.genome} -I ${tumor_bam} -tumor ${sample_id}_T -I ${normal_bam} -normal ${sample_id}_N -O ${sample_id}.vcf.gz
     \"\"\"
 }
 
 workflow {
-    MUTECT2_SOMATIC(file(params.tumor_bam), file(params.normal_bam))
+    samples_ch = Channel
+        .fromPath(params.samplesheet)
+        .splitCsv(header:true)
+        .map { row -> tuple(row.sample_id, row.tumor_bam, row.normal_bam) }
+
+    MUTECT2_SOMATIC(samples_ch)
 }"""
         dockerfile_code = """FROM broadinstitute/gatk:4.4.0.0
 LABEL maintainer="Jordana Consulting - Somatic Oncology"
-
 RUN apt-get update && apt-get install -y bcftools samtools python3-pandas"""
 
-        samplesheet_code = """tumor_sample,normal_sample,tumor_bam,normal_bam
-TUMOR_PANEL_01,NORMAL_PANEL_01,s3://my-bucket/oncology/T01.bam,s3://my-bucket/oncology/N01.bam"""
+        samplesheet_code = """sample_id,omics_modality,experiment_type,data_type,file_type,tumor_bam,normal_bam
+PATIENT_01,Cancer Genomics,Targeted Hybrid Capture Panel,Somatic Variant Calling,Aligned BAM,s3://my-bucket/oncology/P01_T.bam,s3://my-bucket/oncology/P01_N.bam
+PATIENT_02,Cancer Genomics,Targeted Hybrid Capture Panel,Somatic Variant Calling,Aligned BAM,s3://my-bucket/oncology/P02_T.bam,s3://my-bucket/oncology/P02_N.bam"""
 
-    elif "TCGA" in target_modality:
+    else:
+        svg_dag = """
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 160" style="background:#0f172a; border-radius:8px; padding:10px; width:100%;">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#a855f7" />
+            </marker>
+          </defs>
+          <rect x="50" y="50" width="150" height="50" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+          <text x="125" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">GDC Manifest</text>
+          
+          <line x1="200" y1="75" x2="300" y2="75" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow)" />
+
+          <rect x="305" y="50" width="180" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+          <text x="395" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">GDC_CLIENT_DOWNLOAD</text>
+          
+          <line x1="485" y1="75" x2="585" y2="75" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow)" />
+
+          <rect x="590" y="50" width="150" height="50" rx="8" fill="#581c87" stroke="#c084fc" stroke-width="2"/>
+          <text x="665" y="80" fill="#f8fafc" font-size="12" font-family="monospace" text-anchor="middle">TCGA Data Lake</text>
+        </svg>
+        """
         main_nf = """nextflow.enable.dsl=2
 
-params.gdc_manifest = "$projectDir/tcga_manifest.txt"
-params.outdir = "$projectDir/tcga_data"
+params.samplesheet = "$projectDir/samplesheet.csv"
 
 process GDC_DOWNLOAD {
-    tag "TCGA_Data_Ingestion"
     container 'biocontainers/gdc-client:v1.6.1_cv1'
 
     input:
-    path manifest
+    tuple val(sample_id), val(file_id)
 
     output:
     path "gdc_downloaded/*", emit: tcga_files
 
     script:
     \"\"\"
-    gdc-client download -m ${manifest} -d gdc_downloaded/
+    gdc-client download ${file_id} -d gdc_downloaded/
     \"\"\"
 }
 
 workflow {
-    GDC_DOWNLOAD(file(params.gdc_manifest))
+    samples_ch = Channel
+        .fromPath(params.samplesheet)
+        .splitCsv(header:true)
+        .map { row -> tuple(row.sample_id, row.file_id) }
+
+    GDC_DOWNLOAD(samples_ch)
 }"""
         dockerfile_code = """FROM ubuntu:22.04
 RUN apt-get update && apt-get install -y curl unzip
 RUN curl -O https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_Ubuntu_x64.zip \\
     && unzip gdc-client_v1.6.1_Ubuntu_x64.zip -d /usr/local/bin/"""
 
-        samplesheet_code = """file_id,filename,data_category,data_type
-a1b2c3d4-e5f6-7890-1234-56789abcdef0,TCGA-BRCA.htseq.counts.gz,Transcriptome Profiling,Gene Expression Quantification"""
+        samplesheet_code = """sample_id,omics_modality,experiment_type,data_type,file_type,file_id
+TCGA_BRCA_01,Cancer Transcriptomics,Bulk RNA-seq Illumina NovaSeq,HTSeq Gene Counts,GZIP CSV,a1b2c3d4-e5f6-7890-1234-56789abcdef0
+TCGA_LUAD_02,Cancer Transcriptomics,Bulk RNA-seq Illumina NovaSeq,HTSeq Gene Counts,GZIP CSV,b2c3d4e5-f6a7-8901-2345-6789abcdef01"""
 
-    else:
-        main_nf = """nextflow.enable.dsl=2
-// Default Genomics Alignment Pipeline
-process BWA_ALIGN {
-    container 'biocontainers/bwa:v0.7.17_cv1'
-    script:
-    \"\"\"
-    bwa mem -t 8 ref.fa read1.fq read2.fq > aligned.sam
-    \"\"\"
-}"""
-        dockerfile_code = "FROM biocontainers/bwa:v0.7.17_cv1"
-        samplesheet_code = "sample,fastq_1,fastq_2\nS1,s3://b/1.fq,s3://b/2.fq"
+    st.markdown("#### 🗺 Visual Execution Graph (DAG)")
+    st.components.v1.html(svg_dag, height=180)
 
-    code_tab1, code_tab2, code_tab3 = st.tabs(["📄 main.nf", "🐳 Dockerfile", "📋 samplesheet.csv"])
+    code_tab1, code_tab2, code_tab3 = st.tabs(["📋 samplesheet.csv", "📄 main.nf", "🐳 Dockerfile"])
 
     with code_tab1:
+        st.markdown("##### Metadata-Enriched Pipeline Input CSV")
+        st.code(samplesheet_code, language="csv")
+        st.download_button("Download samplesheet.csv", data=samplesheet_code, file_name="samplesheet.csv", mime="text/csv")
+
+    with code_tab2:
         st.code(main_nf, language="groovy")
         st.download_button("Download main.nf", data=main_nf, file_name="main.nf", mime="text/plain")
 
-    with code_tab2:
+    with code_tab3:
         st.code(dockerfile_code, language="dockerfile")
         st.download_button("Download Dockerfile", data=dockerfile_code, file_name="Dockerfile", mime="text/plain")
-
-    with code_tab3:
-        st.code(samplesheet_code, language="csv")
-        st.download_button("Download samplesheet.csv", data=samplesheet_code, file_name="samplesheet.csv", mime="text/csv")
 
 # ---------------------------------------------------------
 # TAB 3: STATISTICAL ANALYSIS & PCA
