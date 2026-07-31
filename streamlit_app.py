@@ -22,7 +22,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "⚡ Pipeline Engine & Samplesheet Ingester", 
     "📊 Statistical Analysis & Live DEG",
     "☁️ Cloud Resources & Runtime Sizing", 
-    "📅 Week 5 Roadmap & Logs"
+    "📅 Week 5 & 6 Roadmap & Logs"
 ])
 
 # ---------------------------------------------------------
@@ -102,7 +102,6 @@ with tab2:
 
     st.markdown("---")
 
-    # Display Parsed Sample Sheet Table
     if uploaded_ss is not None:
         try:
             sep = "," if uploaded_ss.name.endswith(".csv") else "\t"
@@ -185,7 +184,7 @@ workflow {
 }"""
         st.code(nf_code, language="groovy")
 
-    else: # Snakemake
+    else:
         snake_code = """# Production Snakemake Workflow
 SAMPLES = ["SAMPLE_01_CTRL", "SAMPLE_02_TRT"]
 
@@ -249,7 +248,6 @@ with tab3:
             st.error(f"Error parsing custom expression file: {e}")
             df_deg = None
     else:
-        # Generate clean synthetic DEG data
         random.seed(42)
         genes = ["TP53", "EGFR", "BRCA1", "MYC", "KRAS", "VEGFA", "IL6", "TNF", "AKT1", "CDK4", "ESR1", "PTEN", "MET", "BRAF", "PIK3CA"]
         rows = []
@@ -344,18 +342,25 @@ with tab4:
     st.success("⚡ **Total Runtime to Final Analysis:** ~5 - 9 Hours per sample | **Total Compute Spend:** ~$5.35 per sample (using AWS EC2 Spot instances).")
 
 # ---------------------------------------------------------
-# TAB 5: WEEK 5 ROADMAP & HISTORICAL LOGS
+# TAB 5: WEEK 5 & 6 ROADMAP & HISTORICAL LOGS
 # ---------------------------------------------------------
 with tab5:
-    st.markdown("### 📅 Week 5 Engineering Roadmap & Client Milestone Checklist")
+    st.markdown("### 📅 Week 5 & 6 Engineering Roadmap & Client Milestone Deliverables")
     
+    st.markdown("#### 🔵 Week 5: Pipeline Optimization, Cloud Sizing & Interactive Analysis")
     st.markdown("""
-    #### Key Milestones Completed for Week 5 Delivery:
-    * [x] **Full Pipeline Integration:** Validated Nextflow DSL2 and Snakemake workflow syntax against standard `nf-core/rnaseq` and `somatic` specifications.
-    * [x] **Dynamic Sample Sheet Engine:** Support for user-provided CSV/TSV sample sheets containing custom file URIs, experiment metadata, and omics modalities.
-    * [x] **Cloud Compute Architecture Sizing:** Modeled exact memory, core allocations, EC2 instance families, and runtimes across alignment and variant calling phases.
-    * [x] **Interactive Differential Expression Engine:** Integrated client-side plotting for DEG volcano distributions and cutoff sensitivity parameters.
-    * [x] **GitHub Pages Browser Engine:** Zero-backend execution via WebAssembly / Streamlit-lite compatibility.
+    * **Production Pipeline Syntax Validation:** Verified Nextflow DSL2 and Snakemake orchestrators against standard nf-core and somatic profiling specifications.
+    * **Dynamic Sample Sheet & Ingestion Engine:** Implemented user CSV/TSV sample sheet uploading to parse custom file paths (`fastq_1`, `fastq_2`, BAM URIs) on the fly.
+    * **Cloud Resource Architecture Sizing:** Mapped AWS EC2 instance tiers (`c5.2xlarge`, `r5.4xlarge`, `r5.8xlarge`), memory limits (16GB to 128GB), and execution runtimes from alignment to final variant calling.
+    * **Interactive Differential Expression:** Integrated live volcano plot rendering with adjustable fold-change and significance cutoff sliders.
+    """)
+
+    st.markdown("#### 🟢 Week 6: Automated Reporting, Container Registry & Client Handover")
+    st.markdown("""
+    * **Automated MultiQC & Execution Reporting:** Configured Nextflow/Snakemake native reporting flags (`-with-report`, `-with-trace`, `-with-dag`) to export comprehensive HTML performance summaries.
+    * **Container Registry & ECR Publishing:** Containerized custom scripts and packed biocontainers into Amazon ECR / Quay.io repositories for reproducible execution.
+    * **Executive Report & Artifact Generation:** Built automated client summary tables and exportable CSV artifacts for clinical decision-making.
+    * **Client Handoff & Knowledge Transfer:** Delivered documentation, GitHub Pages deployment runbooks, and internal team walkthrough sessions.
     """)
 
     st.markdown("---")
