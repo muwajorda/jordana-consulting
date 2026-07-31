@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biotech Readiness & Workflow Generator | Week 3</title>
+  <title>Biotech Readiness & Workflow Generator</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +19,7 @@
       <a href="index.html" class="text-xl font-bold text-emerald-400 hover:text-emerald-300">
         ← Back to Homepage
       </a>
-      <span class="text-sm text-slate-400 font-mono">Week 3: Workflow & Pipeline Automation Engine</span>
+      <span class="text-sm text-slate-400 font-mono">Week 3: Workflow Automation Engine</span>
     </div>
   </nav>
 
@@ -28,7 +28,7 @@
     <div id="root" class="min-h-[850px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4">
       <div id="status" class="flex flex-col items-center justify-center py-20 text-slate-400">
         <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-400 mb-4"></div>
-        <p class="text-sm font-mono">Initializing Nextflow & Container Generation Engine...</p>
+        <p class="text-sm font-mono">Initializing Streamlit Runtime...</p>
       </div>
     </div>
   </main>
@@ -45,52 +45,50 @@ from datetime import datetime
 if "assessments" not in st.session_state:
     st.session_state.assessments = []
 
-st.set_page_config(page_title="Biotech Readiness & Workflow Engine", layout="wide")
+st.set_page_config(page_title="Biotech Readiness Engine", layout="wide")
 
-st.title("🧬 Bioinformatics Readiness & Pipeline Automation Engine")
-st.caption("Week 3 Complete: Readiness Scoring, Cost Estimator & Automated Nextflow Workflow Generator")
+st.title("🧬 Bioinformatics Readiness & Workflow Generator")
+st.caption("Readiness Scoring, Cloud Cost Estimation & Nextflow Pipeline Builder")
 
 tab1, tab2, tab3, tab4 = st.tabs([
     "🚀 Readiness Assessment", 
-    "⚡ Automated Pipeline Generator", 
+    "⚡ Pipeline Generator", 
     "💰 Cost Estimator", 
     "📊 Session History"
 ])
 
-# ---------------------------------------------------------
-# TAB 1: READINESS ASSESSMENT & INFRASTRUCTURE BLUEPRINT
-# ---------------------------------------------------------
+# TAB 1: READINESS ASSESSMENT
 with tab1:
     with st.form("assessment_form"):
         st.markdown("#### 1. Company Profile & Scope")
         col1, col2 = st.columns(2)
         with col1:
-            company_name = st.text_input("Company / Project Name", value="AstraOmics Bio")
+            company_name = st.text_input("Company Name", value="AstraOmics Bio")
             contact_email = st.text_input("Contact Email", value="founder@astraomics.com")
-            cloud_provider = st.selectbox("Target Cloud Provider", ["AWS (Amazon Web Services)", "GCP (Google Cloud Platform)", "Hybrid / On-Prem"])
+            cloud_provider = st.selectbox("Cloud Provider", ["AWS (Amazon Web Services)", "GCP (Google Cloud Platform)", "Hybrid / On-Prem"])
         with col2:
             team_size = st.number_input("Bioinformatics Headcount", min_value=0, max_value=50, value=3)
             stage = st.selectbox("Company Stage", ["Seed", "Series A", "Series B+", "Academic / Non-Profit"])
             primary_engine = st.selectbox("Workflow Orchestrator", ["Nextflow (nf-core)", "Snakemake", "Cromwell / WDL"])
 
-        st.markdown("#### 2. Omics Modalities & Data Throughput")
+        st.markdown("#### 2. Omics Modalities & Data Volume")
         data_types = st.multiselect(
-            "Primary Workloads & Data Types",
+            "Primary Workloads",
             ["Preventive Genomics WGS", "cfDNA / Fragmentomics", "ChIP-seq / Epigenetics", "Bulk RNA-seq", "scRNA-seq", "Oncology Panels"],
             default=["Preventive Genomics WGS", "cfDNA / Fragmentomics"]
         )
-        monthly_gb = st.number_input("Estimated Monthly Raw Data Volume (GB)", value=1200, step=100)
+        monthly_gb = st.number_input("Monthly Data Ingestion (GB)", value=1200, step=100)
 
-        st.markdown("#### 3. Infrastructure Baseline")
+        st.markdown("#### 3. Infrastructure Checklist")
         col3, col4 = st.columns(2)
         with col3:
             uses_containers = st.checkbox("Uses Containers (Docker / Apptainer)", value=True)
-            has_cold_archive = st.checkbox("Automated Cold Storage Tiering Configured", value=False)
+            has_cold_archive = st.checkbox("Cold Storage Tiering Configured", value=False)
         with col4:
             uses_spot_instances = st.checkbox("Utilizes Spot / Preemptible Instances", value=True)
-            has_ci_cd = st.checkbox("CI/CD Pipeline Integration", value=False)
+            has_ci_cd = st.checkbox("CI/CD Integration", value=False)
 
-        submitted = st.form_submit_button("Generate Assessment & Workflow Specs 🔥")
+        submitted = st.form_submit_button("Run Assessment Engine 🔥")
 
     if submitted:
         bottlenecks = []
@@ -100,8 +98,8 @@ with tab1:
         if "cfDNA / Fragmentomics" in data_types or "ChIP-seq / Epigenetics" in data_types:
             omics_score += 1
             if team_size < 3:
-                bottlenecks.append("High-noise omics modalities require automated biological QC layers.")
-                recommendations.append("Implement automated biological QC filtering before variant calling.")
+                bottlenecks.append("High-noise omics require automated biological QC filtering.")
+                recommendations.append("Implement biological QC layers before variant calling.")
 
         if "Preventive Genomics WGS" in data_types:
             omics_score = min(5, omics_score + 1)
@@ -115,7 +113,6 @@ with tab1:
 
         team_score = min(5, max(1, team_size * 2))
 
-        # Session Save
         st.session_state.assessments.append({
             "Company": company_name,
             "Stage": stage,
@@ -127,7 +124,7 @@ with tab1:
             "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
         })
 
-        st.success("Assessment Computed! Proceed to 'Automated Pipeline Generator' tab to view your custom code.")
+        st.success("Assessment Computed! Check the 'Pipeline Generator' tab for your code.")
 
         m1, m2, m3 = st.columns(3)
         m1.metric("Omics Readiness", f"{min(5, omics_score)} / 5")
@@ -146,27 +143,22 @@ with tab1:
                 for r in recommendations:
                     st.info(f"- {r}")
 
-# ---------------------------------------------------------
-# TAB 2: AUTOMATED PIPELINE & WORKFLOW GENERATOR
-# ---------------------------------------------------------
+# TAB 2: PIPELINE GENERATOR
 with tab2:
     st.markdown("### ⚡ Nextflow DSL2 Workflow & Container Generator")
-    st.caption("Tailored pipeline orchestration code based on your selected omics modalities.")
-
     p_col1, p_col2 = st.columns(2)
     with p_col1:
         target_modality = st.selectbox(
-            "Select Target Omics Pipeline Template",
-            ["Preventive Genomics (WGS / GATK4)", "Bulk RNA-seq (STAR / Salmon)", "Single-Cell RNA-seq (CellRanger)", "cfDNA / Liquid Biopsy"]
+            "Select Pipeline Template",
+            ["Bulk RNA-seq (STAR / Salmon)", "Preventive Genomics (WGS / GATK4)", "cfDNA / Liquid Biopsy"]
         )
     with p_col2:
-        executor_type = st.selectbox("Target Compute Engine", ["AWS Batch", "Google Cloud Batch", "Slurm HPC Local"])
+        executor_type = st.selectbox("Compute Engine", ["AWS Batch", "Google Cloud Batch", "Slurm HPC"])
 
     st.markdown("---")
 
-    # Dynamic Nextflow Template Generation
     if "RNA-seq" in target_modality:
-        main_nf = """nextflow.enable.dsl=2
+        main_nf = '''nextflow.enable.dsl=2
 
 params.reads = "$projectDir/data/*_{1,2}.fastq.gz"
 params.outdir = "$projectDir/results"
@@ -182,12 +174,12 @@ process FASTQC {
     path "*.zip", emit: fastqc_files
 
     script:
-    \"\"\"
+    """
     fastqc ${reads}
-    \"\"\"
+    """
 }
 
-process ALIGN_QUANT {
+process SALMON_QUANT {
     tag "$sample_id"
     container 'biocontainers/salmon:v1.10.1_cv1'
 
@@ -198,38 +190,22 @@ process ALIGN_QUANT {
     path "${sample_id}_quant", emit: quant_results
 
     script:
-    \"\"\"
+    """
     salmon quant -i $params.transcriptome -l A -1 ${reads[0]} -2 ${reads[1]} -o ${sample_id}_quant
-    \"\"\"
+    """
 }
 
 workflow {
     read_pairs_ch = Channel.fromFilePairs(params.reads)
     FASTQC(read_pairs_ch)
-    ALIGN_QUANT(read_pairs_ch)
-}"""
+    SALMON_QUANT(read_pairs_ch)
+}'''
     else:
-        main_nf = """nextflow.enable.dsl=2
+        main_nf = '''nextflow.enable.dsl=2
 
 params.reads = "$projectDir/data/*_{1,2}.fastq.gz"
 params.genome = "$projectDir/ref/hg38.fasta"
 params.outdir = "$projectDir/results"
-
-process FASTQC {
-    tag "$sample_id"
-    container 'biocontainers/fastqc:v0.11.9_cv8'
-
-    input:
-    tuple val(sample_id), path(reads)
-
-    output:
-    path "*.html"
-
-    script:
-    \"\"\"
-    fastqc ${reads[0]} ${reads[1]}
-    \"\"\"
-}
 
 process BWA_ALIGN {
     tag "$sample_id"
@@ -242,42 +218,37 @@ process BWA_ALIGN {
     tuple val(sample_id), path("${sample_id}.bam")
 
     script:
-    \"\"\"
+    """
     bwa mem -t 8 $params.genome ${reads[0]} ${reads[1]} | samtools sort -o ${sample_id}.bam
-    \"\"\"
+    """
 }
 
 workflow {
     read_pairs_ch = Channel.fromFilePairs(params.reads)
-    FASTQC(read_pairs_ch)
     BWA_ALIGN(read_pairs_ch)
-}"""
+}'''
 
-    dockerfile_code = """FROM ubuntu:22.04
+    dockerfile_code = '''FROM ubuntu:22.04
 
-LABEL maintainer="Jordana Consulting <consulting@muwajorda.io>"
-LABEL description="Production Bioinformatics execution environment"
-
+LABEL maintainer="Jordana Consulting"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \\
     build-essential \\
     wget \\
     curl \\
-    git \\
     samtools \\
     fastqc \\
-    python3-pip \\
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/bioinformatics
-CMD ["/bin/bash"]"""
+CMD ["/bin/bash"]'''
 
-    samplesheet_code = """sample,fastq_1,fastq_2,single_end
-sample_01,s3://my-omics-bucket/fastqs/sample_01_R1.fastq.gz,s3://my-omics-bucket/fastqs/sample_01_R2.fastq.gz,false
-sample_02,s3://my-omics-bucket/fastqs/sample_02_R1.fastq.gz,s3://my-omics-bucket/fastqs/sample_02_R2.fastq.gz,false"""
+    samplesheet_code = '''sample,fastq_1,fastq_2,single_end
+sample_01,s3://my-bucket/fastqs/sample_01_R1.fastq.gz,s3://my-bucket/fastqs/sample_01_R2.fastq.gz,false
+sample_02,s3://my-bucket/fastqs/sample_02_R1.fastq.gz,s3://my-bucket/fastqs/sample_02_R2.fastq.gz,false'''
 
-    code_tab1, code_tab2, code_tab3 = st.tabs(["📄 main.nf (Nextflow DSL2)", "🐳 Dockerfile", "📋 samplesheet.csv"])
+    code_tab1, code_tab2, code_tab3 = st.tabs(["📄 main.nf", "🐳 Dockerfile", "📋 samplesheet.csv"])
 
     with code_tab1:
         st.code(main_nf, language="groovy")
@@ -291,41 +262,31 @@ sample_02,s3://my-omics-bucket/fastqs/sample_02_R1.fastq.gz,s3://my-omics-bucket
         st.code(samplesheet_code, language="csv")
         st.download_button("Download samplesheet.csv", data=samplesheet_code, file_name="samplesheet.csv", mime="text/csv")
 
-# ---------------------------------------------------------
-# TAB 3: STORAGE & COMPUTE COST CALCULATOR
-# ---------------------------------------------------------
+# TAB 3: COST ESTIMATOR
 with tab3:
     st.markdown("### 💰 Cloud Storage & Compute Cost Estimator")
-    
     calc_c1, calc_c2 = st.columns(2)
     with calc_c1:
         calc_gb = st.slider("Monthly Raw Data Ingestion (GB)", min_value=100, max_value=20000, value=2000, step=100)
-        retention_months = st.slider("Hot Storage Retention (Months before Archiving)", min_value=1, max_value=12, value=3)
-        compute_hours_per_sample = st.number_input("Est. Compute Hours per Sample (100GB)", value=4.0, step=0.5)
+        retention_months = st.slider("Hot Storage Retention (Months)", min_value=1, max_value=12, value=3)
+        compute_hours_per_sample = st.number_input("Est. Compute Hours / 100GB", value=4.0, step=0.5)
 
     with calc_c2:
-        hot_cost_per_gb = 0.023
-        cold_cost_per_gb = 0.00099
-        spot_cpu_hour_cost = 0.04
-        
         num_samples = calc_gb / 100
         total_hot_gb = calc_gb * retention_months
         total_cold_gb = max(0, (calc_gb * 12) - total_hot_gb)
 
-        monthly_hot_storage = total_hot_gb * hot_cost_per_gb
-        monthly_cold_storage = total_cold_gb * cold_cost_per_gb
-        monthly_compute_cost = num_samples * compute_hours_per_sample * 8 * spot_cpu_hour_cost
+        monthly_hot = total_hot_gb * 0.023
+        monthly_cold = total_cold_gb * 0.00099
+        monthly_compute = num_samples * compute_hours_per_sample * 8 * 0.04
 
-        st.metric("Hot Storage Spend", f"${monthly_hot_storage:,.2f} / mo")
-        st.metric("Cold Storage Spend (Archived)", f"${monthly_cold_storage:,.2f} / mo")
-        st.metric("Estimated Pipeline Compute (Spot)", f"${monthly_compute_cost:,.2f} / mo")
+        st.metric("Hot Storage Spend", f"${monthly_hot:,.2f} / mo")
+        st.metric("Cold Storage Spend", f"${monthly_cold:,.2f} / mo")
+        st.metric("Estimated Pipeline Compute (Spot)", f"${monthly_compute:,.2f} / mo")
 
-        total_est = monthly_hot_storage + monthly_cold_storage + monthly_compute_cost
-        st.subheader(f"Total Projected Monthly Cloud Spend: **${total_est:,.2f}**")
+        st.subheader(f"Total Projected Monthly Cloud Spend: **${(monthly_hot + monthly_cold + monthly_compute):,.2f}**")
 
-# ---------------------------------------------------------
-# TAB 4: SESSION HISTORY
-# ---------------------------------------------------------
+# TAB 4: SESSION LOGS
 with tab4:
     st.markdown("### 📊 Historical Session Logs")
     if st.session_state.assessments:
