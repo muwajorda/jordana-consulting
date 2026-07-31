@@ -39,34 +39,12 @@
 
     const pythonAppCode = `
 import streamlit as st
-import sqlite3
 import json
 from datetime import datetime
 
-def init_db():
-    conn = sqlite3.connect("assessments.db")
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS assessments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            company_name TEXT,
-            contact_email TEXT,
-            stage TEXT,
-            team_size INTEGER,
-            data_types TEXT,
-            monthly_gb INTEGER,
-            uses_workflows INTEGER,
-            uses_containers INTEGER,
-            omics_score INTEGER,
-            infra_score INTEGER,
-            team_score INTEGER,
-            created_at TEXT
-        )
-    """)
-    conn.commit()
-    conn.close()
-
-init_db()
+# Initialize Session State DB replacement
+if "assessments" not in st.session_state:
+    st.session_state.assessments = []
 
 st.set_page_config(page_title="Biotech Readiness Engine", layout="centered")
 
@@ -135,19 +113,17 @@ with tab1:
 
         team_score = min(5, max(1, team_size * 2))
 
-        conn = sqlite3.connect("assessments.db")
-        cursor = conn.cursor()
-        cursor.execute("""
-            INSERT INTO assessments (
-                company_name, contact_email, stage, team_size, data_types, 
-                monthly_gb, uses_workflows, uses_containers, omics_score, 
-                infra_score, team_score, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (company_name, contact_email, stage, team_size, json.dumps(data_types), monthly_gb, int(uses_workflows), int(uses_containers), min(5, omics_score), min(5, infra_score), team_score, datetime.now().isoformat()))
-        conn.commit()
-        conn.close()
+        # Store entry in session state
+        st.session_state.assessments.append({
+            "Company": company_name,
+            "Stage": stage,
+            "Omics Score": f"{min(5, omics_score)}/5",
+            "Infra Score": f"{min(5, infra_score)}/5",
+            "Team Score": f"{team_score}/5",
+            "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
+        })
 
-        st.success("Assessment Computed & Persisted to Browser DB!")
+        st.success("Assessment Computed & Saved to Session!")
 
         c1, c2, c3 = st.columns(3)
         c1.metric("Omics Readiness", f"{min(5, omics_score)} / 5")
@@ -177,15 +153,9 @@ with tab1:
         )
 
 with tab2:
-    st.markdown("#### 📁 SQLite Assessment Database")
-    conn = sqlite3.connect("assessments.db")
-    cursor = conn.cursor()
-    cursor.execute("SELECT company_name, stage, omics_score, infra_score, team_score, created_at FROM assessments ORDER BY id DESC")
-    rows = cursor.fetchall()
-    conn.close()
-
-    if rows:
-        st.table([{"Company": r[0], "Stage": r[1], "Omics Score": f"{r[2]}/5", "Infra Score": f"{r[3]}/5", "Team Score": f"{r[4]}/5", "Timestamp": r[5][:16]} for r in rows])
+    st.markdown("#### 📁 Submission Logs")
+    if st.session_state.assessments:
+        st.table(st.session_state.assessments)
     else:
         st.info("No assessments submitted in this session yet.")
 `;
