@@ -107,6 +107,17 @@ SAMPLE_01_CTRL,Bulk RNA-seq,Illumina NovaSeq PE150,Raw Transcriptomics,FASTQ GZI
 SAMPLE_02_TRT,Bulk RNA-seq,Illumina NovaSeq PE150,Raw Transcriptomics,FASTQ GZIP,s3://my-bio-bucket/fastqs/S02_R1.fq.gz,s3://my-bio-bucket/fastqs/S02_R2.fq.gz
 PATIENT_01_T,Somatic Panel,Hybrid Capture WES,Targeted DNA,Aligned BAM,s3://my-bio-bucket/bams/P01_Tumor.bam,s3://my-bio-bucket/bams/P01_Normal.bam"""
 
+    # ALWAYS-VISIBLE DOWNLOAD BUTTON & SAMPLE PREVIEW
+    col_btn, col_blank = st.columns([1, 2])
+    with col_btn:
+        st.download_button(
+            label="📥 Download Template samplesheet.csv",
+            data=default_ss,
+            file_name="example_samplesheet.csv",
+            mime="text/csv",
+            use_container_width=True
+        )
+
     if uploaded_ss is not None:
         try:
             sep = "," if uploaded_ss.name.endswith(".csv") else "\t"
@@ -116,16 +127,8 @@ PATIENT_01_T,Somatic Panel,Hybrid Capture WES,Targeted DNA,Aligned BAM,s3://my-b
         except Exception as e:
             st.error(f"Error reading file: {e}")
     else:
-        st.info("💡 Showing default dynamic sample sheet format below. Upload your own CSV above or download the example template.")
+        st.info("💡 Default sample sheet preview below. Upload your own CSV above or download the template.")
         st.code(default_ss, language="csv")
-        
-        # FEATURE 1: Downloadable synthetic samplesheet button
-        st.download_button(
-            label="📥 Download Template samplesheet.csv",
-            data=default_ss,
-            file_name="example_samplesheet.csv",
-            mime="text/csv"
-        )
 
     st.markdown("#### 📜 Production Pipeline Code")
 
@@ -193,7 +196,6 @@ workflow {
 }"""
         st.code(nf_code, language="groovy")
 
-        # FEATURE 3: Pipeline Configuration Exporter
         with st.expander("⚙️ View nextflow.config / AWS Execution Profile"):
             config_code = """
 process {
@@ -320,7 +322,6 @@ with tab3:
 
         st.scatter_chart(df_deg, x="log2FC", y="-log10(pvalue)", color="Status")
 
-        # FEATURE 4: Interactive DEG Gene Search & Filter
         selected_gene = st.text_input("🔍 Search / Filter Specific Gene (e.g. TP53, BRCA1)", value="")
         if selected_gene:
             filtered_df = df_deg[df_deg["Gene"].str.contains(selected_gene, case=False, na=False)]
@@ -385,13 +386,12 @@ with tab4:
     
     st.table(pd.DataFrame(runtime_data))
 
-    # FEATURE 2: Dynamic Cohort Cost & Resource Calculator
     st.markdown("#### 💵 Dynamic Cohort Cost Estimator")
     sample_count = st.number_input("Target Sample Cohort Size", min_value=1, max_value=1000, value=25, step=5)
 
     cost_per_sample = 5.35
     total_cost = sample_count * cost_per_sample
-    total_node_hours = sample_count * 7  # Average ~7 hours of processing time per sample
+    total_node_hours = sample_count * 7
 
     m1, m2, m3 = st.columns(3)
     m1.metric("Est. Total AWS Cost (Spot)", f"${total_cost:,.2f} USD")
