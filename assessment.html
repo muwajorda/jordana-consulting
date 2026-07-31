@@ -1,76 +1,188 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biotech Readiness Engine</title>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- stlite CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@0.83.0/build/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biotech Assessment & Technical Due Diligence Engine</title>
+    <!-- Tailwind CSS for clean layout styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- jsPDF library for client-side PDF memo generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
+<body class="bg-slate-900 text-slate-100 min-h-screen p-6 font-sans">
 
-  <nav class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-xl font-bold text-emerald-400 hover:text-emerald-300">
-        ← Back to Homepage
-      </a>
-      <span class="text-sm text-slate-400 font-mono">Workflow & Assessment Engine</span>
+    <div class="max-w-4xl mx-auto space-y-6">
+        
+        <!-- Header -->
+        <header class="border-b border-slate-700 pb-4">
+            <h1 class="text-2xl font-bold text-blue-400">Biotech Technical Due Diligence Engine</h1>
+            <p class="text-sm text-slate-400">Evaluate technical maturity across Oncology, scRNA-seq, and cfDNA modalities.</p>
+        </header>
+
+        <!-- Form Section -->
+        <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 space-y-4">
+            <h2 class="text-lg font-semibold text-slate-200">Company & Pipeline Parameters</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Company Name</label>
+                    <input id="companyName" type="text" value="AstraOmics Bio" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Modality</label>
+                    <select id="modality" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+                        <option value="Oncology">Oncology (Panel / Exome)</option>
+                        <option value="scRNA-seq">Single-Cell (scRNA-seq)</option>
+                        <option value="cfDNA">Liquid Biopsy (cfDNA)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Funding Stage</label>
+                    <input id="stage" type="text" value="Series A" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Target Depth / Reads</label>
+                    <input id="readDepth" type="number" value="500" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6 pt-2">
+                <label class="flex items-center space-x-2 text-sm text-slate-300">
+                    <input id="automatedQc" type="checkbox" checked class="rounded border-slate-700 text-blue-600">
+                    <span>Automated QC</span>
+                </label>
+                <label class="flex items-center space-x-2 text-sm text-slate-300">
+                    <input id="cloudScalable" type="checkbox" checked class="rounded border-slate-700 text-blue-600">
+                    <span>Cloud Scalable</span>
+                </label>
+                <label class="flex items-center space-x-2 text-sm text-slate-300">
+                    <input id="hipaaCompliant" type="checkbox" checked class="rounded border-slate-700 text-blue-600">
+                    <span>HIPAA Compliant</span>
+                </label>
+            </div>
+
+            <button onclick="runAssessment()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 rounded transition">
+                Execute Dynamic Evaluation
+            </button>
+        </div>
+
+        <!-- Output Scorecard -->
+        <div id="resultsCard" class="hidden bg-slate-800 p-6 rounded-lg border border-slate-700 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <h3 id="resCompany" class="text-xl font-bold text-slate-100">Company Evaluation</h3>
+                <span id="resStatus" class="px-3 py-1 rounded text-xs font-bold bg-green-900 text-green-300">APPROVED</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="bg-slate-900 p-3 rounded">
+                    <span class="block text-xs text-slate-400">Omics Quality</span>
+                    <span id="scoreOmics" class="text-lg font-bold text-blue-400">0.0 / 100</span>
+                </div>
+                <div class="bg-slate-900 p-3 rounded">
+                    <span class="block text-xs text-slate-400">Cloud / Infra</span>
+                    <span id="scoreInfra" class="text-lg font-bold text-blue-400">0.0 / 100</span>
+                </div>
+                <div class="bg-slate-900 p-3 rounded">
+                    <span class="block text-xs text-slate-400">Team Expertise</span>
+                    <span id="scoreTeam" class="text-lg font-bold text-blue-400">0.0 / 100</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+                <div>
+                    <span class="text-sm text-slate-400">Overall Score: </span>
+                    <span id="scoreOverall" class="text-xl font-bold text-white">0.0</span>
+                </div>
+                <button onclick="downloadPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium px-4 py-2 rounded transition">
+                    Export Executive Memo (PDF)
+                </button>
+            </div>
+        </div>
+
     </div>
-  </nav>
 
-  <main class="max-w-6xl mx-auto px-4 py-8">
-    <div id="root" class="min-h-[850px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4">
-      <div id="status" class="flex flex-col items-center justify-center py-20 text-slate-400">
-        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-400 mb-4"></div>
-        <p id="status-text" class="text-sm font-mono">Fetching app code...</p>
-      </div>
-    </div>
-  </main>
+    <!-- Engine Scripting -->
+    <script>
+        let currentAssessment = null;
 
-  <script type="module">
-    import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@0.83.0/build/stlite.js";
+        function runAssessment() {
+            // Read inputs
+            const company = document.getElementById("companyName").value;
+            const modality = document.getElementById("modality").value;
+            const stage = document.getElementById("stage").value;
+            const depth = parseFloat(document.getElementById("readDepth").value) || 0;
+            const automatedQc = document.getElementById("automatedQc").checked;
+            const cloudScalable = document.getElementById("cloudScalable").checked;
+            const hipaaCompliant = document.getElementById("hipaaCompliant").checked;
 
-    async function init() {
-      try {
-        const response = await fetch("./streamlit_app.py");
-        if (!response.ok) {
-          throw new Error(`Failed to load streamlit_app.py: ${response.statusText}`);
+            // Compute sub-scores
+            let omicsScore = Math.min(100, (depth / 500) * 100);
+            let infraScore = (automatedQc ? 30 : 0) + (cloudScalable ? 35 : 0) + (hipaaCompliant ? 35 : 0);
+            let teamScore = 85.0; // Standard baseline team score metric
+
+            let overallScore = Math.round(((omicsScore * 0.4) + (infraScore * 0.3) + (teamScore * 0.3)) * 100) / 100;
+            let status = overallScore >= 75 ? "APPROVED" : "NEEDS_REVIEW";
+
+            currentAssessment = {
+                company, modality, stage,
+                scores: { omics: omicsScore, infra: infraScore, team: teamScore, overall: overallScore },
+                status: status
+            };
+
+            // Display Results UI
+            document.getElementById("resCompany").innerText = `${company} (${modality})`;
+            document.getElementById("resStatus").innerText = status;
+            document.getElementById("resStatus").className = status === "APPROVED" 
+                ? "px-3 py-1 rounded text-xs font-bold bg-green-900 text-green-300"
+                : "px-3 py-1 rounded text-xs font-bold bg-red-900 text-red-300";
+
+            document.getElementById("scoreOmics").innerText = `${omicsScore.toFixed(1)} / 100`;
+            document.getElementById("scoreInfra").innerText = `${infraScore.toFixed(1)} / 100`;
+            document.getElementById("scoreTeam").innerText = `${teamScore.toFixed(1)} / 100`;
+            document.getElementById("scoreOverall").innerText = `${overallScore.toFixed(1)} / 100`;
+
+            document.getElementById("resultsCard").classList.remove("hidden");
+
+            // Save to Local History (LocalStorage)
+            let history = JSON.parse(localStorage.getItem("biotech_assessments") || "[]");
+            history.push({ ...currentAssessment, timestamp: new Date().toISOString() });
+            localStorage.setItem("biotech_assessments", JSON.stringify(history));
         }
-        const pythonAppCode = await response.text();
 
-        document.getElementById("status-text").innerText = "Mounting Streamlit Wasm Runtime...";
+        function downloadPDF() {
+            if (!currentAssessment) return;
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
 
-        mount(
-          {
-            entrypoint: "streamlit_app.py",
-            files: {
-              "streamlit_app.py": pythonAppCode
-            },
-            streamlitConfig: {
-              "server.fileWatcherType": "none",
-              "theme.base": "dark",
-              "theme.backgroundColor": "#0f172a",
-              "theme.secondaryBackgroundColor": "#1e293b",
-              "theme.textColor": "#f8fafc",
-              "theme.primaryColor": "#10b981"
-            }
-          },
-          document.getElementById("root")
-        );
-      } catch (err) {
-        document.getElementById("root").innerHTML = `
-          <div class="p-6 bg-red-950/50 border border-red-800 rounded-lg text-red-200">
-            <h3 class="text-lg font-bold mb-2">Initialization Error</h3>
-            <p class="font-mono text-sm">${err.message}</p>
-          </div>`;
-      }
-    }
+            doc.setFontSize(18);
+            doc.text("EXECUTIVE DUE DILIGENCE MEMO", 14, 20);
 
-    init();
-  </script>
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text(`Generated: ${new Date().toLocaleDateString()} | Confidential`, 14, 28);
+
+            doc.setLineWidth(0.5);
+            doc.line(14, 32, 196, 32);
+
+            doc.setFontSize(12);
+            doc.setTextColor(0);
+            doc.text(`Company: ${currentAssessment.company}`, 14, 42);
+            doc.text(`Modality: ${currentAssessment.modality}`, 14, 50);
+            doc.text(`Funding Stage: ${currentAssessment.stage}`, 14, 58);
+            doc.text(`Verdict Status: ${currentAssessment.status}`, 14, 66);
+
+            doc.text("Scorecard Breakdown:", 14, 80);
+            doc.setFontSize(10);
+            doc.text(`- Omics Quality Score: ${currentAssessment.scores.omics} / 100`, 20, 90);
+            doc.text(`- Infrastructure Score: ${currentAssessment.scores.infra} / 100`, 20, 98);
+            doc.text(`- Team Expertise Score: ${currentAssessment.scores.team} / 100`, 20, 106);
+            doc.text(`- Overall Composite Score: ${currentAssessment.scores.overall} / 100`, 20, 114);
+
+            doc.save(`${currentAssessment.company.replace(/\s+/g, '_')}_Executive_Memo.pdf`);
+        }
+    </script>
 </body>
 </html>
