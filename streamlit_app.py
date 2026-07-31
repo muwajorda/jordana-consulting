@@ -102,6 +102,11 @@ with tab2:
 
     st.markdown("---")
 
+    default_ss = """sample_id,omics_modality,experiment_type,data_type,file_type,fastq_1,fastq_2
+SAMPLE_01_CTRL,Bulk RNA-seq,Illumina NovaSeq PE150,Raw Transcriptomics,FASTQ GZIP,s3://my-bio-bucket/fastqs/S01_R1.fq.gz,s3://my-bio-bucket/fastqs/S01_R2.fq.gz
+SAMPLE_02_TRT,Bulk RNA-seq,Illumina NovaSeq PE150,Raw Transcriptomics,FASTQ GZIP,s3://my-bio-bucket/fastqs/S02_R1.fq.gz,s3://my-bio-bucket/fastqs/S02_R2.fq.gz
+PATIENT_01_T,Somatic Panel,Hybrid Capture WES,Targeted DNA,Aligned BAM,s3://my-bio-bucket/bams/P01_Tumor.bam,s3://my-bio-bucket/bams/P01_Normal.bam"""
+
     if uploaded_ss is not None:
         try:
             sep = "," if uploaded_ss.name.endswith(".csv") else "\t"
@@ -111,12 +116,16 @@ with tab2:
         except Exception as e:
             st.error(f"Error reading file: {e}")
     else:
-        st.info("💡 Showing default dynamic sample sheet format below. Upload your own CSV above to replace it.")
-        default_ss = """sample_id,omics_modality,experiment_type,data_type,file_type,fastq_1,fastq_2
-SAMPLE_01_CTRL,Bulk RNA-seq,Illumina NovaSeq PE150,Raw Transcriptomics,FASTQ GZIP,s3://my-bio-bucket/fastqs/S01_R1.fq.gz,s3://my-bio-bucket/fastqs/S01_R2.fq.gz
-SAMPLE_02_TRT,Bulk RNA-seq,Illumina NovaSeq PE150,Raw Transcriptomics,FASTQ GZIP,s3://my-bio-bucket/fastqs/S02_R1.fq.gz,s3://my-bio-bucket/fastqs/S02_R2.fq.gz
-PATIENT_01_T,Somatic Panel,Hybrid Capture WES,Targeted DNA,Aligned BAM,s3://my-bio-bucket/bams/P01_Tumor.bam,s3://my-bio-bucket/bams/P01_Normal.bam"""
+        st.info("💡 Showing default dynamic sample sheet format below. Upload your own CSV above or download the example template.")
         st.code(default_ss, language="csv")
+        
+        # FEATURE 1: Downloadable synthetic samplesheet button
+        st.download_button(
+            label="📥 Download Template samplesheet.csv",
+            data=default_ss,
+            file_name="example_samplesheet.csv",
+            mime="text/csv"
+        )
 
     st.markdown("#### 📜 Production Pipeline Code")
 
@@ -183,6 +192,37 @@ workflow {
     STAR_ALIGN(samples_ch)
 }"""
         st.code(nf_code, language="groovy")
+
+        # FEATURE 3: Pipeline Configuration Exporter
+        with st.expander("⚙️ View nextflow.config / AWS Execution Profile"):
+            config_code = """
+process {
+    executor = 'awsbatch'
+    queue    = 'arn:aws:batch:us-east-1:123456789012:job-queue/omics-high-memory'
+    
+    // Auto-retry on OOM (Out Of Memory) exit codes
+    errorStrategy = { task.exitStatus in [137,140] ? 'retry' : 'finish' }
+    maxRetries    = 2
+    memory        = { 16.GB * task.attempt }
+    
+    withName: 'STAR_ALIGN' {
+        cpus   = 16
+        memory = 64.GB
+    }
+    withName: 'GATK_MUTECT2' {
+        cpus   = 32
+        memory = 128.GB
+    }
+}
+
+aws {
+    region = 'us-east-1'
+    batch {
+        cliPath = '/home/ec2-user/miniconda/bin/aws'
+    }
+}
+"""
+            st.code(config_code, language="groovy")
 
     else:
         snake_code = """# Production Snakemake Workflow
@@ -279,9 +319,16 @@ with tab3:
         c3.metric("Downregulated", len(df_deg[df_deg["Status"] == "Downregulated"]))
 
         st.scatter_chart(df_deg, x="log2FC", y="-log10(pvalue)", color="Status")
-        
-        with st.expander("🔍 View Table Data"):
-            st.dataframe(df_deg.head(20), use_container_width=True)
+
+        # FEATURE 4: Interactive DEG Gene Search & Filter
+        selected_gene = st.text_input("🔍 Search / Filter Specific Gene (e.g. TP53, BRCA1)", value="")
+        if selected_gene:
+            filtered_df = df_deg[df_deg["Gene"].str.contains(selected_gene, case=False, na=False)]
+            st.markdown(f"**Search Results for `{selected_gene}`:**")
+            st.dataframe(filtered_df, use_container_width=True)
+        else:
+            with st.expander("🔍 View All Table Data"):
+                st.dataframe(df_deg.head(20), use_container_width=True)
 
 # ---------------------------------------------------------
 # TAB 4: CLOUD RESOURCES & RUNTIME SIZING
@@ -338,14 +385,24 @@ with tab4:
     
     st.table(pd.DataFrame(runtime_data))
 
-    st.markdown("##### 💵 Summary Total Estimates")
-    st.success("⚡ **Total Runtime to Final Analysis:** ~5 - 9 Hours per sample | **Total Compute Spend:** ~$5.35 per sample (using AWS EC2 Spot instances).")
+    # FEATURE 2: Dynamic Cohort Cost & Resource Calculator
+    st.markdown("#### 💵 Dynamic Cohort Cost Estimator")
+    sample_count = st.number_input("Target Sample Cohort Size", min_value=1, max_value=1000, value=25, step=5)
+
+    cost_per_sample = 5.35
+    total_cost = sample_count * cost_per_sample
+    total_node_hours = sample_count * 7  # Average ~7 hours of processing time per sample
+
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Est. Total AWS Cost (Spot)", f"${total_cost:,.2f} USD")
+    m2.metric("Total Compute Allocation", f"{total_node_hours:,} vCPU Hours")
+    m3.metric("Cost / Sample", f"${cost_per_sample:.2f} USD")
 
 # ---------------------------------------------------------
 # TAB 5: WEEK 5 & 6 ROADMAP & HISTORICAL LOGS
 # ---------------------------------------------------------
 with tab5:
-    st.markdown("### 📅 Week 5 & 6 Engineering Roadmap & Client Milestone Deliverables")
+    st.markdown("### 📅 Week 5 & 6 Engineering Roadmap & Client Deliverables")
     
     st.markdown("#### 🔵 Week 5: Pipeline Optimization, Cloud Sizing & Interactive Analysis")
     st.markdown("""
@@ -357,10 +414,10 @@ with tab5:
 
     st.markdown("#### 🟢 Week 6: Automated Reporting, Container Registry & Client Handover")
     st.markdown("""
-    * **Automated MultiQC & Execution Reporting:** Configured Nextflow/Snakemake native reporting flags (`-with-report`, `-with-trace`, `-with-dag`) to export comprehensive HTML performance summaries.
-    * **Container Registry & ECR Publishing:** Containerized custom scripts and packed biocontainers into Amazon ECR / Quay.io repositories for reproducible execution.
-    * **Executive Report & Artifact Generation:** Built automated client summary tables and exportable CSV artifacts for clinical decision-making.
-    * **Client Handoff & Knowledge Transfer:** Delivered documentation, GitHub Pages deployment runbooks, and internal team walkthrough sessions.
+    * **Automated MultiQC & Execution Tracking:** Configured Nextflow and Snakemake execution logging (`-with-report`, `-with-trace`, `-with-dag`) to export comprehensive HTML performance summaries.
+    * **Container Registry & Amazon ECR Packaging:** Multi-architecture Docker/Apptainer images packaged and pushed to Amazon ECR / Quay.io with tool pinning.
+    * **Executive Report & Output Artifacts:** Automated summary reporting tables and exportable CSV artifacts for clinical analysis.
+    * **Client Handover & Technical Walkthrough:** Finalized platform documentation, GitHub Pages browser deployment runbooks, and team handover sessions.
     """)
 
     st.markdown("---")
