@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- stlite CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@0.83.0/build/style.css" />
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
@@ -23,20 +23,22 @@
     </div>
   </nav>
 
-  <!-- Container -->
+  <!-- Main Mount Root Container -->
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div id="root" class="min-h-[800px] w-full bg-slate-900 rounded-lg border border-slate-800 p-4">
-      <div id="status-container" class="flex flex-col items-center justify-center py-20 text-slate-400">
+      <div id="status" class="flex flex-col items-center justify-center py-20 text-slate-400">
         <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-400 mb-4"></div>
-        <p class="text-sm font-mono" id="status-text">Compiling Pyodide WebAssembly engine...</p>
+        <p class="text-sm font-mono">Loading Pyodide & Streamlit Runtime...</p>
       </div>
     </div>
   </main>
 
-  <!-- stlite JS -->
-  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.73.0/build/stlite.js"></script>
-  <script>
-    const pythonCode = `import streamlit as st
+  <!-- stlite Browser Module -->
+  <script type="module">
+    import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@0.83.0/build/stlite.js";
+
+    const pythonAppCode = `
+import streamlit as st
 import sqlite3
 import json
 from datetime import datetime
@@ -44,21 +46,23 @@ from datetime import datetime
 def init_db():
     conn = sqlite3.connect("assessments.db")
     cursor = conn.cursor()
-    cursor.execute("""CREATE TABLE IF NOT EXISTS assessments (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        company_name TEXT,
-        contact_email TEXT,
-        stage TEXT,
-        team_size INTEGER,
-        data_types TEXT,
-        monthly_gb INTEGER,
-        uses_workflows INTEGER,
-        uses_containers INTEGER,
-        omics_score INTEGER,
-        infra_score INTEGER,
-        team_score INTEGER,
-        created_at TEXT
-    )""")
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS assessments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            company_name TEXT,
+            contact_email TEXT,
+            stage TEXT,
+            team_size INTEGER,
+            data_types TEXT,
+            monthly_gb INTEGER,
+            uses_workflows INTEGER,
+            uses_containers INTEGER,
+            omics_score INTEGER,
+            infra_score INTEGER,
+            team_score INTEGER,
+            created_at TEXT
+        )
+    """)
     conn.commit()
     conn.close()
 
@@ -107,7 +111,7 @@ with tab1:
         if "cfDNA / Fragmentomics" in data_types or "ChIP-seq / Epigenetics" in data_types:
             omics_score += 1
             if team_size < 3:
-                bottlenecks.append("High-noise omics modalities require automated biological QC filtering.")
+                bottlenecks.append("High-noise omics modalities require biological QC filtering.")
                 recommendations.append("Implement automated biological QC layers to filter low-signal samples.")
 
         if "Preventive Genomics WGS" in data_types:
@@ -133,7 +137,13 @@ with tab1:
 
         conn = sqlite3.connect("assessments.db")
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO assessments (company_name, contact_email, stage, team_size, data_types, monthly_gb, uses_workflows, uses_containers, omics_score, infra_score, team_score, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (company_name, contact_email, stage, team_size, json.dumps(data_types), monthly_gb, int(uses_workflows), int(uses_containers), min(5, omics_score), min(5, infra_score), team_score, datetime.now().isoformat()))
+        cursor.execute("""
+            INSERT INTO assessments (
+                company_name, contact_email, stage, team_size, data_types, 
+                monthly_gb, uses_workflows, uses_containers, omics_score, 
+                infra_score, team_score, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (company_name, contact_email, stage, team_size, json.dumps(data_types), monthly_gb, int(uses_workflows), int(uses_containers), min(5, omics_score), min(5, infra_score), team_score, datetime.now().isoformat()))
         conn.commit()
         conn.close()
 
@@ -181,24 +191,25 @@ with tab2:
 `;
 
     try {
-      stlite.mount({
-        entrypoint: "streamlit_app.py",
-        files: {
-          "streamlit_app.py": pythonCode
+      mount(
+        {
+          entrypoint: "streamlit_app.py",
+          files: {
+            "streamlit_app.py": pythonAppCode
+          },
+          streamlitConfig: {
+            "server.fileWatcherType": "none",
+            "theme.base": "dark",
+            "theme.backgroundColor": "#0f172a",
+            "theme.secondaryBackgroundColor": "#1e293b",
+            "theme.textColor": "#f8fafc",
+            "theme.primaryColor": "#10b981"
+          }
         },
-        streamlitConfig: {
-          "server.fileWatcherType": "none",
-          "theme.base": "dark",
-          "theme.backgroundColor": "#0f172a",
-          "theme.secondaryBackgroundColor": "#1e293b",
-          "theme.textColor": "#f8fafc",
-          "theme.primaryColor": "#10b981"
-        }
-      }, document.getElementById("root"));
-    } catch (e) {
-      document.getElementById("status-container").innerHTML = `
-        <p class="text-red-400 font-mono">Initialization Error: ${e.message}</p>
-      `;
+        document.getElementById("root")
+      );
+    } catch (err) {
+      document.getElementById("status").innerHTML = `<p class="text-red-400">Failed to mount stlite: ${err.message}</p>`;
     }
   </script>
 </body>
