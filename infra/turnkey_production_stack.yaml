@@ -1,0 +1,109 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Skeleton CloudFormation stack for BioFlow Cloud POC (AWS Batch + S3 + IAM + SQS).
+
+Parameters:
+  DeploymentPrefix:
+    Type: String
+    Default: bioflow-poc
+  ResultsBucketName:
+    Type: String
+    Default: "bioflow-poc-results-<ACCOUNT_ID>"
+  DataBucketName:
+    Type: String
+    Default: "bioflow-poc-data-<ACCOUNT_ID>"
+  NextflowRoleArn:
+    Type: String
+    Description: "IAM role ARN that Nextflow (or Lambda) will assume to run AWS Batch / access S3"
+
+Resources:
+  ResultsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref ResultsBucketName
+      VersioningConfiguration:
+        Status: Enabled
+
+  DataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref DataBucketName
+
+  RunQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub "${DeploymentPrefix}-run-queue"
+
+  RunDLQ:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub "${DeploymentPrefix}-run-dlq"
+
+  BatchServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${DeploymentPrefix}-awsbatch-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: batch.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole
+
+  BatchInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${DeploymentPrefix}-instance-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+
+  # NOTE: The following AWS::Batch resources are placeholders. You will need to tune AMI, instance types, and subnets.
+  BatchComputeEnvironment:
+    Type: AWS::Batch::ComputeEnvironment
+    Properties:
+      Type: MANAGED
+      ComputeEnvironmentName: !Sub "${DeploymentPrefix}-compute-env"
+      ComputeResources:
+        Type: EC2
+        MinvCpus: 0
+        MaxvCpus: 256
+        DesiredvCpus: 0
+        InstanceTypes:
+          - optimal
+        Ec2KeyPair: ''
+        Subnets: [] # Fill with your VPC subnets
+        SecurityGroupIds: []
+        AllocationStrategy: SPOT_CAPACITY_OPTIMIZED
+        InstanceRole: !GetAtt BatchInstanceRole.Arn
+      ServiceRole: !GetAtt BatchServiceRole.Arn
+
+  BatchJobQueue:
+    Type: AWS::Batch::JobQueue
+    Properties:
+      JobQueueName: !Sub "${DeploymentPrefix}-job-queue"
+      Priority: 1
+      ComputeEnvironmentOrder:
+        - Order: 1
+          ComputeEnvironment: !Ref BatchComputeEnvironment
+
+Outputs:
+  ResultsBucketName:
+    Description: "S3 bucket for pipeline results"
+    Value: !Ref ResultsBucket
+  DataBucketName:
+    Description: "S3 bucket for input data"
+    Value: !Ref DataBucket
+  RunQueueUrl:
+    Description: "SQS queue URL to submit run requests"
+    Value: !Ref RunQueue

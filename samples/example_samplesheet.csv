@@ -1,0 +1,2 @@
+sample_id,modality,fastq_r1,fastq_r2
+SAMPLE_01,Bulk RNA-seq,s3://your-bucket/fastqs/SAMPLE_01_R1.fastq.gz,s3://your-bucket/fastqs/SAMPLE_01_R2.fastq.gz
