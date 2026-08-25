@@ -1,90 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Services | Jordana Consulting</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #020617;
-      color: white;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Services — Jordana Consulting</title>
+  <link rel="stylesheet" href="/static/css/site.css">
 </head>
-
 <body>
-
-<div class="max-w-7xl mx-auto px-6 py-20">
-
-  <div class="text-center mb-20">
-    <h1 class="text-6xl font-black mb-6">Services & Consulting</h1>
-    <p class="text-xl text-slate-400 max-w-3xl mx-auto">
-      Advanced bioinformatics infrastructure, AI systems, and computational biology consulting for biotech and healthcare organizations.
-    </p>
-  </div>
-
-  <div class="grid md:grid-cols-2 gap-8">
-
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-emerald-400 mb-4">Computational Biology & Algorithm Development</h2>
-
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• Custom bioinformatics algorithm design</li>
-        <li>• Statistical and machine learning model development</li>
-        <li>• Biomarker discovery and validation</li>
-        <li>• Multi-omics data integration</li>
-        <li>• Genomic and transcriptomic analytics</li>
-      </ul>
-
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo"><a href="/">JORDANA CONSULTING</a></h1>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/assessments/index.html">Assessments</a>
+        <a href="/demos/index.html">Demos</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a class="btn btn-primary" href="/assessments/flow.html">Start Assessment</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-cyan-400 mb-4">Bioinformatics Pipelines & Workflow Engineering</h2>
+  <main class="container">
+    <h2>Services</h2>
+    <p>We organize our services by lifecycle: ASSESS → DESIGN → BUILD → OPTIMIZE. We focus on practical, implementable outcomes.</p>
 
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• Nextflow development</li>
-        <li>• Snakemake development</li>
-        <li>• RNA-seq, ChIP-seq, ATAC-seq workflows</li>
-        <li>• Workflow optimization and automation</li>
-        <li>• QC metric implementation</li>
+    <section>
+      <h3>ASSESS</h3>
+      <ul>
+        <li><strong>Technology Readiness Assessment</strong> — Understand current infrastructure and biggest gaps.</li>
+        <li><strong>AI Readiness Assessment</strong> — Identify practical AI opportunities and risks.</li>
+        <li><strong>Data Infrastructure Assessment</strong> — Map systems, data flows, storage and analytics.</li>
+        <li><strong>Cloud Readiness Assessment</strong> — Determine whether and how to migrate to the cloud.</li>
       </ul>
+    </section>
 
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
-    </div>
-
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-purple-400 mb-4">Cloud & Infrastructure</h2>
-
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• AWS deployment</li>
-        <li>• Scalable compute environments</li>
-        <li>• Reproducible research infrastructure</li>
-        <li>• Data management and workflow orchestration</li>
+    <section>
+      <h3>DESIGN</h3>
+      <ul>
+        <li><strong>Technology Architecture</strong> — We design the architecture before you spend money building it.</li>
+        <li><strong>Data Architecture</strong> — Data warehouses, lakes, integration and analytics.</li>
+        <li><strong>AI Architecture</strong> — AI/ML systems, automation and responsible AI workflows.</li>
+        <li><strong>Healthcare &amp; Interoperability</strong> — FHIR, clinical data and healthcare integration.</li>
       </ul>
+    </section>
 
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
-    </div>
-
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-blue-400 mb-4">Precision Medicine & Translational Research</h2>
-
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• Pipeline-to-patient solutions</li>
-        <li>• Clinical genomics workflows</li>
-        <li>• Research-to-clinic translation</li>
-        <li>• Decision-support analytics</li>
+    <section>
+      <h3>BUILD</h3>
+      <ul>
+        <li><strong>Cloud Implementation</strong> — AWS infrastructure, automation and deployment.</li>
+        <li><strong>Data Pipelines</strong> — Production data pipelines and workflow automation.</li>
+        <li><strong>AI Solutions</strong> — Document processing, extraction, classification and decision-support tools.</li>
+        <li><strong>Bioinformatics</strong> — RNA-seq, WGS, ATAC-seq and reproducible research workflows.</li>
       </ul>
+    </section>
 
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
-    </div>
+    <section>
+      <h3>OPTIMIZE</h3>
+      <ul>
+        <li><strong>Infrastructure Optimization</strong> — Reduce waste and improve reliability.</li>
+        <li><strong>Data Quality</strong> — Validation, monitoring and governance.</li>
+        <li><strong>AI Optimization</strong> — Improve AI workflows and identify additional automation opportunities.</li>
+      </ul>
+    </section>
 
-  </div>
+    <p><a class="btn btn-primary" href="/assessments/flow.html">Start an Assessment</a></p>
+  </main>
 
-</div>
-
+  <footer class="site-footer">
+    <div class="container">© Jordana Consulting</div>
+  </footer>
 </body>
 </html>

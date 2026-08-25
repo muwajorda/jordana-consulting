@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Assessment — Jordana Consulting</title>
+  <link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo"><a href="/">JORDANA CONSULTING</a></h1>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/assessments/index.html">Assessments</a>
+        <a href="/demos/index.html">Demos</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a class="btn btn-primary" href="/assessments/flow.html">Start Assessment</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Technology &amp; AI Readiness Assessment</h2>
+    <p>Answer a few short questions and get an immediate readiness summary. Provide your email to receive the full downloadable report and book a review.</p>
+
+    <form id="assessment-form">
+      <label>Organization name<br><input name="organization_name" required></label>
+      <label>Organization type<br>
+        <select name="organization_type">
+          <option value="general">General</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="education">Education</option>
+          <option value="municipal">Municipal</option>
+          <option value="lifesciences">Life Sciences</option>
+        </select>
+      </label>
+      <label>Employees<br><input type="number" name="employees" value="50"></label>
+      <label>Current cloud setup<br>
+        <select name="cloud">
+          <option value="none">None</option>
+          <option value="partial">Partial (some services)</option>
+          <option value="full">Full cloud</option>
+        </select>
+      </label>
+      <label>Data sources (comma separated)<br><input name="data_sources" placeholder="EHR, Excel, PDFs"></label>
+      <label>IT team size<br><input type="number" name="it_team_size" value="3"></label>
+      <label><input type="checkbox" name="has_ai"> Currently using AI</label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Analyze Organization</button>
+      </div>
+    </form>
+
+    <section id="summary" class="result-summary" hidden>
+      <h3>Readiness Summary</h3>
+      <div id="score">Score: <span id="score-value"></span></div>
+      <div id="breakdown"></div>
+      <p>To download the full report and book an architecture review we ask for your email.</p>
+      <form id="email-form">
+        <label>Email<br><input type="email" name="email" required></label>
+        <button type="submit" class="btn">Get Full Report</button>
+      </form>
+      <p><a id="book-link" class="btn btn-primary" href="#">Book an Architecture Review</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© Jordana Consulting</div>
+  </footer>
+  <script src="/static/js/assessment.js"></script>
+</body>
+</html>

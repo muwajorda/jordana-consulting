@@ -1,36 +1,17 @@
-# Jordana Consulting
+# Jordana Consulting — Assessment README
 
-Personal consulting site for Jordana Esther Muwanguzi.
+This branch adds a minimal assessment product and a prototype API to score and store results.
 
-## Core Expertise
+Running the API (local development)
+- Requires Python 3.10+
+- Install dependencies: pip install fastapi uvicorn pydantic
+- Run: uvicorn api.assessment_api:app --reload --port 8000
 
-### Infrastructure as Code (IaC)
-- **Terraform** – Infrastructure provisioning and state management
-- **Boto3** – AWS SDK for programmatic infrastructure automation
-- **AWS CloudFormation** – Deploy complete pipelines via single-script deployment
+The static site pages are simple HTML files under the repo root. The client-side JS calls the API endpoints:
+- POST /api/assess — submit answers, returns token and summary
+- POST /api/claim/{token} — provide email to claim full report
+- GET /api/result/{token} — fetch report (full report only returned after claim)
 
-### Automated Data Validation & Governance
-- **Python (Pydantic)** – Data validation and schema enforcement
-- **Docker containerization** – Reproducible, isolated execution environments
-- **REST APIs** – Data ingestion and exposure patterns
-- **Metadata harmonization pipelines** – Standardizing heterogeneous data sources
+Scheduling integration: the site places a Google Meet placeholder link for the "Book an Architecture Review" CTA. Replace with a dedicated Google Calendar Meet link or integrate with your scheduling workflow.
 
-### Gen AI / LLM Integration
-- **AWS Bedrock** – Managed foundational models for AI workloads
-- **AWS Lambda** – Serverless extraction pipelines
-- **Automated parsing** – Raw clinical and public health data → structured schemas
-- **RAG and prompt engineering** – Context-aware intelligent systems
-
-### Client-Facing Architecture
-- **System design presentation** – Technical communication and visualization
-- **Field requirements gathering** – Stakeholder-driven discovery and validation
-- **Technical onboarding** – Knowledge transfer and adoption enablement for local teams
-- **Solution architecture** – Bridging business needs with technical implementation
-
-## Services
-
-Specialized in designing and implementing cloud-native data pipelines for healthcare and life sciences, with a focus on compliance, scalability, and interoperability.
-
----
-
-*Last updated: August 2026*
+Assessment gating: this implementation requires email to view/download the full report (recommended). The summary is immediately available after the quick analysis.
