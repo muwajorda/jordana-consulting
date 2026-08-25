@@ -54,7 +54,7 @@
       <a href="#contact" class="hover:text-emerald-400">Contact</a>
     </nav>
 
-    <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline hidden">
+    <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-block">
       Book Now
     </button>
   </div>
@@ -64,26 +64,30 @@
 <section id="home" class="max-w-7xl mx-auto px-6 py-32">
   <div class="text-center mb-16">
     <div class="inline-block bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-full text-sm mb-6">
-      <i class="fas fa-infinity mr-2"></i> Cloud Infrastructure • Data Governance • AI Metadata Ingestion
+      <i class="fas fa-infinity mr-2"></i> AI Bioinformatics Assessments • Cloud & Data Architecture • Production Pipelines
     </div>
 
-    <h1 class="text-7xl md:text-8xl font-black leading-tight mb-8 text-white">
-      Field-Ready Cloud Infrastructure & Governance-Aware Data Pipelines
+    <h1 class="text-6xl md:text-7xl font-black leading-tight mb-6 text-white">
+      Build the Right Data & AI Infrastructure Before You Build the Pipeline
     </h1>
 
-    <p class="text-2xl text-slate-300 mb-6 leading-relaxed max-w-4xl mx-auto">
-      Architecting 1-click AWS/Terraform deployments, automated FHIR/Pydantic validation layers, and AI metadata ingestion for healthcare systems, public sector initiatives, and biopharma.
+    <p class="text-xl text-slate-300 mb-8 leading-relaxed max-w-4xl mx-auto">
+      Jordana Consulting helps biotech, healthcare, and public-sector organisations assess their data readiness, design cloud and AI architectures, and deliver production-ready bioinformatics systems.
     </p>
 
     <div class="flex gap-4 justify-center mb-12">
-      <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="cta-primary text-white px-8 py-4 rounded-xl font-bold text-lg transition">
-        <i class="fas fa-calendar mr-2"></i> Schedule an Architecture Review
-      </button>
-
-      <a href="#pillars" class="border border-emerald-400 text-emerald-300 hover:bg-emerald-500/10 px-8 py-4 rounded-xl font-bold transition">
-        <i class="fas fa-chevron-down mr-2"></i> Explore Solutions
+      <a href="assessment.html" class="cta-primary text-white px-8 py-4 rounded-xl font-bold text-lg transition inline-flex items-center">
+        <i class="fas fa-check-circle mr-3"></i> Run an Infrastructure Assessment
       </a>
+
+      <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="border border-emerald-400 text-emerald-300 hover:bg-emerald-500/10 px-8 py-4 rounded-xl font-bold transition inline-flex items-center">
+        <i class="fas fa-calendar mr-3"></i> Book an Architecture Review
+      </button>
     </div>
+
+    <p class="text-sm text-slate-400 max-w-3xl mx-auto">
+      Typical output: assessment report, recommended architecture blueprint, prioritized implementation plan, cost & staffing estimates.
+    </p>
   </div>
 
   <!-- Quick Stats -->
@@ -103,6 +107,33 @@
     <div class="glass rounded-xl p-6 text-center">
       <div class="text-4xl font-black text-cyan-400 mb-2">Field-Ready</div>
       <p class="text-slate-300 text-sm">Production Deployment</p>
+    </div>
+  </div>
+</section>
+
+<!-- Product Flow: Assess → Architect → Deploy → Scale -->
+<section id="product-flow" class="max-w-7xl mx-auto px-6 py-12 border-t border-slate-800">
+  <div class="text-center mb-8">
+    <h2 class="text-4xl font-black mb-4">ASSESS → ARCHITECT → DEPLOY → SCALE</h2>
+    <p class="text-slate-300 max-w-3xl mx-auto">A structured path from readiness assessment to production-grade deployments and ongoing scale planning.</p>
+  </div>
+
+  <div class="grid md:grid-cols-4 gap-6 mt-8">
+    <div class="glass rounded-xl p-6 text-center">
+      <h3 class="font-bold text-emerald-300 mb-2">Assess</h3>
+      <p class="text-sm text-slate-300">AI/Omics readiness, data & clinical readiness, governance, and cloud posture — with prioritized recommendations.</p>
+    </div>
+    <div class="glass rounded-xl p-6 text-center">
+      <h3 class="font-bold text-blue-300 mb-2">Architect</h3>
+      <p class="text-sm text-slate-300">Architecture blueprints: AWS, data lake, FHIR models, security controls, and pipelines.</p>
+    </div>
+    <div class="glass rounded-xl p-6 text-center">
+      <h3 class="font-bold text-purple-300 mb-2">Deploy</h3>
+      <p class="text-sm text-slate-300">Terraform, CI/CD, pipeline templates, validation layers, and runbooks for production.</p>
+    </div>
+    <div class="glass rounded-xl p-6 text-center">
+      <h3 class="font-bold text-cyan-300 mb-2">Scale</h3>
+      <p class="text-sm text-slate-300">Cost & compute estimates, staffing plans, timelines and ongoing ops recommendations.</p>
     </div>
   </div>
 </section>
@@ -322,7 +353,7 @@
             <div class="font-bold text-emerald-300 mb-1">S3 Data Lake + IAM</div>
             <div class="text-sm text-slate-400">storage.tf • 180 lines</div>
           </button>
-          <a href="https://github.com/muwajorda/jordana-consulting/tree/main/infra" target="_blank" class="w-full text-center bg-emerald-500 hover:bg-emerald-600 px-4 py-3 rounded-lg font-bold transition block">
+          <a href="https://github.com/muwajorda/jordana-consulting/tree/main/infra" target="_blank" class="w-full text-center bg-emerald-500 hover:bg-emerald-600 px-4 py-3 rounded-lg font-bold transition inline-block">
             <i class="fas fa-github mr-2"></i> View on GitHub
           </a>
         </div>
@@ -362,6 +393,35 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- Pricing Section (Starting at) -->
+<section id="pricing" class="max-w-7xl mx-auto px-6 py-12 border-t border-slate-800">
+  <div class="text-center mb-6">
+    <h2 class="text-3xl font-black mb-2">Pricing (starting at)</h2>
+    <p class="text-slate-400 max-w-2xl mx-auto">Transparent starting prices to help you self-select and start conversations at the right level.</p>
+  </div>
+
+  <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-4 mt-6">
+    <div class="glass rounded-xl p-6">
+      <div class="font-bold text-white">AI Infrastructure Assessment</div>
+      <div class="text-slate-300 text-sm">Starting at <span class="text-emerald-300 font-black">$1,500</span></div>
+    </div>
+    <div class="glass rounded-xl p-6">
+      <div class="font-bold text-white">Architecture Blueprint</div>
+      <div class="text-slate-300 text-sm">Starting at <span class="text-emerald-300 font-black">$3,000</span></div>
+    </div>
+    <div class="glass rounded-xl p-6">
+      <div class="font-bold text-white">Cloud / Bioinformatics Implementation</div>
+      <div class="text-slate-300 text-sm">Starting at <span class="text-emerald-300 font-black">$5,000</span></div>
+    </div>
+    <div class="glass rounded-xl p-6">
+      <div class="font-bold text-white">Production Infrastructure Build</div>
+      <div class="text-slate-300 text-sm">Starting at <span class="text-emerald-300 font-black">$10,000</span></div>
+    </div>
+  </div>
+
+  <p class="text-xs text-slate-400 mt-4 text-center">Fractional Infrastructure Architect: <span class="text-emerald-300">$150–$250/hr</span></p>
 </section>
 
 <!-- Contact Modal -->
