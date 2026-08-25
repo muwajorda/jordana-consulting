@@ -1,6 +1,6 @@
 # Jordana Consulting
 
-Personal consulting site for Jordana Esther Muwanguzi.
+AI-Powered Infrastructure Architecture for Biotech, Healthcare & Data-Intensive Organizations
 
 ## Core Expertise
 
