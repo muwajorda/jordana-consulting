@@ -1,0 +1,22 @@
+/* Minimal site styles for the assessment redesign */
+body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#222}
+.container{max-width:980px;margin:0 auto;padding:20px}
+.site-header{background:#fff;border-bottom:1px solid #eee}
+.site-header .container{display:flex;align-items:center;justify-content:space-between}
+.site-nav a{margin-left:12px;text-decoration:none;color:#333}
+.logo a{font-weight:700;text-decoration:none;color:#111}
+.hero{padding:40px 0;background:linear-gradient(180deg,#f7fbff,#fff)}
+.hero .lead{font-size:1.1rem}
+.btn{display:inline-block;padding:8px 14px;border-radius:6px;text-decoration:none;background:#f0f0f0;color:#111;border:1px solid #ddd}
+.btn-primary{background:#0b5cff;color:#fff;border-color:#054bdb}
+.btn-cta{background:#ff5a5f;color:#fff}
+.who-list{list-style:none;padding:0}
+.who-list li{margin:8px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{border:1px solid #eee;padding:16px;border-radius:8px;background:#fff}
+.assessment .lead{margin-bottom:12px}
+.result-summary{border:1px solid #e6eefc;padding:16px;border-radius:8px}
+.breakdown{width:100%;border-collapse:collapse}
+.breakdown th,.breakdown td{border:1px solid #eee;padding:8px;text-align:left}
+.site-footer{border-top:1px solid #eee;padding:16px;text-align:center;color:#666}
+.form-actions{margin-top:12px}
