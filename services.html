@@ -5,86 +5,322 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Services | Jordana Consulting</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: #020617;
+      background: linear-gradient(to bottom, #07111f, #0f172a);
       color: white;
+    }
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .cta-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      transition: all 0.3s ease;
+    }
+    .cta-primary:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
     }
   </style>
 </head>
 
 <body>
 
+<!-- Navigation Header -->
+<header class="sticky top-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-emerald-400">
+      <i class="fas fa-cloud mr-2"></i> Jordana Consulting
+    </h1>
+
+    <nav class="space-x-6 text-sm font-semibold hidden md:flex">
+      <a href="index.html" class="hover:text-emerald-400">Home</a>
+      <a href="index.html#process" class="hover:text-emerald-400">Our Process</a>
+      <a href="index.html#who-we-help" class="hover:text-emerald-400">Who We Help</a>
+      <a href="services.html" class="hover:text-emerald-400 text-emerald-400">Services</a>
+      <a href="index.html#contact" class="hover:text-emerald-400">Contact</a>
+    </nav>
+
+    <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-block hidden">
+      Get Started
+    </button>
+  </div>
+</header>
+
 <div class="max-w-7xl mx-auto px-6 py-20">
 
   <div class="text-center mb-20">
-    <h1 class="text-6xl font-black mb-6">Services & Consulting</h1>
-    <p class="text-xl text-slate-400 max-w-3xl mx-auto">
-      Advanced bioinformatics infrastructure, AI systems, and computational biology consulting for biotech and healthcare organizations.
+    <h1 class="text-6xl font-black mb-6">Our Services</h1>
+    <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+      Comprehensive solutions across four stages: Assess, Design, Build, and Optimize your technology and AI infrastructure.
     </p>
   </div>
 
-  <div class="grid md:grid-cols-2 gap-8">
-
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-emerald-400 mb-4">Computational Biology & Algorithm Development</h2>
-
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• Custom bioinformatics algorithm design</li>
-        <li>• Statistical and machine learning model development</li>
-        <li>• Biomarker discovery and validation</li>
-        <li>• Multi-omics data integration</li>
-        <li>• Genomic and transcriptomic analytics</li>
-      </ul>
-
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
+  <!-- ASSESS Stage -->
+  <div class="mb-20">
+    <div class="flex items-center mb-12">
+      <h2 class="text-4xl font-black text-emerald-400">
+        <i class="fas fa-search mr-4"></i> Assess
+      </h2>
+      <div class="flex-grow ml-4 h-1 bg-emerald-400/20"></div>
     </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass rounded-2xl p-6 border-t-4 border-emerald-400">
+        <div class="mb-3">
+          <i class="fas fa-clipboard-check text-3xl text-emerald-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Technology Readiness Assessment</h3>
+        <p class="text-slate-300 text-sm mb-4">Comprehensive evaluation of your current technology landscape, infrastructure, and modernization opportunities.</p>
+      </div>
 
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-cyan-400 mb-4">Bioinformatics Pipelines & Workflow Engineering</h2>
+      <div class="glass rounded-2xl p-6 border-t-4 border-emerald-400">
+        <div class="mb-3">
+          <i class="fas fa-robot text-3xl text-emerald-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">AI Readiness Assessment</h3>
+        <p class="text-slate-300 text-sm mb-4">Identify AI opportunities, organizational readiness, data maturity, and implementation priorities.</p>
+      </div>
 
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• Nextflow development</li>
-        <li>• Snakemake development</li>
-        <li>• RNA-seq, ChIP-seq, ATAC-seq workflows</li>
-        <li>• Workflow optimization and automation</li>
-        <li>• QC metric implementation</li>
-      </ul>
+      <div class="glass rounded-2xl p-6 border-t-4 border-emerald-400">
+        <div class="mb-3">
+          <i class="fas fa-database text-3xl text-emerald-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Data Infrastructure Assessment</h3>
+        <p class="text-slate-300 text-sm mb-4">Evaluate data silos, quality, governance, and readiness for modernization.</p>
+      </div>
 
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
+      <div class="glass rounded-2xl p-6 border-t-4 border-emerald-400">
+        <div class="mb-3">
+          <i class="fas fa-cloud text-3xl text-emerald-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Cloud Readiness Assessment</h3>
+        <p class="text-slate-300 text-sm mb-4">Assess cloud migration feasibility, architecture needs, and cost optimization opportunities.</p>
+      </div>
     </div>
+  </div>
 
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-purple-400 mb-4">Cloud & Infrastructure</h2>
-
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• AWS deployment</li>
-        <li>• Scalable compute environments</li>
-        <li>• Reproducible research infrastructure</li>
-        <li>• Data management and workflow orchestration</li>
-      </ul>
-
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
+  <!-- DESIGN Stage -->
+  <div class="mb-20">
+    <div class="flex items-center mb-12">
+      <h2 class="text-4xl font-black text-blue-400">
+        <i class="fas fa-pencil-ruler mr-4"></i> Design
+      </h2>
+      <div class="flex-grow ml-4 h-1 bg-blue-400/20"></div>
     </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass rounded-2xl p-6 border-t-4 border-blue-400">
+        <div class="mb-3">
+          <i class="fas fa-cubes text-3xl text-blue-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Technology Architecture</h3>
+        <p class="text-slate-300 text-sm mb-4">Design comprehensive modernization roadmaps with phased implementation plans and success metrics.</p>
+      </div>
 
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-blue-400 mb-4">Precision Medicine & Translational Research</h2>
+      <div class="glass rounded-2xl p-6 border-t-4 border-blue-400">
+        <div class="mb-3">
+          <i class="fas fa-layer-group text-3xl text-blue-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Data Architecture</h3>
+        <p class="text-slate-300 text-sm mb-4">Build scalable data lakes, warehouses, and integration patterns for modern analytics.</p>
+      </div>
 
-      <ul class="space-y-3 text-slate-300 mb-6">
-        <li>• Pipeline-to-patient solutions</li>
-        <li>• Clinical genomics workflows</li>
-        <li>• Research-to-clinic translation</li>
-        <li>• Decision-support analytics</li>
-      </ul>
+      <div class="glass rounded-2xl p-6 border-t-4 border-blue-400">
+        <div class="mb-3">
+          <i class="fas fa-brain text-3xl text-blue-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">AI Architecture</h3>
+        <p class="text-slate-300 text-sm mb-4">Plan AI/ML solutions including model development, deployment, and governance frameworks.</p>
+      </div>
 
-      <p class="text-lg text-slate-400">Pricing to be discussed</p>
+      <div class="glass rounded-2xl p-6 border-t-4 border-blue-400">
+        <div class="mb-3">
+          <i class="fas fa-hospital text-3xl text-blue-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Healthcare & Interoperability</h3>
+        <p class="text-slate-300 text-sm mb-4">Design FHIR-compliant systems, EHR modernization strategies, and clinical data integration.</p>
+      </div>
     </div>
+  </div>
 
+  <!-- BUILD Stage -->
+  <div class="mb-20">
+    <div class="flex items-center mb-12">
+      <h2 class="text-4xl font-black text-purple-400">
+        <i class="fas fa-hammer mr-4"></i> Build
+      </h2>
+      <div class="flex-grow ml-4 h-1 bg-purple-400/20"></div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass rounded-2xl p-6 border-t-4 border-purple-400">
+        <div class="mb-3">
+          <i class="fas fa-server text-3xl text-purple-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Cloud Implementation</h3>
+        <p class="text-slate-300 text-sm mb-4">Deploy AWS/Azure/GCP infrastructure, security, networking, and management solutions.</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 border-t-4 border-purple-400">
+        <div class="mb-3">
+          <i class="fas fa-arrows-alt text-3xl text-purple-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Data Pipelines</h3>
+        <p class="text-slate-300 text-sm mb-4">Build ETL/ELT workflows, data ingestion, transformation, and real-time streaming systems.</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 border-t-4 border-purple-400">
+        <div class="mb-3">
+          <i class="fas fa-wand-magic-sparkles text-3xl text-purple-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">AI Solutions</h3>
+        <p class="text-slate-300 text-sm mb-4">Implement AI/ML models, NLP, computer vision, predictive analytics, and intelligent automation.</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 border-t-4 border-purple-400">
+        <div class="mb-3">
+          <i class="fas fa-dna text-3xl text-purple-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Bioinformatics</h3>
+        <p class="text-slate-300 text-sm mb-4">Develop genomic pipelines, multi-omics analysis, and life sciences data infrastructure.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTIMIZE Stage -->
+  <div class="mb-20">
+    <div class="flex items-center mb-12">
+      <h2 class="text-4xl font-black text-cyan-400">
+        <i class="fas fa-chart-line mr-4"></i> Optimize
+      </h2>
+      <div class="flex-grow ml-4 h-1 bg-cyan-400/20"></div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 border-t-4 border-cyan-400">
+        <div class="mb-3">
+          <i class="fas fa-cog text-3xl text-cyan-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Infrastructure Optimization</h3>
+        <p class="text-slate-300 text-sm mb-4">Monitor performance, optimize costs, scale capacity, and ensure reliability and security.</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 border-t-4 border-cyan-400">
+        <div class="mb-3">
+          <i class="fas fa-check-circle text-3xl text-cyan-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Data Quality</h3>
+        <p class="text-slate-300 text-sm mb-4">Implement data validation, governance frameworks, and continuous quality monitoring.</p>
+      </div>
+
+      <div class="glass rounded-2xl p-6 border-t-4 border-cyan-400">
+        <div class="mb-3">
+          <i class="fas fa-chart-bar text-3xl text-cyan-400"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">AI Optimization</h3>
+        <p class="text-slate-300 text-sm mb-4">Refine models, improve accuracy, retrain with new data, and unlock continuous improvements.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="glass rounded-3xl p-12 text-center border-t border-slate-800 mt-20">
+    <h2 class="text-4xl font-black mb-6">Ready to Get Started?</h2>
+    <p class="text-xl text-slate-300 mb-8">Schedule a consultation to discuss your organization's modernization journey.</p>
+    <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="cta-primary text-white px-10 py-4 rounded-xl font-bold text-lg transition">
+      <i class="fas fa-calendar mr-2"></i> Schedule a Consultation
+    </button>
   </div>
 
 </div>
+
+<!-- Contact Modal -->
+<div id="contact-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-slate-900 rounded-2xl p-8 max-w-2xl w-full max-h-96 overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-3xl font-bold text-emerald-300">Start Your Assessment</h3>
+      <button onclick="document.getElementById('contact-modal').classList.add('hidden')" class="text-slate-400 hover:text-white">
+        <i class="fas fa-times text-2xl"></i>
+      </button>
+    </div>
+
+    <form id="booking-form" class="space-y-4">
+      <div class="grid md:grid-cols-2 gap-4">
+        <input type="text" placeholder="First Name" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+        <input type="text" placeholder="Last Name" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+      </div>
+
+      <input type="email" placeholder="Email" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+
+      <input type="text" placeholder="Company / Organization" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+
+      <select class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required>
+        <option value="">Select Your Sector</option>
+        <option>Healthcare</option>
+        <option>Education</option>
+        <option>Government & Municipalities</option>
+        <option>Life Sciences</option>
+        <option>Nonprofit</option>
+        <option>Other</option>
+      </select>
+
+      <textarea placeholder="Tell us about your organization and goals..." class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white h-24"></textarea>
+
+      <button type="submit" class="w-full cta-primary text-white py-3 rounded-lg font-bold text-lg transition">
+        <i class="fas fa-paper-plane mr-2"></i> Send Request
+      </button>
+
+      <p class="text-xs text-slate-400 text-center">
+        We'll respond within 24 hours to schedule your consultation.
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="border-t border-slate-800 py-12 text-center text-slate-400 mt-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <p class="mb-4">© 2026 Jordana Consulting | Technology Modernization & AI Solutions</p>
+    <div class="flex justify-center gap-6">
+      <a href="https://github.com/muwajorda" target="_blank" class="hover:text-emerald-400 transition">
+        <i class="fab fa-github text-2xl"></i>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="hover:text-emerald-400 transition">
+        <i class="fab fa-linkedin text-2xl"></i>
+      </a>
+      <a href="mailto:contact@jordanaconsulting.com" class="hover:text-emerald-400 transition">
+        <i class="fas fa-envelope text-2xl"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('booking-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    try {
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData))
+      });
+      if (response.ok) {
+        alert('Request sent! We\'ll be in touch within 24 hours.');
+        document.getElementById('contact-modal').classList.add('hidden');
+        e.target.reset();
+      }
+    } catch (error) {
+      console.error('Booking error:', error);
+    }
+  });
+</script>
 
 </body>
 </html>
