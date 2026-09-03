@@ -1,507 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biotech Assessment Engine & Executive Due Diligence Suite</title>
-    <!-- Tailwind CSS for layout and styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js for radar chart visualizations -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- jsPDF for client-side PDF executive memo exports -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assessment | Jordana Consulting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #07111f, #0f172a);
+      color: white;
+    }
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .cta-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      transition: all 0.3s ease;
+    }
+    .cta-primary:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+    }
+    .assessment-card {
+      transition: all 0.3s ease;
+    }
+    .assessment-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+    }
+  </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex font-sans">
 
-    <!-- SIDEBAR NAVIGATION -->
-    <aside class="w-64 bg-slate-950 border-r border-slate-800 p-6 flex flex-col justify-between shrink-0">
-        <div class="space-y-6">
-            <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-blue-600/30">J</div>
-                <div>
-                    <h1 class="font-bold text-slate-100 text-sm leading-none">Jordana Consulting</h1>
-                    <span class="text-xs text-slate-500">Biotech Engine v2.5</span>
-                </div>
-            </div>
+<body>
 
-            <nav class="space-y-2 text-sm">
-                <a href="#" onclick="switchTab('evaluation')" class="flex items-center space-x-3 bg-blue-600/10 text-blue-400 p-2.5 rounded-lg border border-blue-500/20 font-medium">
-                    <span>📊 Evaluation Suite</span>
-                </a>
-                <a href="#" onclick="toggleHistoryModal()" class="flex items-center space-x-3 text-slate-400 hover:bg-slate-900 hover:text-slate-200 p-2.5 rounded-lg transition">
-                    <span>📜 Portfolio History</span>
-                </a>
-                <a href="#" onclick="toggleConfigModal()" class="flex items-center space-x-3 text-slate-400 hover:bg-slate-900 hover:text-slate-200 p-2.5 rounded-lg transition">
-                    <span>⚙️ Weights & Scoring Rules</span>
-                </a>
-                <a href="#" onclick="toggleAuditModal()" class="flex items-center space-x-3 text-slate-400 hover:bg-slate-900 hover:text-slate-200 p-2.5 rounded-lg transition">
-                    <span>🔒 Audit Trail & HIPAA Logs</span>
-                </a>
-            </nav>
+<!-- Navigation Header -->
+<header class="sticky top-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-emerald-400">
+      <i class="fas fa-cloud mr-2"></i> Jordana Consulting
+    </h1>
+
+    <nav class="space-x-6 text-sm font-semibold hidden md:flex">
+      <a href="index.html" class="hover:text-emerald-400">Home</a>
+      <a href="index.html#process" class="hover:text-emerald-400">Our Process</a>
+      <a href="index.html#who-we-help" class="hover:text-emerald-400">Who We Help</a>
+      <a href="services.html" class="hover:text-emerald-400">Services</a>
+      <a href="assessment.html" class="hover:text-emerald-400 text-emerald-400">Assessments</a>
+    </nav>
+
+    <a href="index.html#contact" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-block hidden">
+      Contact
+    </a>
+  </div>
+</header>
+
+<div class="max-w-7xl mx-auto px-6 py-20">
+
+  <div class="text-center mb-20">
+    <h1 class="text-6xl font-black mb-6">Find Out What Your Organization Needs</h1>
+    <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+      Before investing in new technology, cloud infrastructure, or AI, understand your organization's current readiness, gaps, risks, and priorities.
+    </p>
+  </div>
+
+  <!-- Assessment Cards Grid -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
+
+    <!-- Healthcare Assessment -->
+    <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-blue-400 flex flex-col">
+      <div class="mb-4">
+        <i class="fas fa-hospital text-3xl text-blue-400"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2">Healthcare Technology Assessment</h3>
+      
+      <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
+        <div>
+          <p class="font-semibold text-slate-200">Who it's for:</p>
+          <p>Hospitals, health systems, and healthcare providers</p>
         </div>
-
-        <div class="border-t border-slate-800 pt-4 text-xs text-slate-500">
-            System Status: <span class="text-emerald-400 font-medium">Engine Active</span>
+        <div>
+          <p class="font-semibold text-slate-200">What it evaluates:</p>
+          <p>EHR modernization, FHIR compliance, interoperability, clinical workflows</p>
         </div>
-    </aside>
-
-    <!-- MAIN CONTENT AREA -->
-    <main class="flex-1 p-8 space-y-6 overflow-y-auto">
-
-        <!-- Page Header -->
-        <header class="flex justify-between items-center border-b border-slate-800 pb-4">
-            <div>
-                <h2 class="text-2xl font-bold text-slate-100">Technical Due Diligence Platform</h2>
-                <p class="text-sm text-slate-400">Multi-modal assessment for Oncology, scRNA-seq, and Liquid Biopsy (cfDNA) platforms.</p>
-            </div>
-            <div class="flex space-x-3">
-                <button onclick="triggerAsyncPipeline()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-3.5 py-2 rounded-lg border border-slate-700 transition">
-                    ⚡ Trigger Async AWS Batch Job
-                </button>
-            </div>
-        </header>
-
-        <!-- MAIN GRID: INPUTS & VISUALS -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            <!-- FORM CONTAINER (2 COLUMNS) -->
-            <div class="lg:col-span-2 bg-slate-800/60 p-6 rounded-xl border border-slate-800 space-y-5">
-                <h3 class="text-base font-semibold text-slate-200 border-b border-slate-700/50 pb-2">1. Company Profile & Options</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Company Name</label>
-                        <input id="companyName" type="text" value="AstraOmics Bio" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Target Modality</label>
-                        <select id="modality" onchange="updateDynamicFields()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
-                            <option value="Oncology">Oncology (Panel / Exome)</option>
-                            <option value="scRNA-seq">Single-Cell (scRNA-seq)</option>
-                            <option value="cfDNA">Liquid Biopsy (cfDNA)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Funding Stage</label>
-                        <input id="stage" type="text" value="Series A" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">PhD Ratio (0.0 to 1.0)</label>
-                        <input id="phdRatio" type="number" step="0.05" min="0" max="1" value="0.75" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Domain Experience (Years)</label>
-                        <input id="yearsExp" type="number" value="12" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Bioinformatics Leads</label>
-                        <input id="bioinfoLeads" type="number" value="2" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
-                    </div>
-                </div>
-
-                <!-- DYNAMIC MODALITY-SPECIFIC INPUTS -->
-                <h3 class="text-base font-semibold text-slate-200 border-b border-slate-700/50 pb-2 pt-2">2. Modality & Sequencing Parameters</h3>
-                
-                <div id="dynamicInputs" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- JavaScript dynamically populates dynamic inputs based on modality selection -->
-                </div>
-
-                <!-- INFRASTRUCTURE & COMPLIANCE OPTIONS -->
-                <h3 class="text-base font-semibold text-slate-200 border-b border-slate-700/50 pb-2 pt-2">3. Infrastructure & Regulatory Compliance</h3>
-
-                <div class="flex flex-wrap gap-6">
-                    <label class="flex items-center space-x-2 text-sm text-slate-300">
-                        <input id="automatedQc" type="checkbox" checked class="rounded border-slate-700 text-blue-600 focus:ring-0">
-                        <span>Automated QC</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-sm text-slate-300">
-                        <input id="cloudScalable" type="checkbox" checked class="rounded border-slate-700 text-blue-600 focus:ring-0">
-                        <span>Cloud Scalable (AWS/Nextflow)</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-sm text-slate-300">
-                        <input id="hipaaCompliant" type="checkbox" checked class="rounded border-slate-700 text-blue-600 focus:ring-0">
-                        <span>HIPAA Compliant</span>
-                    </label>
-                </div>
-
-                <button onclick="runAssessment()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-lg transition shadow-lg shadow-blue-600/20">
-                    Execute Technical Evaluation Engine
-                </button>
-            </div>
-
-            <!-- VISUALIZATION CONTAINER (RADAR CHART & STATUS) -->
-            <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
-                <div>
-                    <h3 class="text-base font-semibold text-slate-200 border-b border-slate-700/50 pb-2 mb-4">Technical Maturity Scorecard</h3>
-                    <div class="w-full h-64 flex items-center justify-center">
-                        <canvas id="radarChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900/80 p-4 rounded-lg border border-slate-800 space-y-2 mt-4 text-xs">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Omics Weight:</span> <span id="weightOmicsLabel" class="text-slate-200">40%</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Infra Weight:</span> <span id="weightInfraLabel" class="text-slate-200">30%</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Team Weight:</span> <span id="weightTeamLabel" class="text-slate-200">30%</span>
-                    </div>
-                </div>
-            </div>
-
+        <div>
+          <p class="font-semibold text-slate-200">What you receive:</p>
+          <p>Readiness scorecard, compliance gaps, integration priorities</p>
         </div>
+      </div>
 
-        <!-- SCORECARD & EVALUATION RESULTS -->
-        <div id="resultsCard" class="hidden bg-slate-800/90 p-6 rounded-xl border border-slate-700 space-y-6">
-            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
-                <div>
-                    <h3 id="resCompany" class="text-xl font-bold text-slate-100">Company Evaluation</h3>
-                    <p id="resSub" class="text-xs text-slate-400">Modality Details</p>
-                </div>
-                <span id="resStatus" class="px-3 py-1 rounded-full text-xs font-bold bg-green-900 text-green-300 border border-green-700">APPROVED</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-                <div class="bg-slate-900/80 p-4 rounded-lg border border-slate-800">
-                    <span class="block text-xs text-slate-400 mb-1">Omics Quality</span>
-                    <span id="scoreOmics" class="text-xl font-bold text-blue-400">0.0 / 100</span>
-                </div>
-                <div class="bg-slate-900/80 p-4 rounded-lg border border-slate-800">
-                    <span class="block text-xs text-slate-400 mb-1">Cloud / Infra</span>
-                    <span id="scoreInfra" class="text-xl font-bold text-blue-400">0.0 / 100</span>
-                </div>
-                <div class="bg-slate-900/80 p-4 rounded-lg border border-slate-800">
-                    <span class="block text-xs text-slate-400 mb-1">Team Expertise</span>
-                    <span id="scoreTeam" class="text-xl font-bold text-blue-400">0.0 / 100</span>
-                </div>
-                <div class="bg-slate-900/80 p-4 rounded-lg border border-slate-800">
-                    <span class="block text-xs text-slate-400 mb-1">Overall Composite</span>
-                    <span id="scoreOverall" class="text-xl font-bold text-emerald-400">0.0 / 100</span>
-                </div>
-            </div>
-
-            <div class="flex justify-end space-x-4 border-t border-slate-700 pt-4">
-                <button onclick="downloadPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition flex items-center space-x-2">
-                    <span>📄 Export Executive PDF Memo</span>
-                </button>
-            </div>
+      <div class="pt-4 border-t border-slate-700 space-y-2">
+        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-blue-400/10 text-blue-300 px-2 py-1 rounded">Infrastructure</span>
+          <span class="text-xs bg-blue-400/10 text-blue-300 px-2 py-1 rounded">Data</span>
+          <span class="text-xs bg-blue-400/10 text-blue-300 px-2 py-1 rounded">Security</span>
         </div>
+      </div>
 
-    </main>
-
-    <!-- MODAL 1: ASSESSMENT HISTORY -->
-    <div id="historyModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full max-w-2xl space-y-4">
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="text-lg font-bold">Historical Portfolio Benchmarks</h3>
-                <button onclick="toggleHistoryModal()" class="text-slate-400 hover:text-white">&times;</button>
-            </div>
-            <div id="historyContainer" class="max-h-64 overflow-y-auto space-y-2 text-sm text-slate-300">
-                <!-- Populated via JavaScript -->
-            </div>
-            <div class="flex justify-end pt-2">
-                <button onclick="clearHistory()" class="bg-red-900/50 hover:bg-red-800 text-red-200 text-xs px-3 py-1.5 rounded">Clear History Cache</button>
-            </div>
-        </div>
+      <button onclick="startAssessment('healthcare')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
+        <i class="fas fa-arrow-right mr-2"></i> Start Assessment
+      </button>
     </div>
 
-    <!-- MODAL 2: CONFIGURATION & WEIGHTS -->
-    <div id="configModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full max-w-md space-y-4">
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="text-lg font-bold">Scoring Engine Rules & Weights</h3>
-                <button onclick="toggleConfigModal()" class="text-slate-400 hover:text-white">&times;</button>
-            </div>
-            <div class="space-y-3 text-sm">
-                <div>
-                    <label class="block text-xs text-slate-400">Omics Weight</label>
-                    <input id="weightOmics" type="number" step="0.05" value="0.40" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-slate-100">
-                </div>
-                <div>
-                    <label class="block text-xs text-slate-400">Infra Weight</label>
-                    <input id="weightInfra" type="number" step="0.05" value="0.30" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-slate-100">
-                </div>
-                <div>
-                    <label class="block text-xs text-slate-400">Team Weight</label>
-                    <input id="weightTeam" type="number" step="0.05" value="0.30" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-slate-100">
-                </div>
-            </div>
-            <button onclick="saveWeights()" class="w-full bg-blue-600 hover:bg-blue-500 py-2 rounded text-sm font-medium">Save Configuration</button>
+    <!-- Education Assessment -->
+    <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-emerald-400 flex flex-col">
+      <div class="mb-4">
+        <i class="fas fa-graduation-cap text-3xl text-emerald-400"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2">Education Technology Assessment</h3>
+      
+      <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
+        <div>
+          <p class="font-semibold text-slate-200">Who it's for:</p>
+          <p>Schools, universities, and educational institutions</p>
         </div>
+        <div>
+          <p class="font-semibold text-slate-200">What it evaluates:</p>
+          <p>Learning management systems, student data, infrastructure, analytics readiness</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-200">What you receive:</p>
+          <p>Technology roadmap, modernization priorities, success metrics</p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-slate-700 space-y-2">
+        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded">Infrastructure</span>
+          <span class="text-xs bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded">Data</span>
+          <span class="text-xs bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded">Analytics</span>
+        </div>
+      </div>
+
+      <button onclick="startAssessment('education')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
+        <i class="fas fa-arrow-right mr-2"></i> Start Assessment
+      </button>
     </div>
 
-    <!-- MODAL 3: AUDIT TRAIL LOGS -->
-    <div id="auditModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full max-w-2xl space-y-4">
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="text-lg font-bold">Immutable HIPAA Audit Trail</h3>
-                <button onclick="toggleAuditModal()" class="text-slate-400 hover:text-white">&times;</button>
-            </div>
-            <div id="auditContainer" class="max-h-64 overflow-y-auto space-y-2 font-mono text-xs text-slate-400 bg-slate-950 p-3 rounded">
-                <!-- Log entries added dynamically -->
-            </div>
+    <!-- Municipal Assessment -->
+    <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-purple-400 flex flex-col">
+      <div class="mb-4">
+        <i class="fas fa-landmark text-3xl text-purple-400"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2">Municipal Technology Assessment</h3>
+      
+      <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
+        <div>
+          <p class="font-semibold text-slate-200">Who it's for:</p>
+          <p>Cities, counties, towns, and municipal governments</p>
         </div>
+        <div>
+          <p class="font-semibold text-slate-200">What it evaluates:</p>
+          <p>Legacy system dependencies, service delivery, digital transformation readiness</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-200">What you receive:</p>
+          <p>Modernization strategy, citizen-facing improvements, cost optimization</p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-slate-700 space-y-2">
+        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-purple-400/10 text-purple-300 px-2 py-1 rounded">Infrastructure</span>
+          <span class="text-xs bg-purple-400/10 text-purple-300 px-2 py-1 rounded">Governance</span>
+          <span class="text-xs bg-purple-400/10 text-purple-300 px-2 py-1 rounded">Legacy</span>
+        </div>
+      </div>
+
+      <button onclick="startAssessment('municipal')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
+        <i class="fas fa-arrow-right mr-2"></i> Start Assessment
+      </button>
     </div>
 
-    <!-- SCRIPTING ENGINE -->
-    <script>
-        let currentAssessment = null;
-        let radarChartInstance = null;
-        let weights = { omics: 0.40, infra: 0.30, team: 0.30 };
-        let auditLogs = [];
+    <!-- Life Sciences Assessment -->
+    <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-pink-400 flex flex-col">
+      <div class="mb-4">
+        <i class="fas fa-dna text-3xl text-pink-400"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2">Life Sciences Assessment</h3>
+      
+      <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
+        <div>
+          <p class="font-semibold text-slate-200">Who it's for:</p>
+          <p>Biotech, pharma, and life sciences organizations</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-200">What it evaluates:</p>
+          <p>Genomic pipelines, data infrastructure, bioinformatics readiness, research capabilities</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-200">What you receive:</p>
+          <p>Bioinformatics roadmap, infrastructure recommendations, scaling strategy</p>
+        </div>
+      </div>
 
-        function logAction(action, details) {
-            const entry = {
-                timestamp: new Date().toISOString(),
-                user: "consultant_admin",
-                action: action,
-                details: details
-            };
-            auditLogs.push(entry);
-            const container = document.getElementById("auditContainer");
-            if (container) {
-                container.innerHTML = auditLogs.map(l => `<div>[${l.timestamp}] <span class="text-blue-400">${l.action}</span> - ${JSON.stringify(l.details)}</div>`).join('');
-            }
-        }
+      <div class="pt-4 border-t border-slate-700 space-y-2">
+        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-pink-400/10 text-pink-300 px-2 py-1 rounded">Data</span>
+          <span class="text-xs bg-pink-400/10 text-pink-300 px-2 py-1 rounded">AI/ML</span>
+          <span class="text-xs bg-pink-400/10 text-pink-300 px-2 py-1 rounded">Cloud</span>
+        </div>
+      </div>
 
-        function updateDynamicFields() {
-            const modality = document.getElementById("modality").value;
-            const container = document.getElementById("dynamicInputs");
+      <button onclick="startAssessment('lifesciences')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
+        <i class="fas fa-arrow-right mr-2"></i> Start Assessment
+      </button>
+    </div>
 
-            if (modality === "Oncology") {
-                container.innerHTML = `
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Target Read Depth (x)</label>
-                        <input id="param1" type="number" value="500" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Variant Calling Sensitivity (0.0 to 1.0)</label>
-                        <input id="param2" type="number" step="0.01" value="0.98" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100">
-                    </div>
-                `;
-            } else if (modality === "scRNA-seq") {
-                container.innerHTML = `
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Mean Reads / Cell</label>
-                        <input id="param1" type="number" value="50000" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Doublet Rate (%)</label>
-                        <input id="param2" type="number" step="0.1" value="3.5" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100">
-                    </div>
-                `;
-            } else if (modality === "cfDNA") {
-                container.innerHTML = `
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Limit of Detection (VAF %)</label>
-                        <input id="param1" type="number" step="0.01" value="0.1" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Duplication Rate (%)</label>
-                        <input id="param2" type="number" value="15" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100">
-                    </div>
-                `;
-            }
-        }
+    <!-- Nonprofit Assessment -->
+    <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-orange-400 flex flex-col">
+      <div class="mb-4">
+        <i class="fas fa-handshake text-3xl text-orange-400"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2">Organization & Nonprofit Technology Assessment</h3>
+      
+      <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
+        <div>
+          <p class="font-semibold text-slate-200">Who it's for:</p>
+          <p>Nonprofits and mission-driven organizations</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-200">What it evaluates:</p>
+          <p>Operations, program delivery, donor systems, technology cost optimization</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-200">What you receive:</p>
+          <p>Impact-focused roadmap, cost savings opportunities, program effectiveness metrics</p>
+        </div>
+      </div>
 
-        window.onload = function() {
-            updateDynamicFields();
-            initRadarChart([0, 0, 0]);
-            logAction("SYSTEM_INIT", { status: "Online", version: "2.5" });
-        };
+      <div class="pt-4 border-t border-slate-700 space-y-2">
+        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-orange-400/10 text-orange-300 px-2 py-1 rounded">Infrastructure</span>
+          <span class="text-xs bg-orange-400/10 text-orange-300 px-2 py-1 rounded">Integration</span>
+          <span class="text-xs bg-orange-400/10 text-orange-300 px-2 py-1 rounded">Security</span>
+        </div>
+      </div>
 
-        function initRadarChart(dataPoints) {
-            const ctx = document.getElementById('radarChart').getContext('2d');
-            if (radarChartInstance) radarChartInstance.destroy();
+      <button onclick="startAssessment('nonprofit')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
+        <i class="fas fa-arrow-right mr-2"></i> Start Assessment
+      </button>
+    </div>
 
-            radarChartInstance = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Omics Quality', 'Cloud / Infra', 'Team Expertise'],
-                    datasets: [{
-                        label: 'Score Ratings',
-                        data: dataPoints,
-                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
-                        borderColor: 'rgba(37, 99, 235, 1)',
-                        pointBackgroundColor: 'rgba(37, 99, 235, 1)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    scales: {
-                        r: {
-                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                            pointLabels: { color: '#94a3b8', font: { size: 10 } },
-                            ticks: { display: false },
-                            suggestedMin: 0,
-                            suggestedMax: 100
-                        }
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
+  </div>
 
-        function runAssessment() {
-            const company = document.getElementById("companyName").value;
-            const modality = document.getElementById("modality").value;
-            const stage = document.getElementById("stage").value;
-            
-            const phdRatio = parseFloat(document.getElementById("phdRatio").value) || 0;
-            const yearsExp = parseInt(document.getElementById("yearsExp").value) || 0;
-            const bioinfoLeads = parseInt(document.getElementById("bioinfoLeads").value) || 0;
+  <!-- Common Evaluation Areas -->
+  <div class="glass rounded-3xl p-12 mb-20">
+    <h2 class="text-3xl font-black mb-8 text-center">What Every Assessment Includes</h2>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-7 gap-6 text-center">
+      <div>
+        <div class="text-2xl mb-2">🏗️</div>
+        <p class="text-sm font-semibold">Infrastructure</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">📊</div>
+        <p class="text-sm font-semibold">Data Maturity</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">☁️</div>
+        <p class="text-sm font-semibold">Cloud Readiness</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">🤖</div>
+        <p class="text-sm font-semibold">AI Readiness</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">🔐</div>
+        <p class="text-sm font-semibold">Security & Governance</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">🔗</div>
+        <p class="text-sm font-semibold">Integration</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">✅</div>
+        <p class="text-sm font-semibold">Recommended Priorities</p>
+      </div>
+    </div>
+  </div>
 
-            const param1 = parseFloat(document.getElementById("param1").value) || 0;
-            const param2 = parseFloat(document.getElementById("param2").value) || 0;
+  <!-- CTA Section -->
+  <div class="glass rounded-3xl p-12 text-center border-t border-slate-800">
+    <h2 class="text-4xl font-black mb-6">Ready to Understand Your Organization's Needs?</h2>
+    <p class="text-xl text-slate-300 mb-8">Choose your organization type above to start your personalized assessment.</p>
+  </div>
 
-            const automatedQc = document.getElementById("automatedQc").checked;
-            const cloudScalable = document.getElementById("cloudScalable").checked;
-            const hipaaCompliant = document.getElementById("hipaaCompliant").checked;
+</div>
 
-            // Omics Calculation
-            let omicsScore = 0;
-            if (modality === "Oncology") {
-                omicsScore = Math.min(100, (param1 / 500) * 40 + param2 * 60);
-            } else if (modality === "scRNA-seq") {
-                omicsScore = Math.min(100, (param1 / 50000) * 50 + Math.max(0, 50 - param2 * 2));
-            } else {
-                omicsScore = Math.min(100, (1.0 / Math.max(0.01, param1)) * 10 + (100 - param2) * 0.5);
-            }
+<!-- Footer -->
+<footer class="border-t border-slate-800 py-12 text-center text-slate-400 mt-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <p class="mb-4">© 2026 Jordana Consulting | Technology Modernization & AI Solutions</p>
+    <div class="flex justify-center gap-6">
+      <a href="https://github.com/muwajorda" target="_blank" class="hover:text-emerald-400 transition">
+        <i class="fab fa-github text-2xl"></i>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="hover:text-emerald-400 transition">
+        <i class="fab fa-linkedin text-2xl"></i>
+      </a>
+      <a href="mailto:contact@jordanaconsulting.com" class="hover:text-emerald-400 transition">
+        <i class="fas fa-envelope text-2xl"></i>
+      </a>
+    </div>
+  </div>
+</footer>
 
-            // Infrastructure Calculation
-            let infraScore = (automatedQc ? 30 : 0) + (cloudScalable ? 35 : 0) + (hipaaCompliant ? 35 : 0);
+<script>
+  function startAssessment(assessmentType) {
+    // Store the assessment type in sessionStorage for the detailed assessment engine
+    sessionStorage.setItem('selectedAssessmentType', assessmentType);
+    
+    // Redirect to the detailed assessment engine
+    // The engine will read this value and pre-populate fields if needed
+    window.location.href = 'assessment-engine.html?type=' + assessmentType;
+  }
+</script>
 
-            // Team Expertise Calculation
-            let teamScore = Math.min(100, (phdRatio * 40) + Math.min(40, yearsExp * 3) + Math.min(20, bioinfoLeads * 10));
-
-            // Composite Weighted Score
-            let overallScore = Math.round(((omicsScore * weights.omics) + (infraScore * weights.infra) + (teamScore * weights.team)) * 100) / 100;
-            let status = overallScore >= 75 ? "APPROVED" : "NEEDS_REVIEW";
-
-            currentAssessment = {
-                company, modality, stage,
-                scores: { 
-                    omics: Math.round(omicsScore * 100) / 100, 
-                    infra: Math.round(infraScore * 100) / 100, 
-                    team: Math.round(teamScore * 100) / 100, 
-                    overall: overallScore 
-                },
-                status: status
-            };
-
-            // Update UI
-            document.getElementById("resCompany").innerText = company;
-            document.getElementById("resSub").innerText = `${modality} • ${stage}`;
-            document.getElementById("resStatus").innerText = status;
-            document.getElementById("resStatus").className = status === "APPROVED" 
-                ? "px-3 py-1 rounded-full text-xs font-bold bg-green-900 text-green-300 border border-green-700"
-                : "px-3 py-1 rounded-full text-xs font-bold bg-red-900 text-red-300 border border-red-700";
-
-            document.getElementById("scoreOmics").innerText = `${currentAssessment.scores.omics} / 100`;
-            document.getElementById("scoreInfra").innerText = `${currentAssessment.scores.infra} / 100`;
-            document.getElementById("scoreTeam").innerText = `${currentAssessment.scores.team} / 100`;
-            document.getElementById("scoreOverall").innerText = `${overallScore} / 100`;
-
-            document.getElementById("resultsCard").classList.remove("hidden");
-
-            initRadarChart([currentAssessment.scores.omics, currentAssessment.scores.infra, currentAssessment.scores.team]);
-
-            // Save to LocalStorage History
-            let history = JSON.parse(localStorage.getItem("biotech_assessments") || "[]");
-            history.push({ ...currentAssessment, timestamp: new Date().toISOString() });
-            localStorage.setItem("biotech_assessments", JSON.stringify(history));
-
-            logAction("EVALUATION_COMPLETED", { company, score: overallScore, status });
-        }
-
-        function downloadPDF() {
-            if (!currentAssessment) return;
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.setFontSize(18);
-            doc.text("EXECUTIVE DUE DILIGENCE MEMO", 14, 20);
-
-            doc.setFontSize(10);
-            doc.setTextColor(100);
-            doc.text(`Generated: ${new Date().toLocaleDateString()} | Jordana Consulting Platform`, 14, 28);
-
-            doc.setLineWidth(0.5);
-            doc.line(14, 32, 196, 32);
-
-            doc.setFontSize(12);
-            doc.setTextColor(0);
-            doc.text(`Company: ${currentAssessment.company}`, 14, 42);
-            doc.text(`Modality: ${currentAssessment.modality}`, 14, 50);
-            doc.text(`Funding Stage: ${currentAssessment.stage}`, 14, 58);
-            doc.text(`Verdict Status: ${currentAssessment.status}`, 14, 66);
-
-            doc.text("Scorecard Breakdown:", 14, 80);
-            doc.setFontSize(10);
-            doc.text(`- Omics Quality Score: ${currentAssessment.scores.omics} / 100`, 20, 90);
-            doc.text(`- Infrastructure Score: ${currentAssessment.scores.infra} / 100`, 20, 98);
-            doc.text(`- Team Expertise Score: ${currentAssessment.scores.team} / 100`, 20, 106);
-            doc.text(`- Overall Composite Score: ${currentAssessment.scores.overall} / 100`, 20, 114);
-
-            doc.save(`${currentAssessment.company.replace(/\s+/g, '_')}_Executive_Memo.pdf`);
-            logAction("PDF_EXPORTED", { company: currentAssessment.company });
-        }
-
-        function triggerAsyncPipeline() {
-            const jobId = "job_aws_batch_" + Math.floor(Date.now() / 1000);
-            alert(`Dispatched Nextflow execution payload to AWS Batch.\nJob ID: ${jobId}`);
-            logAction("ASYNC_JOB_TRIGGERED", { jobId: jobId, target: "AWS Batch Spot Queue" });
-        }
-
-        function toggleHistoryModal() {
-            const modal = document.getElementById("historyModal");
-            modal.classList.toggle("hidden");
-            if (!modal.classList.contains("hidden")) {
-                let history = JSON.parse(localStorage.getItem("biotech_assessments") || "[]");
-                const container = document.getElementById("historyContainer");
-                container.innerHTML = history.length === 0 ? "No evaluations saved yet." : history.map(h => 
-                    `<div class="bg-slate-800 p-2.5 rounded border border-slate-700 flex justify-between">
-                        <div><b>${h.company}</b> (${h.modality}) - ${h.stage}</div>
-                        <div class="font-bold text-blue-400">${h.scores.overall} pts</div>
-                     </div>`
-                ).join('');
-            }
-        }
-
-        function toggleConfigModal() {
-            document.getElementById("configModal").classList.toggle("hidden");
-        }
-
-        function toggleAuditModal() {
-            document.getElementById("auditModal").classList.toggle("hidden");
-        }
-
-        function saveWeights() {
-            weights.omics = parseFloat(document.getElementById("weightOmics").value) || 0.4;
-            weights.infra = parseFloat(document.getElementById("weightInfra").value) || 0.3;
-            weights.team = parseFloat(document.getElementById("weightTeam").value) || 0.3;
-
-            document.getElementById("weightOmicsLabel").innerText = (weights.omics * 100) + "%";
-            document.getElementById("weightInfraLabel").innerText = (weights.infra * 100) + "%";
-            document.getElementById("weightTeamLabel").innerText = (weights.team * 100) + "%";
-
-            toggleConfigModal();
-            logAction("WEIGHTS_UPDATED", weights);
-        }
-
-        function clearHistory() {
-            localStorage.removeItem("biotech_assessments");
-            toggleHistoryModal();
-            logAction("CACHE_CLEARED", {});
-        }
-    </script>
 </body>
 </html>
