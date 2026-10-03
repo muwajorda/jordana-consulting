@@ -67,7 +67,7 @@
       <a href="#contact" class="hover:text-emerald-400">Contact</a>
     </nav>
 
-    <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-block hidden">
+    <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-block">
       Get Started
     </button>
   </div>
@@ -85,7 +85,7 @@
     </h1>
 
     <p class="text-xl md:text-2xl text-slate-300 mb-6 leading-relaxed max-w-4xl mx-auto">
-      We help schools, healthcare organizations, local governments, life-science organizations, nonprofits, and businesses assess their technology, modernize their data infrastructure, and deploy practical AI solutions.
+      We help schools, healthcare organizations, local governments, life-science organizations, nonprofits, and businesses assess their technology, modernize their data infrastructure, and deploy AI solutions that improve decision-making and operational efficiency.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -279,7 +279,7 @@
   <div class="glass rounded-3xl p-12 text-center">
     <h2 class="text-4xl md:text-5xl font-black mb-6">Don't Know Where to Start?</h2>
     <p class="text-xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-      Take our Technology & AI Readiness Assessment to identify infrastructure gaps, evaluate data maturity, discover AI opportunities, assess cloud readiness, uncover security and governance concerns, and receive recommended priorities for modernization.
+      Take our Technology & AI Readiness Assessment to identify infrastructure gaps, evaluate data maturity, discover AI opportunities, assess cloud readiness, uncover security and governance concerns, and build a practical roadmap for transformation.
     </p>
     <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="cta-primary text-white px-10 py-4 rounded-xl font-bold text-lg transition inline-block">
       <i class="fas fa-clipboard-check mr-2"></i> Start Your Assessment
@@ -352,7 +352,7 @@
 </section>
 
 <!-- Final CTA Section -->
-<section class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
+<section id="contact" class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
   <div class="glass rounded-3xl p-12 text-center">
     <h2 class="text-4xl md:text-5xl font-black mb-8">Ready to Modernize Your Organization?</h2>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -371,32 +371,32 @@
   <div class="bg-slate-900 rounded-2xl p-8 max-w-2xl w-full max-h-96 overflow-y-auto">
     <div class="flex justify-between items-center mb-6">
       <h3 class="text-3xl font-bold text-emerald-300">Start Your Assessment</h3>
-      <button onclick="document.getElementById('contact-modal').classList.add('hidden')" class="text-slate-400 hover:text-white">
+      <button type="button" onclick="document.getElementById('contact-modal').classList.add('hidden')" class="text-slate-400 hover:text-white" aria-label="Close contact form">
         <i class="fas fa-times text-2xl"></i>
       </button>
     </div>
 
     <form id="booking-form" class="space-y-4">
       <div class="grid md:grid-cols-2 gap-4">
-        <input type="text" placeholder="First Name" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
-        <input type="text" placeholder="Last Name" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+        <input type="text" name="first_name" placeholder="First Name" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+        <input type="text" name="last_name" placeholder="Last Name" class="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
       </div>
 
-      <input type="email" placeholder="Email" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+      <input type="email" name="email" placeholder="Email" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
 
-      <input type="text" placeholder="Company / Organization" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
+      <input type="text" name="company" placeholder="Company / Organization" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required />
 
-      <select class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required>
+      <select name="industry" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white" required>
         <option value="">Select Your Sector</option>
-        <option>Healthcare</option>
-        <option>Education</option>
-        <option>Government & Municipalities</option>
-        <option>Life Sciences</option>
-        <option>Nonprofit</option>
-        <option>Other</option>
+        <option value="Healthcare">Healthcare</option>
+        <option value="Education">Education</option>
+        <option value="Government & Municipalities">Government & Municipalities</option>
+        <option value="Life Sciences">Life Sciences</option>
+        <option value="Nonprofit">Nonprofit</option>
+        <option value="Other">Other</option>
       </select>
 
-      <textarea placeholder="Tell us about your organization and modernization goals..." class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white h-24"></textarea>
+      <textarea name="challenge" placeholder="Tell us about your organization and modernization goals..." class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white h-24"></textarea>
 
       <button type="submit" class="w-full cta-primary text-white py-3 rounded-lg font-bold text-lg transition">
         <i class="fas fa-paper-plane mr-2"></i> Send Request
@@ -428,23 +428,32 @@
 </footer>
 
 <script>
-  // Form submission handlers
   document.getElementById('booking-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = e.target;
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
     try {
       const response = await fetch('/api/booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(formData))
+        body: JSON.stringify(payload)
       });
+
       if (response.ok) {
         alert('Request sent! We\'ll be in touch within 24 hours.');
-        document.getElementById('contact-modal').classList.add('hidden');
-        e.target.reset();
+        const modal = document.getElementById('contact-modal');
+        if (modal) modal.classList.add('hidden');
+        form.reset();
+      } else {
+        const errorData = await response.json().catch(() => null);
+        const message = errorData?.detail || 'Your request could not be sent. Please try again.';
+        alert(message);
       }
     } catch (error) {
       console.error('Booking error:', error);
+      alert('There was a problem submitting the form. Please try again or email contact@jordanaconsulting.com.');
     }
   });
 </script>
