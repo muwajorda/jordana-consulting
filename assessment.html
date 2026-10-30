@@ -38,7 +38,6 @@
 
 <body>
 
-<!-- Navigation Header -->
 <header class="sticky top-0 z-50 glass">
   <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
     <h1 class="text-2xl font-bold text-emerald-400">
@@ -53,14 +52,13 @@
       <a href="assessment.html" class="hover:text-emerald-400 text-emerald-400">Assessments</a>
     </nav>
 
-    <a href="index.html#contact" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-block hidden">
+    <a href="mailto:muwajorda1@gmail.com?subject=Assessment%20Request" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-block hidden">
       Contact
     </a>
   </div>
 </header>
 
 <div class="max-w-7xl mx-auto px-6 py-20">
-
   <div class="text-center mb-20">
     <h1 class="text-6xl font-black mb-6">Find Out What Your Organization Needs</h1>
     <p class="text-xl text-slate-300 max-w-3xl mx-auto">
@@ -68,261 +66,96 @@
     </p>
   </div>
 
-  <!-- Assessment Cards Grid -->
   <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
-
-    <!-- Healthcare Assessment -->
     <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-blue-400 flex flex-col">
-      <div class="mb-4">
-        <i class="fas fa-hospital text-3xl text-blue-400"></i>
-      </div>
+      <div class="mb-4"><i class="fas fa-hospital text-3xl text-blue-400"></i></div>
       <h3 class="text-xl font-bold mb-2">Healthcare Technology Assessment</h3>
-      
       <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
-        <div>
-          <p class="font-semibold text-slate-200">Who it's for:</p>
-          <p>Hospitals, health systems, and healthcare providers</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What it evaluates:</p>
-          <p>EHR modernization, FHIR compliance, interoperability, clinical workflows</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What you receive:</p>
-          <p>Readiness scorecard, compliance gaps, integration priorities</p>
-        </div>
+        <div><p class="font-semibold text-slate-200">Who it's for:</p><p>Hospitals, health systems, and healthcare providers</p></div>
+        <div><p class="font-semibold text-slate-200">What it evaluates:</p><p>EHR modernization, interoperability, clinical workflows</p></div>
+        <div><p class="font-semibold text-slate-200">What you receive:</p><p>Readiness scorecard and technology priorities</p></div>
       </div>
-
-      <div class="pt-4 border-t border-slate-700 space-y-2">
-        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-blue-400/10 text-blue-300 px-2 py-1 rounded">Infrastructure</span>
-          <span class="text-xs bg-blue-400/10 text-blue-300 px-2 py-1 rounded">Data</span>
-          <span class="text-xs bg-blue-400/10 text-blue-300 px-2 py-1 rounded">Security</span>
-        </div>
-      </div>
-
       <button onclick="startAssessment('healthcare')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
         <i class="fas fa-arrow-right mr-2"></i> Start Assessment
       </button>
     </div>
 
-    <!-- Education Assessment -->
     <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-emerald-400 flex flex-col">
-      <div class="mb-4">
-        <i class="fas fa-graduation-cap text-3xl text-emerald-400"></i>
-      </div>
+      <div class="mb-4"><i class="fas fa-graduation-cap text-3xl text-emerald-400"></i></div>
       <h3 class="text-xl font-bold mb-2">Education Technology Assessment</h3>
-      
       <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
-        <div>
-          <p class="font-semibold text-slate-200">Who it's for:</p>
-          <p>Schools, universities, and educational institutions</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What it evaluates:</p>
-          <p>Learning management systems, student data, infrastructure, analytics readiness</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What you receive:</p>
-          <p>Technology roadmap, modernization priorities, success metrics</p>
-        </div>
+        <div><p class="font-semibold text-slate-200">Who it's for:</p><p>Schools, universities, and educational institutions</p></div>
+        <div><p class="font-semibold text-slate-200">What it evaluates:</p><p>Infrastructure, learning platforms, analytics readiness</p></div>
+        <div><p class="font-semibold text-slate-200">What you receive:</p><p>Technology roadmap and modernization priorities</p></div>
       </div>
-
-      <div class="pt-4 border-t border-slate-700 space-y-2">
-        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded">Infrastructure</span>
-          <span class="text-xs bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded">Data</span>
-          <span class="text-xs bg-emerald-400/10 text-emerald-300 px-2 py-1 rounded">Analytics</span>
-        </div>
-      </div>
-
       <button onclick="startAssessment('education')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
         <i class="fas fa-arrow-right mr-2"></i> Start Assessment
       </button>
     </div>
 
-    <!-- Municipal Assessment -->
     <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-purple-400 flex flex-col">
-      <div class="mb-4">
-        <i class="fas fa-landmark text-3xl text-purple-400"></i>
-      </div>
+      <div class="mb-4"><i class="fas fa-landmark text-3xl text-purple-400"></i></div>
       <h3 class="text-xl font-bold mb-2">Municipal Technology Assessment</h3>
-      
       <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
-        <div>
-          <p class="font-semibold text-slate-200">Who it's for:</p>
-          <p>Cities, counties, towns, and municipal governments</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What it evaluates:</p>
-          <p>Legacy system dependencies, service delivery, digital transformation readiness</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What you receive:</p>
-          <p>Modernization strategy, citizen-facing improvements, cost optimization</p>
-        </div>
+        <div><p class="font-semibold text-slate-200">Who it's for:</p><p>Cities, counties, towns, and municipal governments</p></div>
+        <div><p class="font-semibold text-slate-200">What it evaluates:</p><p>Legacy systems, service delivery, digital transformation readiness</p></div>
+        <div><p class="font-semibold text-slate-200">What you receive:</p><p>Modernization strategy and cost priorities</p></div>
       </div>
-
-      <div class="pt-4 border-t border-slate-700 space-y-2">
-        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-purple-400/10 text-purple-300 px-2 py-1 rounded">Infrastructure</span>
-          <span class="text-xs bg-purple-400/10 text-purple-300 px-2 py-1 rounded">Governance</span>
-          <span class="text-xs bg-purple-400/10 text-purple-300 px-2 py-1 rounded">Legacy</span>
-        </div>
-      </div>
-
       <button onclick="startAssessment('municipal')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
         <i class="fas fa-arrow-right mr-2"></i> Start Assessment
       </button>
     </div>
 
-    <!-- Life Sciences Assessment -->
     <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-pink-400 flex flex-col">
-      <div class="mb-4">
-        <i class="fas fa-dna text-3xl text-pink-400"></i>
-      </div>
+      <div class="mb-4"><i class="fas fa-dna text-3xl text-pink-400"></i></div>
       <h3 class="text-xl font-bold mb-2">Life Sciences Assessment</h3>
-      
       <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
-        <div>
-          <p class="font-semibold text-slate-200">Who it's for:</p>
-          <p>Biotech, pharma, and life sciences organizations</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What it evaluates:</p>
-          <p>Genomic pipelines, data infrastructure, bioinformatics readiness, research capabilities</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What you receive:</p>
-          <p>Bioinformatics roadmap, infrastructure recommendations, scaling strategy</p>
-        </div>
+        <div><p class="font-semibold text-slate-200">Who it's for:</p><p>Biotech, pharma, and life sciences organizations</p></div>
+        <div><p class="font-semibold text-slate-200">What it evaluates:</p><p>Genomic pipelines, bioinformatics readiness, research capacity</p></div>
+        <div><p class="font-semibold text-slate-200">What you receive:</p><p>Roadmap and scaling recommendations</p></div>
       </div>
-
-      <div class="pt-4 border-t border-slate-700 space-y-2">
-        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-pink-400/10 text-pink-300 px-2 py-1 rounded">Data</span>
-          <span class="text-xs bg-pink-400/10 text-pink-300 px-2 py-1 rounded">AI/ML</span>
-          <span class="text-xs bg-pink-400/10 text-pink-300 px-2 py-1 rounded">Cloud</span>
-        </div>
-      </div>
-
       <button onclick="startAssessment('lifesciences')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
         <i class="fas fa-arrow-right mr-2"></i> Start Assessment
       </button>
     </div>
 
-    <!-- Nonprofit Assessment -->
     <div class="assessment-card glass rounded-2xl p-6 border-l-4 border-orange-400 flex flex-col">
-      <div class="mb-4">
-        <i class="fas fa-handshake text-3xl text-orange-400"></i>
-      </div>
+      <div class="mb-4"><i class="fas fa-handshake text-3xl text-orange-400"></i></div>
       <h3 class="text-xl font-bold mb-2">Organization & Nonprofit Technology Assessment</h3>
-      
       <div class="space-y-3 text-sm text-slate-300 mb-6 flex-grow">
-        <div>
-          <p class="font-semibold text-slate-200">Who it's for:</p>
-          <p>Nonprofits and mission-driven organizations</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What it evaluates:</p>
-          <p>Operations, program delivery, donor systems, technology cost optimization</p>
-        </div>
-        <div>
-          <p class="font-semibold text-slate-200">What you receive:</p>
-          <p>Impact-focused roadmap, cost savings opportunities, program effectiveness metrics</p>
-        </div>
+        <div><p class="font-semibold text-slate-200">Who it's for:</p><p>Nonprofits and mission-driven organizations</p></div>
+        <div><p class="font-semibold text-slate-200">What it evaluates:</p><p>Operations, donor systems, data workflows, technology impacts</p></div>
+        <div><p class="font-semibold text-slate-200">What you receive:</p><p>Impact-focused roadmap and priorities</p></div>
       </div>
-
-      <div class="pt-4 border-t border-slate-700 space-y-2">
-        <p class="text-xs text-slate-400 font-medium">EVALUATED AREAS:</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-orange-400/10 text-orange-300 px-2 py-1 rounded">Infrastructure</span>
-          <span class="text-xs bg-orange-400/10 text-orange-300 px-2 py-1 rounded">Integration</span>
-          <span class="text-xs bg-orange-400/10 text-orange-300 px-2 py-1 rounded">Security</span>
-        </div>
-      </div>
-
       <button onclick="startAssessment('nonprofit')" class="cta-primary text-white px-6 py-2 rounded-lg font-semibold text-sm transition mt-4 w-full">
         <i class="fas fa-arrow-right mr-2"></i> Start Assessment
       </button>
     </div>
-
   </div>
 
-  <!-- Common Evaluation Areas -->
-  <div class="glass rounded-3xl p-12 mb-20">
-    <h2 class="text-3xl font-black mb-8 text-center">What Every Assessment Includes</h2>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-7 gap-6 text-center">
-      <div>
-        <div class="text-2xl mb-2">🏗️</div>
-        <p class="text-sm font-semibold">Infrastructure</p>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">📊</div>
-        <p class="text-sm font-semibold">Data Maturity</p>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">☁️</div>
-        <p class="text-sm font-semibold">Cloud Readiness</p>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">🤖</div>
-        <p class="text-sm font-semibold">AI Readiness</p>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">🔐</div>
-        <p class="text-sm font-semibold">Security & Governance</p>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">🔗</div>
-        <p class="text-sm font-semibold">Integration</p>
-      </div>
-      <div>
-        <div class="text-2xl mb-2">✅</div>
-        <p class="text-sm font-semibold">Recommended Priorities</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
   <div class="glass rounded-3xl p-12 text-center border-t border-slate-800">
     <h2 class="text-4xl font-black mb-6">Ready to Understand Your Organization's Needs?</h2>
     <p class="text-xl text-slate-300 mb-8">Choose your organization type above to start your personalized assessment.</p>
   </div>
-
 </div>
 
-<!-- Footer -->
 <footer class="border-t border-slate-800 py-12 text-center text-slate-400 mt-20">
   <div class="max-w-7xl mx-auto px-6">
     <p class="mb-4">© 2026 Jordana Consulting | Technology Modernization & AI Solutions</p>
     <div class="flex justify-center gap-6">
-      <a href="https://github.com/muwajorda" target="_blank" class="hover:text-emerald-400 transition">
-        <i class="fab fa-github text-2xl"></i>
-      </a>
-      <a href="https://linkedin.com" target="_blank" class="hover:text-emerald-400 transition">
-        <i class="fab fa-linkedin text-2xl"></i>
-      </a>
-      <a href="mailto:contact@jordanaconsulting.com" class="hover:text-emerald-400 transition">
-        <i class="fas fa-envelope text-2xl"></i>
-      </a>
+      <a href="https://github.com/muwajorda" target="_blank" class="hover:text-emerald-400 transition"><i class="fab fa-github text-2xl"></i></a>
+      <a href="https://linkedin.com" target="_blank" class="hover:text-emerald-400 transition"><i class="fab fa-linkedin text-2xl"></i></a>
+      <a href="mailto:muwajorda1@gmail.com" class="hover:text-emerald-400 transition"><i class="fas fa-envelope text-2xl"></i></a>
     </div>
   </div>
 </footer>
 
 <script>
   function startAssessment(assessmentType) {
-    // Store the assessment type in sessionStorage for the detailed assessment engine
-    sessionStorage.setItem('selectedAssessmentType', assessmentType);
-    
-    // Redirect to the detailed assessment engine
-    // The engine will read this value and pre-populate fields if needed
-    window.location.href = 'assessment-engine.html?type=' + assessmentType;
+    const email = 'muwajorda1@gmail.com';
+    const subject = encodeURIComponent('Assessment Request: ' + assessmentType);
+    const body = encodeURIComponent('Hello Jordana,\n\nI would like to start a ' + assessmentType + ' assessment.\n\nPlease let me know the next step.');
+    window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
   }
 </script>
 
