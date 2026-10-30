@@ -20,11 +20,11 @@
     }
     .pillar-card {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      cursor: default;
     }
     .pillar-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 20px 40px rgba(16, 185, 129, 0.18);
     }
     .cta-primary {
       background: linear-gradient(135deg, #10b981, #059669);
@@ -34,19 +34,6 @@
       background: linear-gradient(135deg, #059669, #047857);
       box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
     }
-    .process-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: #10b981;
-    }
-    @media (max-width: 768px) {
-      .process-arrow {
-        transform: rotate(90deg);
-        margin: 1rem 0;
-      }
-    }
   </style>
 </head>
 
@@ -54,17 +41,15 @@
 
 <header class="sticky top-0 z-50 glass">
   <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-emerald-400">
+    <div class="text-2xl font-bold text-emerald-400">
       <i class="fas fa-cloud mr-2"></i> Jordana Consulting
-    </h1>
+    </div>
 
     <nav class="space-x-6 text-sm font-semibold hidden md:flex">
-      <span class="text-emerald-400">Home</span>
-      <span class="text-slate-300">Process</span>
-      <span class="text-slate-300">Industries</span>
-      <span class="text-slate-300">Public Sector</span>
-      <span class="text-slate-300">Services</span>
-      <span class="text-slate-300">Contact</span>
+      <a href="index.html" class="text-emerald-400">Home</a>
+      <a href="#industries" class="hover:text-emerald-400">Industries</a>
+      <a href="services.html" class="hover:text-emerald-400">Services</a>
+      <a href="mailto:muwajorda1@gmail.com" class="hover:text-emerald-400">Contact</a>
     </nav>
 
     <a href="mailto:muwajorda1@gmail.com?subject=Assessment%20Request" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold text-sm transition md:inline-flex items-center">
@@ -73,180 +58,101 @@
   </div>
 </header>
 
-<section id="home" class="max-w-7xl mx-auto px-6 py-32">
+<section id="home" class="max-w-7xl mx-auto px-6 py-24 md:py-32">
   <div class="text-center mb-16">
     <div class="inline-block bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-full text-sm mb-6">
       <i class="fas fa-sparkles mr-2"></i> Technology Modernization & AI Solutions
     </div>
 
-    <h1 class="text-6xl md:text-7xl font-black leading-tight mb-8 text-white">
-      Modern Technology & AI Infrastructure for Real-World Organizations
+    <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8 text-white">
+      Modern Technology Infrastructure for Real-World Organizations
     </h1>
 
     <p class="text-xl md:text-2xl text-slate-300 mb-6 leading-relaxed max-w-4xl mx-auto">
-      We help schools, healthcare organizations, local governments, life-science organizations, nonprofits, and businesses assess their technology, modernize their data infrastructure, and deploy practical AI solutions.
+      We help schools, healthcare organizations, local governments, research institutions, utilities, and businesses modernize infrastructure, improve data systems, and deploy practical AI solutions.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-      <a href="mailto:muwajorda1@gmail.com?subject=Assessment%20Request&body=I%20would%20like%20to%20start%20an%20assessment." class="cta-primary text-white px-8 py-4 rounded-xl font-bold text-lg transition inline-block">
+      <a href="mailto:muwajorda1@gmail.com?subject=Assessment%20Request&body=Hello%20Jordana%2C%20I%20would%20like%20to%20start%20an%20assessment." class="cta-primary text-white px-8 py-4 rounded-xl font-bold text-lg transition inline-block">
         <i class="fas fa-clipboard-check mr-2"></i> Start an Assessment
       </a>
 
-      <a href="mailto:muwajorda1@gmail.com?subject=Services%20Inquiry" class="border border-emerald-400 text-emerald-300 hover:bg-emerald-500/10 px-8 py-4 rounded-xl font-bold transition text-center">
-        <i class="fas fa-chevron-down mr-2"></i> Explore Our Services
+      <a href="services.html" class="border border-emerald-400 text-emerald-300 hover:bg-emerald-500/10 px-8 py-4 rounded-xl font-bold transition text-center">
+        <i class="fas fa-arrow-right mr-2"></i> View Services
       </a>
     </div>
   </div>
 </section>
 
-<section id="process" class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
+<section id="industries" class="max-w-7xl mx-auto px-6 py-24 border-t border-slate-800">
   <div class="text-center mb-20">
-    <h2 class="text-5xl font-black mb-4">Our Proven Process</h2>
-    <p class="text-xl text-slate-300">A structured approach to modernizing your organization</p>
+    <h2 class="text-5xl font-black mb-4">Industries We Serve</h2>
+    <p class="text-xl text-slate-300">Technology solutions for organizations with real operational complexity</p>
   </div>
 
-  <div class="grid md:grid-cols-4 gap-8 items-center">
-    <div class="glass rounded-2xl p-8 text-center">
-      <div class="flex justify-center mb-4">
-        <div class="bg-emerald-500/20 rounded-full p-4">
-          <i class="fas fa-search text-3xl text-emerald-400"></i>
-        </div>
-      </div>
-      <h3 class="text-xl font-bold mb-3">Assess</h3>
-      <p class="text-slate-300 text-sm">Evaluate your current technology landscape, data maturity, infrastructure readiness, and AI opportunities.</p>
+  <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <div class="glass rounded-2xl p-8 pillar-card">
+      <div class="flex justify-center mb-4"><i class="fas fa-flask text-4xl text-blue-400"></i></div>
+      <h3 class="text-lg font-bold text-center mb-3">Life Sciences & Biotech</h3>
+      <p class="text-slate-300 text-sm text-center">Genomics, bioinformatics, research pipelines, and scientific AI.</p>
     </div>
 
-    <div class="process-arrow hidden md:flex">→</div>
-
-    <div class="glass rounded-2xl p-8 text-center">
-      <div class="flex justify-center mb-4">
-        <div class="bg-blue-500/20 rounded-full p-4">
-          <i class="fas fa-pencil-ruler text-3xl text-blue-400"></i>
-        </div>
-      </div>
-      <h3 class="text-xl font-bold mb-3">Design</h3>
-      <p class="text-slate-300 text-sm">Create a modernization roadmap with clear priorities, phased implementation plans, and success metrics.</p>
-    </div>
-
-    <div class="process-arrow hidden md:flex">→</div>
-
-    <div class="glass rounded-2xl p-8 text-center">
-      <div class="flex justify-center mb-4">
-        <div class="bg-purple-500/20 rounded-full p-4">
-          <i class="fas fa-hammer text-3xl text-purple-400"></i>
-        </div>
-      </div>
-      <h3 class="text-xl font-bold mb-3">Build</h3>
-      <p class="text-slate-300 text-sm">Implement infrastructure, data pipelines, AI solutions, and integrations with your existing systems.</p>
-    </div>
-
-    <div class="process-arrow hidden md:flex">→</div>
-
-    <div class="glass rounded-2xl p-8 text-center">
-      <div class="flex justify-center mb-4">
-        <div class="bg-cyan-500/20 rounded-full p-4">
-          <i class="fas fa-chart-line text-3xl text-cyan-400"></i>
-        </div>
-      </div>
-      <h3 class="text-xl font-bold mb-3">Optimize</h3>
-      <p class="text-slate-300 text-sm">Monitor performance, refine processes, scale solutions, and unlock continuous improvements.</p>
-    </div>
-  </div>
-</section>
-
-<section id="who-we-help" class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
-  <div class="text-center mb-20">
-    <h2 class="text-5xl font-black mb-4">Who We Help</h2>
-    <p class="text-xl text-slate-300">We serve organizations across diverse sectors</p>
-  </div>
-
-  <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-    <div class="glass rounded-2xl p-8">
-      <div class="flex justify-center mb-4"><i class="fas fa-hospital text-4xl text-blue-400"></i></div>
-      <h3 class="text-lg font-bold text-center mb-3">Healthcare</h3>
-      <p class="text-slate-300 text-sm text-center">Modernize EHR systems, achieve FHIR compliance, and deploy AI for clinical decision support.</p>
-    </div>
-
-    <div class="glass rounded-2xl p-8">
+    <div class="glass rounded-2xl p-8 pillar-card">
       <div class="flex justify-center mb-4"><i class="fas fa-graduation-cap text-4xl text-emerald-400"></i></div>
       <h3 class="text-lg font-bold text-center mb-3">Education</h3>
-      <p class="text-slate-300 text-sm text-center">Upgrade infrastructure, modernize learning platforms, and implement data analytics for student success.</p>
+      <p class="text-slate-300 text-sm text-center">Public and private schools, middle schools, high schools, and universities.</p>
     </div>
 
-    <div class="glass rounded-2xl p-8">
+    <div class="glass rounded-2xl p-8 pillar-card">
+      <div class="flex justify-center mb-4"><i class="fas fa-hospital text-4xl text-cyan-400"></i></div>
+      <h3 class="text-lg font-bold text-center mb-3">Healthcare</h3>
+      <p class="text-slate-300 text-sm text-center">Research data, healthcare interoperability, and workflow technology.</p>
+    </div>
+
+    <div class="glass rounded-2xl p-8 pillar-card">
+      <div class="flex justify-center mb-4"><i class="fas fa-road text-4xl text-violet-400"></i></div>
+      <h3 class="text-lg font-bold text-center mb-3">Transportation & Infrastructure</h3>
+      <p class="text-slate-300 text-sm text-center">Roads, transit, traffic analytics, and infrastructure management.</p>
+    </div>
+
+    <div class="glass rounded-2xl p-8 pillar-card">
+      <div class="flex justify-center mb-4"><i class="fas fa-bolt text-4xl text-amber-400"></i></div>
+      <h3 class="text-lg font-bold text-center mb-3">Energy & Utilities</h3>
+      <p class="text-slate-300 text-sm text-center">Energy analytics, grid data, renewable energy, and automation.</p>
+    </div>
+
+    <div class="glass rounded-2xl p-8 pillar-card">
       <div class="flex justify-center mb-4"><i class="fas fa-landmark text-4xl text-purple-400"></i></div>
       <h3 class="text-lg font-bold text-center mb-3">Government & Municipalities</h3>
-      <p class="text-slate-300 text-sm text-center">Modernize legacy systems, improve service delivery, and ensure security and compliance.</p>
+      <p class="text-slate-300 text-sm text-center">Public-sector systems, cloud modernization, and data integration.</p>
     </div>
 
-    <div class="glass rounded-2xl p-8">
-      <div class="flex justify-center mb-4"><i class="fas fa-dna text-4xl text-pink-400"></i></div>
-      <h3 class="text-lg font-bold text-center mb-3">Life Sciences</h3>
-      <p class="text-slate-300 text-sm text-center">Enable bioinformatics pipelines, manage genomic data, and accelerate research through AI.</p>
+    <div class="glass rounded-2xl p-8 pillar-card">
+      <div class="flex justify-center mb-4"><i class="fas fa-shield-halved text-4xl text-red-400"></i></div>
+      <h3 class="text-lg font-bold text-center mb-3">Federal & Defense</h3>
+      <p class="text-slate-300 text-sm text-center">Scientific computing, secure cloud, and technical subcontracting.</p>
     </div>
 
-    <div class="glass rounded-2xl p-8">
-      <div class="flex justify-center mb-4"><i class="fas fa-handshake text-4xl text-orange-400"></i></div>
-      <h3 class="text-lg font-bold text-center mb-3">Nonprofits & Organizations</h3>
-      <p class="text-slate-300 text-sm text-center">Optimize operations, improve program effectiveness, and maximize impact with modern technology.</p>
+    <div class="glass rounded-2xl p-8 pillar-card">
+      <div class="flex justify-center mb-4"><i class="fas fa-briefcase text-4xl text-orange-400"></i></div>
+      <h3 class="text-lg font-bold text-center mb-3">Enterprise & Nonprofits</h3>
+      <p class="text-slate-300 text-sm text-center">Business automation, analytics, and digital transformation.</p>
     </div>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
-  <div class="text-center mb-20">
-    <h2 class="text-5xl font-black mb-4">Common Challenges We Address</h2>
-    <p class="text-xl text-slate-300">We help organizations overcome modernization obstacles</p>
-  </div>
-
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="glass rounded-2xl p-6 border-l-4 border-emerald-400"><h3 class="text-lg font-bold mb-2 flex items-center"><i class="fas fa-database mr-3 text-emerald-400"></i> Fragmented Data</h3><p class="text-slate-300 text-sm">Siloed data across multiple systems makes it difficult to gain insights and make informed decisions.</p></div>
-    <div class="glass rounded-2xl p-6 border-l-4 border-blue-400"><h3 class="text-lg font-bold mb-2 flex items-center"><i class="fas fa-server mr-3 text-blue-400"></i> Legacy Systems</h3><p class="text-slate-300 text-sm">Outdated infrastructure that's expensive to maintain, lacks scalability, and hinders innovation.</p></div>
-    <div class="glass rounded-2xl p-6 border-l-4 border-purple-400"><h3 class="text-lg font-bold mb-2 flex items-center"><i class="fas fa-hand-paper mr-3 text-purple-400"></i> Manual Workflows</h3><p class="text-slate-300 text-sm">Time-consuming, error-prone processes that drain resources and slow operations.</p></div>
-    <div class="glass rounded-2xl p-6 border-l-4 border-cyan-400"><h3 class="text-lg font-bold mb-2 flex items-center"><i class="fas fa-cloud-upload-alt mr-3 text-cyan-400"></i> Cloud Infrastructure Challenges</h3><p class="text-slate-300 text-sm">Complexity in cloud migration, architecture decisions, or cost optimization.</p></div>
-    <div class="glass rounded-2xl p-6 border-l-4 border-pink-400"><h3 class="text-lg font-bold mb-2 flex items-center"><i class="fas fa-chart-bar mr-3 text-pink-400"></i> Data & Analytics Gaps</h3><p class="text-slate-300 text-sm">Inability to leverage data for competitive advantage, reporting, or analytics.</p></div>
-    <div class="glass rounded-2xl p-6 border-l-4 border-orange-400"><h3 class="text-lg font-bold mb-2 flex items-center"><i class="fas fa-robot mr-3 text-orange-400"></i> AI Readiness</h3><p class="text-slate-300 text-sm">Desire to use AI but unclear on implementation strategy or organizational readiness.</p></div>
-    <div class="glass rounded-2xl p-6 border-l-4 border-red-400"><h3 class="text-lg font-bold mb-2 flex items-center"><i class="fas fa-shield-alt mr-3 text-red-400"></i> Security & Governance</h3><p class="text-slate-300 text-sm">Compliance risks, data privacy concerns, and inadequate security infrastructure.</p></div>
-  </div>
-</section>
-
-<section class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
+<section class="max-w-7xl mx-auto px-6 py-24 border-t border-slate-800">
   <div class="glass rounded-3xl p-12 text-center">
-    <h2 class="text-4xl md:text-5xl font-black mb-6">Don't Know Where to Start?</h2>
+    <h2 class="text-4xl md:text-5xl font-black mb-8">Need a technology partner who can solve the real challenge?</h2>
     <p class="text-xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-      Take our Technology & AI Readiness Assessment to identify infrastructure gaps, evaluate data maturity, and discover next-step priorities.
+      Whether you are modernizing legacy systems, building cloud infrastructure, improving data workflows, or exploring practical AI, we can help map the right next step.
     </p>
-    <a href="mailto:muwajorda1@gmail.com?subject=Assessment%20Request" class="cta-primary text-white px-10 py-4 rounded-xl font-bold text-lg transition inline-block">
-      <i class="fas fa-clipboard-check mr-2"></i> Start Your Assessment
-    </a>
-  </div>
-</section>
-
-<section class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
-  <div class="text-center mb-20">
-    <h2 class="text-5xl font-black mb-4">Our Services</h2>
-    <p class="text-xl text-slate-300">Comprehensive solutions for technology transformation</p>
-  </div>
-
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-    <div class="glass rounded-2xl p-8"><div class="mb-4"><i class="fas fa-stethoscope text-4xl text-blue-400"></i></div><h3 class="text-2xl font-bold mb-3">Technology Assessments</h3><p class="text-slate-300 mb-4">Comprehensive evaluation of your current technology landscape, infrastructure readiness, data maturity, and modernization opportunities.</p></div>
-    <div class="glass rounded-2xl p-8"><div class="mb-4"><i class="fas fa-cubes text-4xl text-emerald-400"></i></div><h3 class="text-2xl font-bold mb-3">Data & Cloud Architecture</h3><p class="text-slate-300 mb-4">Design and implement scalable, secure data infrastructure on AWS, Azure, or GCP.</p></div>
-    <div class="glass rounded-2xl p-8"><div class="mb-4"><i class="fas fa-brain text-4xl text-purple-400"></i></div><h3 class="text-2xl font-bold mb-3">AI Solutions</h3><p class="text-slate-300 mb-4">Deploy practical AI and machine learning solutions for analytics and automation.</p></div>
-    <div class="glass rounded-2xl p-8"><div class="mb-4"><i class="fas fa-hospital text-4xl text-pink-400"></i></div><h3 class="text-2xl font-bold mb-3">Healthcare & Interoperability</h3><p class="text-slate-300 mb-4">FHIR compliance, EHR modernization, clinical data integration, and research technology support.</p></div>
-    <div class="glass rounded-2xl p-8"><div class="mb-4"><i class="fas fa-dna text-4xl text-orange-400"></i></div><h3 class="text-2xl font-bold mb-3">Bioinformatics & Life Sciences</h3><p class="text-slate-300 mb-4">Genomic data pipelines, multi-omics analysis, and life sciences data infrastructure.</p></div>
-    <div class="glass rounded-2xl p-8"><div class="mb-4"><i class="fas fa-rocket text-4xl text-cyan-400"></i></div><h3 class="text-2xl font-bold mb-3">Implementation & Optimization</h3><p class="text-slate-300 mb-4">End-to-end deployment, staff training, process optimization, and ongoing support.</p></div>
-  </div>
-</section>
-
-<section id="contact" class="max-w-7xl mx-auto px-6 py-32 border-t border-slate-800">
-  <div class="glass rounded-3xl p-12 text-center">
-    <h2 class="text-4xl md:text-5xl font-black mb-8">Ready to Modernize Your Organization?</h2>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a href="mailto:muwajorda1@gmail.com?subject=Assessment%20Request" class="cta-primary text-white px-8 py-4 rounded-xl font-bold text-lg transition inline-block">
         <i class="fas fa-clipboard-check mr-2"></i> Start an Assessment
       </a>
-      <a href="mailto:muwajorda1@gmail.com" class="border border-emerald-400 text-emerald-300 hover:bg-emerald-500/10 px-8 py-4 rounded-xl font-bold transition text-center">
-        <i class="fas fa-envelope mr-2"></i> Contact Us
+      <a href="services.html" class="border border-emerald-400 text-emerald-300 hover:bg-emerald-500/10 px-8 py-4 rounded-xl font-bold transition text-center">
+        <i class="fas fa-arrow-right mr-2"></i> View Services
       </a>
     </div>
   </div>
