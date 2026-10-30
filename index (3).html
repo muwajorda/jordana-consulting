@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jordana Consulting helps organizations modernize technology infrastructure, engineer data systems, integrate applications, and implement practical AI across science, education, healthcare, transportation, energy, and government." />
+  <meta name="theme-color" content="#07111f" />
+  <title>Jordana Consulting | Cloud, Data & AI Infrastructure</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #07111f 0%, #0b1728 55%, #0f172a 100%);
+      color: #f8fafc;
+    }
+    .glass {
+      background: rgba(255,255,255,.055);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+    .pillar-card, .service-card {
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .pillar-card:hover, .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(52,211,153,.48);
+      box-shadow: 0 18px 38px rgba(16,185,129,.10);
+    }
+    .cta-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      transition: all .25s ease;
+    }
+    .cta-primary:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      box-shadow: 0 10px 28px rgba(16,185,129,.25);
+      transform: translateY(-1px);
+    }
+    .eyebrow { letter-spacing: .16em; }
+    .section-rule { border-color: rgba(148,163,184,.16); }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #6ee7b7;
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="sticky top-0 z-50 glass">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 py-4 flex justify-between items-center">
+      <a href="#home" class="text-xl sm:text-2xl font-extrabold text-emerald-400 whitespace-nowrap" aria-label="Jordana Consulting home">
+        <i class="fa-solid fa-cloud mr-2"></i>Jordana Consulting
+      </a>
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold" aria-label="Main navigation">
+        <a href="#industries" class="hover:text-emerald-300">Industries</a>
+        <a href="#services" class="hover:text-emerald-300">Services</a>
+        <a href="#approach" class="hover:text-emerald-300">How We Work</a>
+        <a href="#about" class="hover:text-emerald-300">About</a>
+        <a href="#contact" class="hover:text-emerald-300">Contact</a>
+      </nav>
+      <a href="mailto:muwajorda1@gmail.com?subject=Project%20Inquiry" class="hidden sm:inline-flex cta-primary px-4 py-2.5 rounded-lg font-bold text-sm">
+        Discuss a Project <i class="fa-solid fa-arrow-right ml-2"></i>
+      </a>
+      <button id="menuButton" class="lg:hidden text-slate-200 text-xl p-2" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <nav id="mobileMenu" class="hidden lg:hidden px-6 pb-5 space-y-3 text-sm font-semibold" aria-label="Mobile navigation">
+      <a class="block py-1 hover:text-emerald-300" href="#industries">Industries</a>
+      <a class="block py-1 hover:text-emerald-300" href="#services">Services</a>
+      <a class="block py-1 hover:text-emerald-300" href="#approach">How We Work</a>
+      <a class="block py-1 hover:text-emerald-300" href="#about">About</a>
+      <a class="block py-1 hover:text-emerald-300" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="max-w-7xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+      <div class="max-w-5xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold mb-7">
+          <i class="fa-solid fa-network-wired"></i>
+          CLOUD · DATA · AI · DIGITAL INFRASTRUCTURE
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-black leading-tight tracking-tight mb-7">
+          Building the technology infrastructure behind <span class="text-emerald-400">better outcomes.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-4xl mx-auto mb-9">
+          Jordana Consulting helps organizations modernize technology, connect complex data, build cloud-based systems, and put practical AI to work — from scientific research and healthcare to education, transportation, energy, and government.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="mailto:muwajorda1@gmail.com?subject=Project%20Inquiry&body=Hello%20Jordana%2C%0A%0AI%20would%20like%20to%20discuss%20a%20technology%20project.%0A%0AOrganization%3A%0AChallenge%3A%0ATimeline%3A" class="cta-primary text-white px-7 py-4 rounded-xl font-bold text-base sm:text-lg">
+            <i class="fa-regular fa-comments mr-2"></i> Discuss a Project
+          </a>
+          <a href="#services" class="border border-emerald-400/70 text-emerald-300 hover:bg-emerald-500/10 px-7 py-4 rounded-xl font-bold text-base sm:text-lg transition">
+            Explore Our Capabilities <i class="fa-solid fa-arrow-down ml-2"></i>
+          </a>
+        </div>
+        <p class="text-slate-500 text-sm mt-6">Project-based consulting · Contract engineering · Technical partnerships</p>
+      </div>
+    </section>
+
+    <section id="industries" class="border-t section-rule">
+      <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <p class="eyebrow text-emerald-400 text-xs font-bold uppercase mb-4">Markets we support</p>
+          <h2 class="text-3xl md:text-5xl font-black mb-5">Technology for complex, real-world environments</h2>
+          <p class="text-lg text-slate-300">We apply practical engineering to the systems and data that organizations rely on every day.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5">
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-blue-400 text-3xl mb-5"><i class="fa-solid fa-dna"></i></div>
+            <h3 class="text-lg font-bold mb-3">Life Sciences & Biotech</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Bioinformatics, genomics workflows, scientific data pipelines, research applications, and AI-assisted evidence exploration.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-emerald-400 text-3xl mb-5"><i class="fa-solid fa-school"></i></div>
+            <h3 class="text-lg font-bold mb-3">Education</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Public and private K–12 schools, middle schools, high schools, school districts, colleges, and universities — including data, reporting, and operational technology.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-cyan-400 text-3xl mb-5"><i class="fa-solid fa-hospital"></i></div>
+            <h3 class="text-lg font-bold mb-3">Healthcare & Hospitals</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Research informatics, data integration, interoperability, workflow applications, and analytics infrastructure.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-violet-400 text-3xl mb-5"><i class="fa-solid fa-road"></i></div>
+            <h3 class="text-lg font-bold mb-3">Transportation & Roads</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Transportation data, traffic and fleet analytics, road asset information, maintenance reporting, and infrastructure management systems.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-amber-400 text-3xl mb-5"><i class="fa-solid fa-bolt"></i></div>
+            <h3 class="text-lg font-bold mb-3">Energy & Utilities</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Energy data integration, usage analytics, renewable energy reporting, operational dashboards, and automation.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-purple-400 text-3xl mb-5"><i class="fa-solid fa-city"></i></div>
+            <h3 class="text-lg font-bold mb-3">Government & Municipalities</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Local government systems, public-sector data integration, digital services, reporting automation, and cloud modernization.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-rose-400 text-3xl mb-5"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="text-lg font-bold mb-3">Federal & Defense Ecosystem</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Cloud and data engineering, scientific computing, analytics, and technical subcontracting through qualified partners.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 pillar-card">
+            <div class="text-orange-400 text-3xl mb-5"><i class="fa-solid fa-building"></i></div>
+            <h3 class="text-lg font-bold mb-3">Enterprise & Nonprofits</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Business process automation, application integration, data platforms, analytics, and digital transformation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="border-t section-rule">
+      <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div class="max-w-3xl mb-14">
+          <p class="eyebrow text-emerald-400 text-xs font-bold uppercase mb-4">What we do</p>
+          <h2 class="text-3xl md:text-5xl font-black mb-5">Engineering services built around your needs</h2>
+          <p class="text-lg text-slate-300">From a focused technical assessment to implementation support, we help teams move from disconnected processes to dependable technology.</p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <article class="glass rounded-2xl p-7 service-card">
+            <i class="fa-solid fa-cloud text-emerald-400 text-2xl mb-5"></i>
+            <h3 class="text-xl font-bold mb-3">Cloud Infrastructure & Modernization</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Cloud architecture, AWS environments, deployment automation, monitoring, access controls, and modernization planning.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 service-card">
+            <i class="fa-solid fa-database text-cyan-400 text-2xl mb-5"></i>
+            <h3 class="text-xl font-bold mb-3">Data Engineering & Integration</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Python pipelines, data cleaning and validation, database design, APIs, and integration of disconnected data sources.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 service-card">
+            <i class="fa-solid fa-brain text-violet-400 text-2xl mb-5"></i>
+            <h3 class="text-xl font-bold mb-3">AI & Workflow Automation</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Practical AI prototypes, document search, assisted analysis, predictive modeling experiments, and process automation with appropriate human oversight.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 service-card">
+            <i class="fa-solid fa-code-branch text-amber-400 text-2xl mb-5"></i>
+            <h3 class="text-xl font-bold mb-3">Application & Systems Integration</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Dashboards, internal tools, API development, workflow applications, and connections between existing systems.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 service-card">
+            <i class="fa-solid fa-flask text-blue-400 text-2xl mb-5"></i>
+            <h3 class="text-xl font-bold mb-3">Scientific & Research Computing</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Bioinformatics, genomics data workflows, reproducible research pipelines, scientific data applications, and research infrastructure.</p>
+          </article>
+          <article class="glass rounded-2xl p-7 service-card">
+            <i class="fa-solid fa-chart-line text-rose-400 text-2xl mb-5"></i>
+            <h3 class="text-xl font-bold mb-3">Analytics & Operational Reporting</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Data visualization, performance dashboards, automated reporting, data quality checks, and decision-support tools.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="border-t section-rule">
+      <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <p class="eyebrow text-emerald-400 text-xs font-bold uppercase mb-4">How we work</p>
+          <h2 class="text-3xl md:text-5xl font-black mb-5">A practical path from challenge to implementation</h2>
+          <p class="text-lg text-slate-300">Start with the problem, define a manageable scope, and build toward a solution your team can operate and maintain.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="glass rounded-2xl p-8">
+            <div class="text-emerald-400 text-sm font-extrabold mb-4">01 / DISCOVER</div>
+            <h3 class="text-xl font-bold mb-3">Understand the environment</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Review the workflow, data, systems, constraints, and desired outcome. Identify risks and the most useful first step.</p>
+          </div>
+          <div class="glass rounded-2xl p-8">
+            <div class="text-emerald-400 text-sm font-extrabold mb-4">02 / DESIGN & BUILD</div>
+            <h3 class="text-xl font-bold mb-3">Deliver a focused solution</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Define the architecture and scope, then develop the pipeline, integration, application, or cloud component.</p>
+          </div>
+          <div class="glass rounded-2xl p-8">
+            <div class="text-emerald-400 text-sm font-extrabold mb-4">03 / HAND OFF & IMPROVE</div>
+            <h3 class="text-xl font-bold mb-3">Make the work usable</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">Provide documentation, testing, knowledge transfer, and recommendations for the next stage of improvement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="border-t section-rule">
+      <div class="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <div class="glass rounded-3xl p-8 md:p-12 grid lg:grid-cols-5 gap-8 items-center">
+          <div class="lg:col-span-3">
+            <p class="eyebrow text-emerald-400 text-xs font-bold uppercase mb-4">About Jordana Consulting</p>
+            <h2 class="text-3xl md:text-4xl font-black mb-5">Technology expertise with a cross-industry perspective.</h2>
+            <p class="text-slate-300 leading-relaxed mb-4">Jordana Consulting focuses on the engineering foundations that help organizations use their data and technology more effectively. Our capabilities span Python development, cloud infrastructure, data pipelines, APIs, scientific computing, dashboards, and applied AI.</p>
+            <p class="text-slate-300 leading-relaxed">We work toward clear scopes and practical outcomes, and can engage on assessments, defined projects, contract engineering, or ongoing technical support.</p>
+          </div>
+          <div class="lg:col-span-2 grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/70 rounded-xl p-5">
+              <i class="fa-solid fa-cloud text-emerald-400 text-xl mb-3"></i>
+              <div class="font-bold">Cloud</div><div class="text-slate-400 text-xs mt-1">Infrastructure</div>
+            </div>
+            <div class="bg-slate-900/70 rounded-xl p-5">
+              <i class="fa-solid fa-code text-cyan-400 text-xl mb-3"></i>
+              <div class="font-bold">Python</div><div class="text-slate-400 text-xs mt-1">Engineering</div>
+            </div>
+            <div class="bg-slate-900/70 rounded-xl p-5">
+              <i class="fa-solid fa-diagram-project text-violet-400 text-xl mb-3"></i>
+              <div class="font-bold">APIs</div><div class="text-slate-400 text-xs mt-1">Integration</div>
+            </div>
+            <div class="bg-slate-900/70 rounded-xl p-5">
+              <i class="fa-solid fa-microchip text-amber-400 text-xl mb-3"></i>
+              <div class="font-bold">AI & Data</div><div class="text-slate-400 text-xs mt-1">Applications</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="border-t section-rule">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-24 text-center">
+        <p class="eyebrow text-emerald-400 text-xs font-bold uppercase mb-4">Start a conversation</p>
+        <h2 class="text-3xl md:text-5xl font-black mb-6">Have a technology challenge to solve?</h2>
+        <p class="text-lg text-slate-300 leading-relaxed max-w-3xl mx-auto mb-9">Tell us what your organization is trying to build, modernize, connect, or automate. We can discuss the challenge and identify a practical next step.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="mailto:muwajorda1@gmail.com?subject=Project%20Inquiry&body=Hello%20Jordana%2C%0A%0AOrganization%3A%0AIndustry%3A%0AProject%20or%20challenge%3A%0ADesired%20timeline%3A%0A" class="cta-primary px-8 py-4 rounded-xl font-bold text-lg">
+            <i class="fa-solid fa-paper-plane mr-2"></i> Request a Consultation
+          </a>
+          <a href="mailto:muwajorda1@gmail.com?subject=Capability%20Statement%20Request" class="border border-emerald-400/70 text-emerald-300 hover:bg-emerald-500/10 px-8 py-4 rounded-xl font-bold transition">
+            <i class="fa-regular fa-file-lines mr-2"></i> Request Capability Information
+          </a>
+        </div>
+        <p class="text-slate-400 mt-7 text-sm"><i class="fa-regular fa-envelope mr-2"></i><a class="hover:text-emerald-300" href="mailto:muwajorda1@gmail.com">muwajorda1@gmail.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t section-rule py-9 text-center text-slate-400">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="mb-4">© 2026 Jordana Consulting. Cloud, Data & AI Infrastructure.</p>
+      <div class="flex justify-center gap-6">
+        <a href="https://github.com/muwajorda" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hover:text-emerald-400 transition"><i class="fa-brands fa-github text-2xl"></i></a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-emerald-400 transition"><i class="fa-brands fa-linkedin text-2xl"></i></a>
+        <a href="mailto:muwajorda1@gmail.com" aria-label="Email" class="hover:text-emerald-400 transition"><i class="fa-solid fa-envelope text-2xl"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+      menuButton.innerHTML = isOpen ? '<i class="fa-solid fa-bars"></i>' : '<i class="fa-solid fa-xmark"></i>';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation menu');
+      menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }));
+  </script>
+</body>
+</html>
